@@ -8,18 +8,28 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: RootViewController {
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
+        self.title = NSLocalizedString("Selection Tool", comment: "")
+        
+        //Navigation bar setup
+        let btnAdd: UIBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "doAddItemAction")
+        self.titleItem?.leftBarButtonItem = btnAdd
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
+    
+    //MARK: - Actions
 
+    internal func doAddItemAction() {
+        
+    }
 
 }
 

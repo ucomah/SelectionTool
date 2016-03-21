@@ -21,6 +21,8 @@
 		A00CE2751CA045BC003E3510 /* EMCropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00CE26E1CA045BC003E3510 /* EMCropView.swift */; };
 		A00CE2761CA045BC003E3510 /* EMSelectionShapeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00CE26F1CA045BC003E3510 /* EMSelectionShapeView.swift */; };
 		A00CE2771CA045BC003E3510 /* EMSelectionShapeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00CE26F1CA045BC003E3510 /* EMSelectionShapeView.swift */; };
+		A00CE2791CA04EF8003E3510 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00CE2781CA04EF8003E3510 /* RootViewController.swift */; };
+		A00CE27A1CA04EF8003E3510 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00CE2781CA04EF8003E3510 /* RootViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +50,7 @@
 		A00CE26D1CA045BC003E3510 /* EMCropOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EMCropOverlayView.swift; sourceTree = "<group>"; };
 		A00CE26E1CA045BC003E3510 /* EMCropView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EMCropView.swift; sourceTree = "<group>"; };
 		A00CE26F1CA045BC003E3510 /* EMSelectionShapeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EMSelectionShapeView.swift; sourceTree = "<group>"; };
+		A00CE2781CA04EF8003E3510 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +93,7 @@
 		A00CE24A1CA00CED003E3510 /* FreeCropImageTool */ = {
 			isa = PBXGroup;
 			children = (
+				A00CE2781CA04EF8003E3510 /* RootViewController.swift */,
 				A00CE24B1CA00CED003E3510 /* AppDelegate.swift */,
 				A00CE24D1CA00CED003E3510 /* ViewController.swift */,
 				A00CE24F1CA00CED003E3510 /* Main.storyboard */,
@@ -225,6 +229,7 @@
 				A00CE2701CA045BC003E3510 /* EMBezierPathUtils.swift in Sources */,
 				A00CE2721CA045BC003E3510 /* EMCropOverlayView.swift in Sources */,
 				A00CE2741CA045BC003E3510 /* EMCropView.swift in Sources */,
+				A00CE2791CA04EF8003E3510 /* RootViewController.swift in Sources */,
 				A00CE24E1CA00CED003E3510 /* ViewController.swift in Sources */,
 				A00CE24C1CA00CED003E3510 /* AppDelegate.swift in Sources */,
 				A00CE2761CA045BC003E3510 /* EMSelectionShapeView.swift in Sources */,
@@ -237,6 +242,7 @@
 			files = (
 				A00CE2751CA045BC003E3510 /* EMCropView.swift in Sources */,
 				A00CE2611CA00CED003E3510 /* FreeCropImageToolUITests.swift in Sources */,
+				A00CE27A1CA04EF8003E3510 /* RootViewController.swift in Sources */,
 				A00CE2711CA045BC003E3510 /* EMBezierPathUtils.swift in Sources */,
 				A00CE2731CA045BC003E3510 /* EMCropOverlayView.swift in Sources */,
 				A00CE2771CA045BC003E3510 /* EMSelectionShapeView.swift in Sources */,
@@ -309,7 +315,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -348,7 +354,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -361,6 +367,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = FreeCropImageTool/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.melkov.FreeCropImageTool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -372,6 +379,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = FreeCropImageTool/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.melkov.FreeCropImageTool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
