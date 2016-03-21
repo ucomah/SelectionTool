@@ -1,0 +1,403 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A00CE24C1CA00CED003E3510 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00CE24B1CA00CED003E3510 /* AppDelegate.swift */; };
+		A00CE24E1CA00CED003E3510 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00CE24D1CA00CED003E3510 /* ViewController.swift */; };
+		A00CE2511CA00CED003E3510 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A00CE24F1CA00CED003E3510 /* Main.storyboard */; };
+		A00CE2531CA00CED003E3510 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A00CE2521CA00CED003E3510 /* Assets.xcassets */; };
+		A00CE2561CA00CED003E3510 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A00CE2541CA00CED003E3510 /* LaunchScreen.storyboard */; };
+		A00CE2611CA00CED003E3510 /* FreeCropImageToolUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00CE2601CA00CED003E3510 /* FreeCropImageToolUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A00CE25D1CA00CED003E3510 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A00CE2401CA00CED003E3510 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A00CE2471CA00CED003E3510;
+			remoteInfo = FreeCropImageTool;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		A00CE2481CA00CED003E3510 /* FreeCropImageTool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FreeCropImageTool.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A00CE24B1CA00CED003E3510 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A00CE24D1CA00CED003E3510 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A00CE2501CA00CED003E3510 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A00CE2521CA00CED003E3510 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A00CE2551CA00CED003E3510 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A00CE2571CA00CED003E3510 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A00CE25C1CA00CED003E3510 /* FreeCropImageToolUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FreeCropImageToolUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A00CE2601CA00CED003E3510 /* FreeCropImageToolUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeCropImageToolUITests.swift; sourceTree = "<group>"; };
+		A00CE2621CA00CED003E3510 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A00CE2451CA00CED003E3510 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A00CE2591CA00CED003E3510 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A00CE23F1CA00CED003E3510 = {
+			isa = PBXGroup;
+			children = (
+				A00CE24A1CA00CED003E3510 /* FreeCropImageTool */,
+				A00CE25F1CA00CED003E3510 /* FreeCropImageToolUITests */,
+				A00CE2491CA00CED003E3510 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A00CE2491CA00CED003E3510 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A00CE2481CA00CED003E3510 /* FreeCropImageTool.app */,
+				A00CE25C1CA00CED003E3510 /* FreeCropImageToolUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A00CE24A1CA00CED003E3510 /* FreeCropImageTool */ = {
+			isa = PBXGroup;
+			children = (
+				A00CE24B1CA00CED003E3510 /* AppDelegate.swift */,
+				A00CE24D1CA00CED003E3510 /* ViewController.swift */,
+				A00CE24F1CA00CED003E3510 /* Main.storyboard */,
+				A00CE2521CA00CED003E3510 /* Assets.xcassets */,
+				A00CE2541CA00CED003E3510 /* LaunchScreen.storyboard */,
+				A00CE2571CA00CED003E3510 /* Info.plist */,
+			);
+			path = FreeCropImageTool;
+			sourceTree = "<group>";
+		};
+		A00CE25F1CA00CED003E3510 /* FreeCropImageToolUITests */ = {
+			isa = PBXGroup;
+			children = (
+				A00CE2601CA00CED003E3510 /* FreeCropImageToolUITests.swift */,
+				A00CE2621CA00CED003E3510 /* Info.plist */,
+			);
+			path = FreeCropImageToolUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A00CE2471CA00CED003E3510 /* FreeCropImageTool */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A00CE2651CA00CED003E3510 /* Build configuration list for PBXNativeTarget "FreeCropImageTool" */;
+			buildPhases = (
+				A00CE2441CA00CED003E3510 /* Sources */,
+				A00CE2451CA00CED003E3510 /* Frameworks */,
+				A00CE2461CA00CED003E3510 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FreeCropImageTool;
+			productName = FreeCropImageTool;
+			productReference = A00CE2481CA00CED003E3510 /* FreeCropImageTool.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A00CE25B1CA00CED003E3510 /* FreeCropImageToolUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A00CE2681CA00CED003E3510 /* Build configuration list for PBXNativeTarget "FreeCropImageToolUITests" */;
+			buildPhases = (
+				A00CE2581CA00CED003E3510 /* Sources */,
+				A00CE2591CA00CED003E3510 /* Frameworks */,
+				A00CE25A1CA00CED003E3510 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A00CE25E1CA00CED003E3510 /* PBXTargetDependency */,
+			);
+			name = FreeCropImageToolUITests;
+			productName = FreeCropImageToolUITests;
+			productReference = A00CE25C1CA00CED003E3510 /* FreeCropImageToolUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A00CE2401CA00CED003E3510 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0720;
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = "Evgeniy Melkov";
+				TargetAttributes = {
+					A00CE2471CA00CED003E3510 = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
+					A00CE25B1CA00CED003E3510 = {
+						CreatedOnToolsVersion = 7.2.1;
+						TestTargetID = A00CE2471CA00CED003E3510;
+					};
+				};
+			};
+			buildConfigurationList = A00CE2431CA00CED003E3510 /* Build configuration list for PBXProject "FreeCropImageTool" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A00CE23F1CA00CED003E3510;
+			productRefGroup = A00CE2491CA00CED003E3510 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A00CE2471CA00CED003E3510 /* FreeCropImageTool */,
+				A00CE25B1CA00CED003E3510 /* FreeCropImageToolUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A00CE2461CA00CED003E3510 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A00CE2561CA00CED003E3510 /* LaunchScreen.storyboard in Resources */,
+				A00CE2531CA00CED003E3510 /* Assets.xcassets in Resources */,
+				A00CE2511CA00CED003E3510 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A00CE25A1CA00CED003E3510 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A00CE2441CA00CED003E3510 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A00CE24E1CA00CED003E3510 /* ViewController.swift in Sources */,
+				A00CE24C1CA00CED003E3510 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A00CE2581CA00CED003E3510 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A00CE2611CA00CED003E3510 /* FreeCropImageToolUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A00CE25E1CA00CED003E3510 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A00CE2471CA00CED003E3510 /* FreeCropImageTool */;
+			targetProxy = A00CE25D1CA00CED003E3510 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		A00CE24F1CA00CED003E3510 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A00CE2501CA00CED003E3510 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		A00CE2541CA00CED003E3510 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A00CE2551CA00CED003E3510 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A00CE2631CA00CED003E3510 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A00CE2641CA00CED003E3510 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A00CE2661CA00CED003E3510 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = FreeCropImageTool/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.melkov.FreeCropImageTool;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		A00CE2671CA00CED003E3510 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = FreeCropImageTool/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.melkov.FreeCropImageTool;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		A00CE2691CA00CED003E3510 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = FreeCropImageToolUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.melkov.FreeCropImageToolUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = FreeCropImageTool;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		A00CE26A1CA00CED003E3510 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = FreeCropImageToolUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.melkov.FreeCropImageToolUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = FreeCropImageTool;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A00CE2431CA00CED003E3510 /* Build configuration list for PBXProject "FreeCropImageTool" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A00CE2631CA00CED003E3510 /* Debug */,
+				A00CE2641CA00CED003E3510 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A00CE2651CA00CED003E3510 /* Build configuration list for PBXNativeTarget "FreeCropImageTool" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A00CE2661CA00CED003E3510 /* Debug */,
+				A00CE2671CA00CED003E3510 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		A00CE2681CA00CED003E3510 /* Build configuration list for PBXNativeTarget "FreeCropImageToolUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A00CE2691CA00CED003E3510 /* Debug */,
+				A00CE26A1CA00CED003E3510 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A00CE2401CA00CED003E3510 /* Project object */;
+}
