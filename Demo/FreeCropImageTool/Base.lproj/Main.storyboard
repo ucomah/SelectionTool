@@ -23,20 +23,30 @@
                                     <navigationItem title="Title" id="6YF-Mw-esU"/>
                                 </items>
                             </navigationBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I1j-pA-AXu">
+                                <rect key="frame" x="281.5" y="291" width="37.5" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="M1w-PF-JIL" secondAttribute="trailing" id="3YJ-VN-18b"/>
                             <constraint firstItem="M1w-PF-JIL" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Aii-P0-5wC"/>
+                            <constraint firstItem="I1j-pA-AXu" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="kc0-vy-G56"/>
+                            <constraint firstItem="I1j-pA-AXu" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="nWG-Cd-VFN"/>
                             <constraint firstItem="M1w-PF-JIL" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="vQX-he-Lsl"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="helperLabel" destination="I1j-pA-AXu" id="1sK-vH-QUF"/>
                         <outlet property="navBar" destination="M1w-PF-JIL" id="4gx-3l-lZV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="341" y="349"/>
         </scene>
     </scenes>
 </document>

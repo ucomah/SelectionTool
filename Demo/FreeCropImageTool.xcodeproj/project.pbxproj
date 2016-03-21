@@ -23,6 +23,10 @@
 		A00CE2771CA045BC003E3510 /* EMSelectionShapeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00CE26F1CA045BC003E3510 /* EMSelectionShapeView.swift */; };
 		A00CE2791CA04EF8003E3510 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00CE2781CA04EF8003E3510 /* RootViewController.swift */; };
 		A00CE27A1CA04EF8003E3510 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00CE2781CA04EF8003E3510 /* RootViewController.swift */; };
+		A00CE27C1CA05CBB003E3510 /* ImageSourceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00CE27B1CA05CBB003E3510 /* ImageSourceScreen.swift */; };
+		A00CE27D1CA05CBB003E3510 /* ImageSourceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00CE27B1CA05CBB003E3510 /* ImageSourceScreen.swift */; };
+		A00CE2801CA088F9003E3510 /* ZoomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00CE27F1CA088F9003E3510 /* ZoomImageView.swift */; };
+		A00CE2811CA088F9003E3510 /* ZoomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00CE27F1CA088F9003E3510 /* ZoomImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +55,9 @@
 		A00CE26E1CA045BC003E3510 /* EMCropView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EMCropView.swift; sourceTree = "<group>"; };
 		A00CE26F1CA045BC003E3510 /* EMSelectionShapeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EMSelectionShapeView.swift; sourceTree = "<group>"; };
 		A00CE2781CA04EF8003E3510 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		A00CE27B1CA05CBB003E3510 /* ImageSourceScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSourceScreen.swift; sourceTree = "<group>"; };
+		A00CE27E1CA05FB0003E3510 /* FreeCropImageTool.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = FreeCropImageTool.entitlements; sourceTree = "<group>"; };
+		A00CE27F1CA088F9003E3510 /* ZoomImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +100,9 @@
 		A00CE24A1CA00CED003E3510 /* FreeCropImageTool */ = {
 			isa = PBXGroup;
 			children = (
+				A00CE27F1CA088F9003E3510 /* ZoomImageView.swift */,
+				A00CE27E1CA05FB0003E3510 /* FreeCropImageTool.entitlements */,
+				A00CE27B1CA05CBB003E3510 /* ImageSourceScreen.swift */,
 				A00CE2781CA04EF8003E3510 /* RootViewController.swift */,
 				A00CE24B1CA00CED003E3510 /* AppDelegate.swift */,
 				A00CE24D1CA00CED003E3510 /* ViewController.swift */,
@@ -175,6 +185,12 @@
 				TargetAttributes = {
 					A00CE2471CA00CED003E3510 = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = EL7K2G689G;
+						SystemCapabilities = {
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 					A00CE25B1CA00CED003E3510 = {
 						CreatedOnToolsVersion = 7.2.1;
@@ -232,6 +248,8 @@
 				A00CE2791CA04EF8003E3510 /* RootViewController.swift in Sources */,
 				A00CE24E1CA00CED003E3510 /* ViewController.swift in Sources */,
 				A00CE24C1CA00CED003E3510 /* AppDelegate.swift in Sources */,
+				A00CE27C1CA05CBB003E3510 /* ImageSourceScreen.swift in Sources */,
+				A00CE2801CA088F9003E3510 /* ZoomImageView.swift in Sources */,
 				A00CE2761CA045BC003E3510 /* EMSelectionShapeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -240,10 +258,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A00CE27D1CA05CBB003E3510 /* ImageSourceScreen.swift in Sources */,
 				A00CE2751CA045BC003E3510 /* EMCropView.swift in Sources */,
 				A00CE2611CA00CED003E3510 /* FreeCropImageToolUITests.swift in Sources */,
 				A00CE27A1CA04EF8003E3510 /* RootViewController.swift in Sources */,
 				A00CE2711CA045BC003E3510 /* EMBezierPathUtils.swift in Sources */,
+				A00CE2811CA088F9003E3510 /* ZoomImageView.swift in Sources */,
 				A00CE2731CA045BC003E3510 /* EMCropOverlayView.swift in Sources */,
 				A00CE2771CA045BC003E3510 /* EMSelectionShapeView.swift in Sources */,
 			);
@@ -366,11 +386,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = FreeCropImageTool/FreeCropImageTool.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = FreeCropImageTool/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.melkov.FreeCropImageTool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -378,11 +403,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = FreeCropImageTool/FreeCropImageTool.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = FreeCropImageTool/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.melkov.FreeCropImageTool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
