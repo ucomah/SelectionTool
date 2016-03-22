@@ -339,7 +339,7 @@ private let kEMCropViewPadding: CGFloat = 14.0
             self.removeGestureRecognizer(self.doubleTapHandler!)
             self.doubleTapHandler = nil;
         }
-        self.doubleTapHandler = UITapGestureRecognizer.init(target: self, action: "doubleTapGestureRecognized:")
+        self.doubleTapHandler = UITapGestureRecognizer.init(target: self, action: #selector(EMCropView.doubleTapGestureRecognized(_:)))
         self.doubleTapHandler!.numberOfTapsRequired = 2
         self.doubleTapHandler!.delegate = self
         self.doubleTapHandler!.cancelsTouchesInView = true
@@ -487,13 +487,13 @@ private let kEMCropViewPadding: CGFloat = 14.0
         self.addSubview(overlayView)
         
         //Gestures
-        gridPanGestureRecognizer.addTarget(self, action: "gridPanGestureRecognized:")
+        gridPanGestureRecognizer.addTarget(self, action: #selector(EMCropView.gridPanGestureRecognized(_:)))
         gridPanGestureRecognizer.delegate = self
         self.addGestureRecognizer(self.gridPanGestureRecognizer)
         
         //Listeners
         NSNotificationCenter.defaultCenter().addObserver(self,
-            selector: "deviceDidChangeOrientation:",
+            selector: #selector(EMCropView.deviceDidChangeOrientation(_:)),
             name: UIDeviceOrientationDidChangeNotification,
             object: nil)
         
@@ -574,7 +574,7 @@ private let kEMCropViewPadding: CGFloat = 14.0
                 
             case .Cancelled, .Ended:
                 self.delegate?.cropViewDidChangeUndoStatus?(self, canUndo: true)
-                self.undoManager?.registerUndoWithTarget(self, selector: "doRevertSelection", object: nil)
+                self.undoManager?.registerUndoWithTarget(self, selector: #selector(EMCropView.doRevertSelection), object: nil)
                 
             default:
                 break
@@ -705,17 +705,18 @@ private let kEMCropViewPadding: CGFloat = 14.0
         UIView.commitAnimations()
     }
     
-    private func updateCropBoxFrameWithGesturePoint(var point: CGPoint) {
+    private func updateCropBoxFrameWithGesturePoint(point: CGPoint) {
         var frame = self.cropBoxFrame
         let originFrame = self.cropOriginFrame ?? CGRectZero
         let contentFrame = self.contentBounds
         
-        point.x = max(contentFrame.origin.x, point.x)
-        point.y = max(contentFrame.origin.y, point.y)
+        var aPoint = point
+        aPoint.x = max(contentFrame.origin.x, point.x)
+        aPoint.y = max(contentFrame.origin.y, point.y)
         
         //The delta between where we first tapped, and where our finger is now
-        var xDelta = ceil(point.x - self.panOriginPoint!.x)
-        var yDelta = ceil(point.y - self.panOriginPoint!.y)
+        var xDelta = ceil(aPoint.x - self.panOriginPoint!.x)
+        var yDelta = ceil(aPoint.y - self.panOriginPoint!.y)
 
         //Current aspect ratio of the crop box in case we need to clamp it
         let aspectRatio: CGFloat = (originFrame.size.width / originFrame.size.height)
@@ -924,18 +925,18 @@ private let kEMCropViewPadding: CGFloat = 14.0
         }
         else {
             if (frame.origin.x == contentFrame.origin.x) {
-                let delta = self.prevPoint.x - point.x
+                let delta = self.prevPoint.x - aPoint.x
                 if (delta > 0) {
                     frame.size.width -= delta
                 }
             }
             if (frame.origin.y == contentFrame.origin.y) {
-                let delta = self.prevPoint.y - point.y
+                let delta = self.prevPoint.y - aPoint.y
                 if (delta > 0) {
                     frame.size.height -= delta
                 }
             }
-            self.prevPoint = point
+            self.prevPoint = aPoint
         }
         
         self.cropBoxFrame = frame

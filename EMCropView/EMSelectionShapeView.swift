@@ -324,7 +324,7 @@ let EM_SELECTION_SHAPE_POINT_COLOR = UIColor.init(red: 0.3, green: 0.4, blue: 0.
                         self.removeGestureRecognizer(panGestureRecognizer!)
                         panGestureRecognizer = nil
                     }
-                    self.panGestureRecognizer = UIPanGestureRecognizer.init(target: self, action: "panGestureRecognized:")
+                    self.panGestureRecognizer = UIPanGestureRecognizer.init(target: self, action: #selector(EMSelectionShapeView.panGestureRecognized(_:)))
                     self.panGestureRecognizer!.delegate = self
                     self.panGestureRecognizer!.delaysTouchesEnded = false
                     self.addGestureRecognizer(self.panGestureRecognizer!)
@@ -334,7 +334,7 @@ let EM_SELECTION_SHAPE_POINT_COLOR = UIColor.init(red: 0.3, green: 0.4, blue: 0.
                         self.removeGestureRecognizer(self.tapGestureRecognizer!)
                         self.tapGestureRecognizer = nil;
                     }
-                    self.tapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: "tapGestureRecognized:")
+                    self.tapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(EMSelectionShapeView.tapGestureRecognized(_:)))
                     self.tapGestureRecognizer!.delegate = self
                     self.addGestureRecognizer(self.tapGestureRecognizer!)
                 
@@ -417,7 +417,7 @@ let EM_SELECTION_SHAPE_POINT_COLOR = UIColor.init(red: 0.3, green: 0.4, blue: 0.
                 let point: CGPoint = (self.panGestureRecognizer?.locationInView(self))!
                 self.delegate?.selectionShapeViewDidPauseFreeSelectionAtPoint?(self, point: point)
             }
-            self.undoManager?.registerUndoWithTarget(self, selector: "doAddUndoAction", object: self)
+            self.undoManager?.registerUndoWithTarget(self, selector: #selector(EMSelectionShapeView.doAddUndoAction), object: self)
         }
         else if keyPath == "shapeLayer.path" {
             #if DEBUG
@@ -646,7 +646,7 @@ let EM_SELECTION_SHAPE_POINT_COLOR = UIColor.init(red: 0.3, green: 0.4, blue: 0.
             else {
                 aPath.addLineToPoint(point)
             }
-            self.undoManager?.registerUndoWithTarget(self, selector: "doAddUndoAction", object: self)
+            self.undoManager?.registerUndoWithTarget(self, selector: #selector(EMSelectionShapeView.doAddUndoAction), object: self)
             self.delegate?.selectionShapeViewDidAddPolygonPoint?(self, point: point)
         }
         

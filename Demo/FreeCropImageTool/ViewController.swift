@@ -27,7 +27,7 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
         helperLabel?.text = NSLocalizedString("Press '+' button to start", comment: "Main screen helper label text")
         
         //Navigation bar setup
-        btnAdd = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "doAddItemAction")
+        btnAdd = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: Selector(self.doAddItemAction()))
         self.titleItem?.leftBarButtonItem = btnAdd
     }
 
