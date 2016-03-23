@@ -29,6 +29,7 @@
 		A00CE2811CA088F9003E3510 /* EMZoomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00CE27F1CA088F9003E3510 /* EMZoomImageView.swift */; };
 		A02EB03E1CA2BE7B003431BE /* EMCollectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02EB03D1CA2BE7B003431BE /* EMCollectionLayout.swift */; };
 		A02EB03F1CA2BE7B003431BE /* EMCollectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02EB03D1CA2BE7B003431BE /* EMCollectionLayout.swift */; };
+		A09AF4F71CA31B2D0047E3B4 /* ROIScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09AF4F61CA31B2D0047E3B4 /* ROIScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		A00CE27E1CA05FB0003E3510 /* FreeCropImageTool.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = FreeCropImageTool.entitlements; sourceTree = "<group>"; };
 		A00CE27F1CA088F9003E3510 /* EMZoomImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EMZoomImageView.swift; sourceTree = "<group>"; };
 		A02EB03D1CA2BE7B003431BE /* EMCollectionLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EMCollectionLayout.swift; sourceTree = "<group>"; };
+		A09AF4F61CA31B2D0047E3B4 /* ROIScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ROIScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 		A00CE24A1CA00CED003E3510 /* FreeCropImageTool */ = {
 			isa = PBXGroup;
 			children = (
+				A09AF4F61CA31B2D0047E3B4 /* ROIScreen.swift */,
 				A02EB03D1CA2BE7B003431BE /* EMCollectionLayout.swift */,
 				A00CE27F1CA088F9003E3510 /* EMZoomImageView.swift */,
 				A00CE27E1CA05FB0003E3510 /* FreeCropImageTool.entitlements */,
@@ -246,6 +249,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A09AF4F71CA31B2D0047E3B4 /* ROIScreen.swift in Sources */,
 				A00CE2701CA045BC003E3510 /* EMBezierPathUtils.swift in Sources */,
 				A00CE2721CA045BC003E3510 /* EMCropOverlayView.swift in Sources */,
 				A00CE2741CA045BC003E3510 /* EMCropView.swift in Sources */,

@@ -8,9 +8,22 @@
 import Foundation
 import UIKit
 
-@objc enum EMSelectionShapeViewType: Int {
+@objc enum EMSelectionType: Int {
     case Rectangle = 0,
     Circle, Polygon, Lasso
+    
+    var stringValue: String {
+        switch self {
+        case .Rectangle:
+            return "Rectangle_black"
+        case .Circle:
+            return "Circle_black"
+        case .Polygon:
+            return "Polygon_black"
+        case .Lasso:
+            return "Lasso_black"
+        }
+    }
 }
 
 @objc enum EMSelectionFailureReason: Int {
@@ -34,7 +47,7 @@ let EM_SELECTION_SHAPE_POINT_COLOR = UIColor.init(red: 0.3, green: 0.4, blue: 0.
     
     
     var delegate: EMSelectionShapeViewDelegate?
-    var type: EMSelectionShapeViewType {
+    var type: EMSelectionType = .Rectangle {
         didSet {
             setup()
         }
@@ -42,9 +55,9 @@ let EM_SELECTION_SHAPE_POINT_COLOR = UIColor.init(red: 0.3, green: 0.4, blue: 0.
     var enableTestIndicators: Bool = false
     
     /// BezierPath line color.
-    var lineColor: UIColor
+    var lineColor = UIColor.whiteColor()
     /// BezierPath line width.
-    var lineWidth: CGFloat
+    var lineWidth: CGFloat = 3.0
     /// Color of initial selection point. If not specified, EM_SELECTION_SHAPE_POINT_COLOR will be used
     var shapePointColor: UIColor?
     /// Circle layer with initialPoint of BazierPath used to close path.
@@ -54,11 +67,11 @@ let EM_SELECTION_SHAPE_POINT_COLOR = UIColor.init(red: 0.3, green: 0.4, blue: 0.
         }
     }
     /// Indicates if BezierPath of selection should be automatically resized when view changes it's frame. Default is 'true'.
-    var autoAdjustBezierPathOnResize: Bool
+    var autoAdjustBezierPathOnResize = true
     /// Indicates if user can pause lasso selection by ending tap and continue existing selection path with next tap. Default is 'true'.
-    var allowGesturePauseForLasso: Bool
+    var allowGesturePauseForLasso = true
     /// Indicates if Lasso selection is paused
-    private(set) var selectionIsPaused: Bool
+    private(set) var selectionIsPaused = false
     
     var selectionPath: UIBezierPath {
         get {
@@ -73,11 +86,11 @@ let EM_SELECTION_SHAPE_POINT_COLOR = UIColor.init(red: 0.3, green: 0.4, blue: 0.
     private
     
     /// Main BezierPath of shape
-    var aPath: UIBezierPath
+    var aPath: UIBezierPath = UIBezierPath()
     /// Indicates if BezierPath is closed
-    var pathIsClosed: Bool
+    var pathIsClosed = false
     /// Main shape layer where path is actually being drawed
-    var shapeLayer: CAShapeLayer
+    var shapeLayer = CAShapeLayer()
     /// Gesture recognizer for polygon building
     var tapGestureRecognizer: UITapGestureRecognizer?
     /// Gesture recognizer for Lasso building
@@ -85,11 +98,11 @@ let EM_SELECTION_SHAPE_POINT_COLOR = UIColor.init(red: 0.3, green: 0.4, blue: 0.
     /// Layer which displays the first point in Lasso and Polygon mode.
     var firstPointShape: CAShapeLayer?
     /// A frame of 'firstPointShape'
-    var firstPointFrame: CGRect
+    var firstPointFrame: CGRect = CGRectZero
     /// Indicates if current point left 'firstPointShape' area
-    var shapeCanBeLocked: Bool
+    var shapeCanBeLocked = false
     
-    var selectionHidden: Bool {
+    var selectionHidden = false {
         didSet {
             self.shapeLayer.hidden = selectionHidden
             self.firstPointShape?.hidden = selectionHidden
@@ -283,19 +296,6 @@ let EM_SELECTION_SHAPE_POINT_COLOR = UIColor.init(red: 0.3, green: 0.4, blue: 0.
     //MARK: - Lifecycle
     
     override init(frame: CGRect) {
-        
-        lineColor = UIColor.whiteColor()
-        lineWidth = 3.0
-        autoAdjustBezierPathOnResize = true
-        allowGesturePauseForLasso = true
-        selectionIsPaused = false
-        aPath = UIBezierPath()
-        pathIsClosed = false
-        firstPointFrame = CGRectZero
-        shapeCanBeLocked = false
-        type = .Rectangle
-        selectionHidden = false
-        shapeLayer = CAShapeLayer()
         
         super.init(frame: frame)
         
@@ -603,20 +603,20 @@ let EM_SELECTION_SHAPE_POINT_COLOR = UIColor.init(red: 0.3, green: 0.4, blue: 0.
                 }
                 aPath.moveToPoint(point)
                 
-                NSLog("Moved to \(NSStringFromCGPoint(point))")
+                //NSLog("Moved to \(NSStringFromCGPoint(point))")
                 break
                 
             case .Changed:
                 aPath.addLineToPoint(point)
-                NSLog("Line to \(NSStringFromCGPoint(point))")
+                //NSLog("Line to \(NSStringFromCGPoint(point))")
                 break
                 
             case .Ended: //This state is handled by the KVO
-                NSLog("UIGestureRecognizerStateEnded")
+                //NSLog("UIGestureRecognizerStateEnded")
                 break
                 
             default:
-                NSLog("Unhandled UIGestureRecognizerState = \(recognizer.state)")
+                //NSLog("Unhandled UIGestureRecognizerState = \(recognizer.state)")
                 break;
             }
         

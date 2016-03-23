@@ -28,6 +28,10 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
 
         self.title = NSLocalizedString("Selection Tool", comment: "Main screen title")
         helperLabel?.text = NSLocalizedString("Press '+' button to start", comment: "Main screen helper label text")
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         
         //Navigation bar setup
         self.toggleNavigationBarButtons()
@@ -52,7 +56,9 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
             popoverPresentationController?.barButtonItem = btnAdd
         }
         else {
-            let alert = UIAlertController.init(title: NSLocalizedString("Import image from:", comment: ""), message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
+            let alert = UIAlertController.init(title: NSLocalizedString("Import image from:", comment: ""),
+                                               message: "",
+                                               preferredStyle: UIAlertControllerStyle.ActionSheet)
             alert.addAction(UIAlertAction.init(title: NSLocalizedString("iCloud Drive", comment: ""), style: UIAlertActionStyle.Default, handler: { (action: UIAlertAction) -> Void in
                 self.do_iCloudImport()
             }))
@@ -82,7 +88,9 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
     }
     
     internal func doShowSelectCropScreen() {
-        
+        if let cropSelectScreen = self.storyboard?.instantiateViewControllerWithIdentifier("SelectionTypeViewController_identifier") {
+            self.presentViewController(cropSelectScreen, animated: true, completion: nil)
+        }
     }
     
     internal func doDeleteImage() {
@@ -99,20 +107,24 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
     }
     
     func toggleNavigationBarButtons() {
-        btnAdd = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: #selector(ViewController.doAddItemAction))
+        btnAdd = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.Add,
+                                      target: self,
+                                      action: #selector(ViewController.doAddItemAction))
         self.titleItem?.leftBarButtonItems = [btnAdd!]
         
         if self.imageHolder?.image != nil {
             btnCrop = UIBarButtonItem.init(title: NSLocalizedString("Crop", comment: "ToolBar Crop selection button title"),
                                            style: UIBarButtonItemStyle.Plain,
                                            target: self,
-                                           action: Selector(self.doShowSelectCropScreen()))
-            btnDelete = UIBarButtonItem.init(barButtonSystemItem: .Trash, target: self, action: Selector(self.doDeleteImage()))
+                                           action: #selector(ViewController.doShowSelectCropScreen))
+            btnDelete = UIBarButtonItem.init(barButtonSystemItem: .Trash, target: self, action: #selector(ViewController.doDeleteImage))
             
             self.titleItem?.leftBarButtonItems?.append(btnCrop!)
             self.titleItem?.rightBarButtonItems = [btnDelete!]
         }
-        
+        else {
+            self.titleItem?.rightBarButtonItems = []
+        }
     }
     
     //MARK: - UIPopoverPresentationControllerDelegate
@@ -157,7 +169,117 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
 
 //MARK: -
 
-
-class SelectionTypeView: UIViewController {
-    
+protocol SelectionTypeViewControllerDelegate {
+    func selectionTypeViewController(controller: SelectionTypeViewController,  didChoseSelectionType type: EMSelectionType)
 }
+
+let cellReuseIdentifier = "SelectionTypeViewControllerCell_identifier"
+
+class SelectionTypeViewController: RootViewController, UICollectionViewDataSource {
+    
+    @IBOutlet weak var collectionHolder: UICollectionView?
+    var delegate: SelectionTypeViewControllerDelegate?
+    var btnCancel: UIBarButtonItem?
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        self.commonInit()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.commonInit()
+    }
+    
+    private func commonInit() {
+        btnCancel = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.Cancel,
+                                         target: self,
+                                         action: #selector(SelectionTypeViewController.goCancel(_:)))
+        self.titleItem?.leftBarButtonItem = btnCancel!
+        
+        
+        
+        //CollectionView setup
+        let layout = PALayout.init()
+        layout.isVertical = true
+        layout.itemSize = CGSizeMake(128, 160)
+        layout.horizontalItemsSpacing = 120
+        layout.verticalItemsSpacing = 40
+        
+//        if self.collectionHolder == nil {
+//            self.collectionHolder = UICollectionView.init(frame: self.view.bounds, collectionViewLayout: layout)
+//            self.view.addSubview(self.collectionHolder!)
+//        }
+        
+        collectionHolder?.frame = self.view.bounds
+        
+        collectionHolder?.alwaysBounceVertical = true
+        collectionHolder?.collectionViewLayout = layout
+        collectionHolder?.clipsToBounds = true
+        collectionHolder?.dataSource = self
+        
+        collectionHolder?.registerClass(SelectionTypeViewControllerCell.classForCoder(), forCellWithReuseIdentifier: cellReuseIdentifier)
+    }
+    
+    internal
+    func goCancel(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.title = NSLocalizedString("Tap to choose a selection tool", comment:"Selection type choise title")
+        self.titleItem?.rightBarButtonItem = btnCancel
+    }
+    
+    //MARK: - UICollectionView dataSource
+    
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 4
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell: SelectionTypeViewControllerCell = collectionView.dequeueReusableCellWithReuseIdentifier(cellReuseIdentifier, forIndexPath: indexPath) as! SelectionTypeViewControllerCell
+        
+        let type: EMSelectionType = EMSelectionType(rawValue: indexPath.item)!
+        switch type {
+        case .Rectangle:
+            cell.imageHolder?.image = UIImage.init(named: "Rectangle_black")
+        case .Circle:
+            cell.imageHolder?.image = UIImage.init(named: "Circle_black")
+        case .Polygon:
+            cell.imageHolder?.image = UIImage.init(named: "Polygon_black")
+        case .Lasso:
+            cell.imageHolder?.image = UIImage.init(named: "Lasso_black")
+        }
+        cell.titleLabel?.text = type.stringValue
+        
+        return cell
+    }
+}
+
+
+class SelectionTypeViewControllerCell: UICollectionViewCell {
+    
+    @IBOutlet weak var imageHolder: UIImageView?
+    @IBOutlet weak var titleLabel: UILabel?
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        self.imageHolder!.clipsToBounds = true
+        self.imageHolder!.contentMode = UIViewContentMode.ScaleAspectFill
+        self.titleLabel!.textColor = UIColor.darkTextColor()
+    }
+}
+
+

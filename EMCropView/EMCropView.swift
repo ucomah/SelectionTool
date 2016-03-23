@@ -290,7 +290,7 @@ private let kEMCropViewPadding: CGFloat = 14.0
     }
     
     /// Indicates a selection path type for cropView. Default is 'Rectangle'.
-    var selectionType: EMSelectionShapeViewType {
+    var selectionType: EMSelectionType {
         didSet {
             self.overlayView.selectionView.type = selectionType
             

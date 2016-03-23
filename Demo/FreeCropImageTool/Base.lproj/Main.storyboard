@@ -57,5 +57,78 @@
             </objects>
             <point key="canvasLocation" x="341" y="349"/>
         </scene>
+        <!--Selection Type View Controller-->
+        <scene sceneID="Hqd-JO-GXn">
+            <objects>
+                <viewController storyboardIdentifier="SelectionTypeViewController_identifier" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Gk7-Az-wSq" customClass="SelectionTypeViewController" customModule="FreeCropImageTool" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bHo-53-J5a"/>
+                        <viewControllerLayoutGuide type="bottom" id="iEv-FX-eq7"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Pon-UT-3md">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CqX-75-l69">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <items>
+                                    <navigationItem title="Title" id="8Zx-sd-pst"/>
+                                </items>
+                            </navigationBar>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="fXA-n5-NGh">
+                                <rect key="frame" x="0.0" y="44" width="600" height="556"/>
+                                <collectionViewLayout key="collectionViewLayout" id="vb5-3G-gFj" customClass="PALayout" customModule="FreeCropImageTool"/>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SelectionTypeViewControllerCell_identifier" id="qmX-TQ-2Mi" customClass="SelectionTypeViewControllerCell" customModule="FreeCropImageTool" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="128" height="160"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="160"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zME-Zl-AK2">
+                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="294-a0-hmk">
+                                                    <rect key="frame" x="0.0" y="131" width="128" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <size key="customSize" width="128" height="160"/>
+                                        <connections>
+                                            <outlet property="imageHolder" destination="zME-Zl-AK2" id="uRm-sO-JcL"/>
+                                            <outlet property="titleLabel" destination="294-a0-hmk" id="HiY-iN-dBZ"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="Gk7-Az-wSq" id="2gr-lN-Hrc"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="CqX-75-l69" secondAttribute="trailing" id="5ZL-eU-0pz"/>
+                            <constraint firstItem="CqX-75-l69" firstAttribute="top" secondItem="Pon-UT-3md" secondAttribute="top" id="Amv-G8-Sm0"/>
+                            <constraint firstItem="fXA-n5-NGh" firstAttribute="trailing" secondItem="CqX-75-l69" secondAttribute="trailing" id="HHK-dN-8E4"/>
+                            <constraint firstItem="fXA-n5-NGh" firstAttribute="top" secondItem="CqX-75-l69" secondAttribute="bottom" id="MCe-El-hlc"/>
+                            <constraint firstItem="CqX-75-l69" firstAttribute="leading" secondItem="Pon-UT-3md" secondAttribute="leading" id="ON7-4X-EVy"/>
+                            <constraint firstItem="fXA-n5-NGh" firstAttribute="leading" secondItem="CqX-75-l69" secondAttribute="leading" id="fLs-nT-1Zp"/>
+                            <constraint firstItem="fXA-n5-NGh" firstAttribute="bottom" secondItem="iEv-FX-eq7" secondAttribute="top" id="wQH-iE-AH1"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="collectionHolder" destination="fXA-n5-NGh" id="DXj-rJ-U1S"/>
+                        <outlet property="navBar" destination="CqX-75-l69" id="h5R-c4-1UX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BDj-vQ-D3v" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="417" y="1102"/>
+        </scene>
     </scenes>
 </document>

@@ -10,8 +10,8 @@ import UIKit
 
 class EMZoomImageView: UIView, UIScrollViewDelegate {
 
-    ///Default is 0.7
-    var imageAppearanceDuration: CGFloat = 0.7
+    ///Default is 0.5
+    var imageAppearanceDuration: CGFloat = 0.5
     var image: UIImage? {
         get {
             return imageView.image
@@ -23,9 +23,9 @@ class EMZoomImageView: UIView, UIScrollViewDelegate {
     
     func setImage(image: UIImage?, animated: Bool) {
         if (animated) {
-            self.imageView.alpha = 0;
+            self.imageView.alpha = 0
         }
-        self.imageView.image = image;
+        self.imageView.image = image
         self.updateZoom()
         
         if (animated) {
