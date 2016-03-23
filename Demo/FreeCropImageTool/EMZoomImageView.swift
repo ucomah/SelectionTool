@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ZoomImageView: UIView, UIScrollViewDelegate {
+class EMZoomImageView: UIView, UIScrollViewDelegate {
 
     ///Default is 0.7
     var imageAppearanceDuration: CGFloat = 0.7
@@ -80,11 +80,11 @@ class ZoomImageView: UIView, UIScrollViewDelegate {
         scrollView.addSubview(imageView)
         
         //Gestures
-        let doubleTap = UITapGestureRecognizer.init(target: self, action: #selector(ZoomImageView.doDoubleTap(_:)))
+        let doubleTap = UITapGestureRecognizer.init(target: self, action: #selector(EMZoomImageView.doDoubleTap(_:)))
         doubleTap.numberOfTapsRequired = 2
         self.scrollView.addGestureRecognizer(doubleTap)
         
-        let singleTap = UITapGestureRecognizer.init(target: self, action: #selector(ZoomImageView.doSingleTap(_:)))
+        let singleTap = UITapGestureRecognizer.init(target: self, action: #selector(EMZoomImageView.doSingleTap(_:)))
         singleTap.numberOfTapsRequired = 1
         singleTap.numberOfTouchesRequired = 1
         self.scrollView.addGestureRecognizer(singleTap)

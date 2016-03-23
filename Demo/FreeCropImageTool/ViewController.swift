@@ -16,8 +16,11 @@ import UIKit
 class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocumentPickerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var helperLabel : UILabel?
+    @IBOutlet weak var imageHolder: EMZoomImageView?
     
     private var btnAdd: UIBarButtonItem?
+    private var btnCrop: UIBarButtonItem?
+    private var btnDelete: UIBarButtonItem?
     private var inImageSource: ImageSourceViewController?
     
     override func viewDidLoad() {
@@ -27,8 +30,7 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
         helperLabel?.text = NSLocalizedString("Press '+' button to start", comment: "Main screen helper label text")
         
         //Navigation bar setup
-        btnAdd = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: Selector(self.doAddItemAction()))
-        self.titleItem?.leftBarButtonItem = btnAdd
+        self.toggleNavigationBarButtons()
     }
 
     override func didReceiveMemoryWarning() {
@@ -79,18 +81,53 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
         self.presentViewController(picker, animated: true, completion: nil)
     }
     
+    internal func doShowSelectCropScreen() {
+        
+    }
+    
+    internal func doDeleteImage() {
+        self.setImage(nil)
+    }
+    
+    //MARK: - Setup
+    
+    func setImage(image: UIImage?) {
+        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+            self.imageHolder?.image = image
+            self.toggleNavigationBarButtons()
+        }
+    }
+    
+    func toggleNavigationBarButtons() {
+        btnAdd = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: #selector(ViewController.doAddItemAction))
+        self.titleItem?.leftBarButtonItems = [btnAdd!]
+        
+        if self.imageHolder?.image != nil {
+            btnCrop = UIBarButtonItem.init(title: NSLocalizedString("Crop", comment: "ToolBar Crop selection button title"),
+                                           style: UIBarButtonItemStyle.Plain,
+                                           target: self,
+                                           action: Selector(self.doShowSelectCropScreen()))
+            btnDelete = UIBarButtonItem.init(barButtonSystemItem: .Trash, target: self, action: Selector(self.doDeleteImage()))
+            
+            self.titleItem?.leftBarButtonItems?.append(btnCrop!)
+            self.titleItem?.rightBarButtonItems = [btnDelete!]
+        }
+        
+    }
+    
     //MARK: - UIPopoverPresentationControllerDelegate
     
     func tablePopOver(popOver: UIViewController, didSelectItemAtIndex index: Int) {
-        switch index {
-        case 0:
-            self.do_iCloudImport()
-        case 1:
-            self.do_ImagePickerImportWithSourceType(UIImagePickerControllerSourceType.PhotoLibrary)
-        default:
-            break
-        }
-        inImageSource?.dismissViewControllerAnimated(true, completion: nil)
+        inImageSource?.dismissViewControllerAnimated(true, completion: { 
+            switch index {
+            case 0:
+                self.do_iCloudImport()
+            case 1:
+                self.do_ImagePickerImportWithSourceType(UIImagePickerControllerSourceType.PhotoLibrary)
+            default:
+                break
+            }
+        })
     }
     
     //MARK: - UIDocumentPickerDelegate
@@ -105,15 +142,22 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
             return
         }
         let image = UIImage.init(data: data!)
-        
-        controller.dismissViewControllerAnimated(true, completion: nil)
+        self.setImage(image)
+        controller.dismissViewControllerAnimated(true, completion:nil)
     }
     
     //MARK: - UIImagePickerControllerDelegate
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
-        picker.dismissViewControllerAnimated(true, completion: nil)
+        self.setImage(image)
+        picker.dismissViewControllerAnimated(true, completion:nil)
     }
-
 }
 
+
+//MARK: -
+
+
+class SelectionTypeView: UIViewController {
+    
+}

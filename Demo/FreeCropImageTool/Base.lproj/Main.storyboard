@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -24,23 +24,32 @@
                                 </items>
                             </navigationBar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I1j-pA-AXu">
-                                <rect key="frame" x="281.5" y="291" width="37.5" height="18"/>
+                                <rect key="frame" x="281" y="291" width="38" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dce-ge-fDq" customClass="EMZoomImageView" customModule="FreeCropImageTool" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44" width="600" height="556"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="M1w-PF-JIL" secondAttribute="trailing" id="3YJ-VN-18b"/>
                             <constraint firstItem="M1w-PF-JIL" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Aii-P0-5wC"/>
+                            <constraint firstItem="Dce-ge-fDq" firstAttribute="leading" secondItem="M1w-PF-JIL" secondAttribute="leading" id="SKV-TI-7O0"/>
                             <constraint firstItem="I1j-pA-AXu" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="kc0-vy-G56"/>
                             <constraint firstItem="I1j-pA-AXu" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="nWG-Cd-VFN"/>
+                            <constraint firstItem="Dce-ge-fDq" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="qd9-PY-XCv"/>
                             <constraint firstItem="M1w-PF-JIL" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="vQX-he-Lsl"/>
+                            <constraint firstItem="Dce-ge-fDq" firstAttribute="top" secondItem="M1w-PF-JIL" secondAttribute="bottom" id="yfd-nd-3Pl"/>
+                            <constraint firstItem="Dce-ge-fDq" firstAttribute="trailing" secondItem="M1w-PF-JIL" secondAttribute="trailing" id="zK6-d0-RWo"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="helperLabel" destination="I1j-pA-AXu" id="1sK-vH-QUF"/>
+                        <outlet property="imageHolder" destination="Dce-ge-fDq" id="8bK-TT-Zx4"/>
                         <outlet property="navBar" destination="M1w-PF-JIL" id="4gx-3l-lZV"/>
                     </connections>
                 </viewController>
