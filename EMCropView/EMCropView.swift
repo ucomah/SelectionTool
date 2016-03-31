@@ -39,19 +39,28 @@ private let kEMCropViewPadding: CGFloat = 14.0
     //MARK: - Public variables
     
     /// The image that the crop view is displaying. This cannot be changed once the crop view is instantiated.
-    let image: UIImage
+    var image: UIImage {
+        get {
+            return imageView.image ?? UIImage.init()
+        }
+        set {
+            self.imageView.image = newValue
+            self.layoutInitialImage()
+            self.layoutSubviews()
+        }
+    }
     /// A grid view overlaid on top of the foreground image view's container.
-    let overlayView: EMCropOverlayView
+    let overlayView = EMCropOverlayView()
     /// When the cropping box is locked to its current size
-    private(set) var aspectLockEnabled: Bool
+    private(set) var aspectLockEnabled = false
     /// Inset the workable region of the crop view in case in order to make space for accessory views
-    private(set) var cropRegionInsets: UIEdgeInsets
+    private(set) var cropRegionInsets = UIEdgeInsetsZero
     /// Indicates if CropBoxView should be resized when facing superview borders. Default is 'true'
-    private(set) var resizeCropBoxOnDrag: Bool
+    private(set) var resizeCropBoxOnDrag = true
     /** Indicates if app should let user to draw a selection frame box form scratch or use predefined one.
         Applicable only for Rectangle and Oval selection modes.
     */
-    var usePreDefinedSelectionFrame: Bool {
+    var usePreDefinedSelectionFrame: Bool = false {
         didSet {
             self.deselect()
         }
@@ -94,31 +103,31 @@ private let kEMCropViewPadding: CGFloat = 14.0
     
     private
     /// The gesture recognizer in charge of controlling the resizing of the crop view.
-    let gridPanGestureRecognizer: UIPanGestureRecognizer
+    let gridPanGestureRecognizer = UIPanGestureRecognizer()
     /// Handles selection bezier path cleaning
     var doubleTapHandler: UITapGestureRecognizer?
     /// The edge region that the user tapped on, to resize the cropping region.
-    var tappedEdge: EMCropViewOverlayEdge
+    var tappedEdge =  EMCropViewOverlayEdge.None
     /// When resizing, this is the original frame of the crop box.
     var cropOriginFrame: CGRect?
     /// The initial touch point of the pan gesture recognizer
     var panOriginPoint: CGPoint?
     
-    let imageView: UIImageView
+    let imageView = UIImageView()
 
     /// Used to support 'resizeCropBoxOnDrag'
-    var prevPoint: CGPoint
+    var prevPoint = CGPointZero
     /// Base point for drawing a selection frame from scratch
-    var initialCropRect: CGRect
-    private(set) var isInitialRectDrawing: Bool
+    var initialCropRect =  CGRectZero
+    private(set) var isInitialRectDrawing = false
     ///Keeps all cropOriginValues for Undo oprations
-    let cropOriginsStack: NSMutableArray
+    let cropOriginsStack = NSMutableArray()
     
     
     //MARK: - Accessors
     
     /// The frame of the cropping box on the crop view
-    var cropBoxFrame: CGRect {
+    var cropBoxFrame = CGRectZero {
         didSet {
             if (CGRectEqualToRect(cropBoxFrame, oldValue)) {
                 return
@@ -290,7 +299,7 @@ private let kEMCropViewPadding: CGFloat = 14.0
     }
     
     /// Indicates a selection path type for cropView. Default is 'Rectangle'.
-    var selectionType: EMSelectionType {
+    var selectionType = EMSelectionType.Rectangle {
         didSet {
             self.overlayView.selectionView.type = selectionType
             
@@ -433,41 +442,12 @@ private let kEMCropViewPadding: CGFloat = 14.0
             self.isInitialRectDrawing = true
         }
     }
-
-    internal
     
     //MARK: - LifeCycle
     
     init(image: UIImage) {
-        
-        //Image
-        self.image = image
-        
-        //Variables
-        self.aspectLockEnabled = false
-        self.cropRegionInsets = UIEdgeInsetsZero
-        self.resizeCropBoxOnDrag = true
-        self.usePreDefinedSelectionFrame = false
-        self.prevPoint = CGPointZero
-        self.initialCropRect = CGRectZero
-        self.isInitialRectDrawing = false
-        self.cropOriginsStack = NSMutableArray()
-        self.tappedEdge = .None
-        self.cropBoxFrame = CGRectZero
-        self.selectionType = .Rectangle
-        
-        gridPanGestureRecognizer = UIPanGestureRecognizer()
-        imageView = UIImageView()
-        overlayView = EMCropOverlayView()
-        
         //Super
         super.init(frame: CGRectMake(0, 0, image.size.width, image.size.height))
-        
-        //Continuing with variables
-        self.selectionType = .Rectangle
-        self.cropBoxColor = nil
-        self.resizingPointInnerColor = nil
-        self.resizingPointOuterColor = nil
 
         //View properties
         self.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
@@ -496,8 +476,6 @@ private let kEMCropViewPadding: CGFloat = 14.0
             selector: #selector(EMCropView.deviceDidChangeOrientation(_:)),
             name: UIDeviceOrientationDidChangeNotification,
             object: nil)
-        
-        
     }
     
     override init(frame: CGRect) {
