@@ -13,6 +13,8 @@ class RootViewController: UIViewController {
     internal var titleItem: UINavigationItem?
     @IBOutlet weak var navBar: UINavigationBar?
     
+    private var barConstraint: NSLayoutConstraint?
+    
     override var title: String? {
         get {
             if let item = self.titleItem {
@@ -47,20 +49,19 @@ class RootViewController: UIViewController {
             NSFontAttributeName: UIFont.boldSystemFontOfSize(18.0)
         ]
         navBar?.titleTextAttributes = attrs
+        
+        barConstraint = NSLayoutConstraint.init(item: navBar!,
+                                                attribute: NSLayoutAttribute.Height,
+                                                relatedBy: NSLayoutRelation.Equal,
+                                                toItem: nil,
+                                                attribute: NSLayoutAttribute.Height,
+                                                multiplier: 1,
+                                                constant: 64.0)
     }
     
     override func viewWillAppear(animated: Bool) {
         
-        //Fix navigationBar height
-        if self.modalPresentationStyle != UIModalPresentationStyle.FormSheet {
-            view.addConstraint(NSLayoutConstraint.init(item: navBar!,
-                attribute: NSLayoutAttribute.Height,
-                relatedBy: NSLayoutRelation.Equal,
-                toItem: nil,
-                attribute: NSLayoutAttribute.Height,
-                multiplier: 1,
-                constant: 64.0))
-        }
+        self.addConstrintIfNeeded()
         
         if (self.navBar != nil) {
             self.navBar?.items = [self.titleItem!]
@@ -73,5 +74,22 @@ class RootViewController: UIViewController {
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+    
+    private func addConstrintIfNeeded() {
+        //Fix navigationBar height
+        if self.modalPresentationStyle != UIModalPresentationStyle.FormSheet {
+            view.addConstraint(barConstraint!)
+        }
+    }
+    
+    override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
+        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone &&
+        UIDevice.currentDevice().orientation.isLandscape {
+            self.view.removeConstraint(barConstraint!)
+        }
+        else {
+            self.addConstrintIfNeeded()
+        }
     }
 }
