@@ -44,6 +44,8 @@ private let kEMCropViewPadding: CGFloat = 14.0
             return imageView.image ?? UIImage.init()
         }
         set {
+            self.imageView.frame = contentBounds
+            self.imageView.contentMode = .ScaleAspectFit
             self.imageView.image = newValue
             self.layoutInitialImage()
             self.layoutSubviews()
@@ -448,16 +450,41 @@ private let kEMCropViewPadding: CGFloat = 14.0
     init(image: UIImage) {
         //Super
         super.init(frame: CGRectMake(0, 0, image.size.width, image.size.height))
-
+        
+        self.image = image
+        self.commonInit()
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        self.commonInit()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self);
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.commonInit()
+    }
+    
+    private func commonInit() {
         //View properties
         self.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
         
+        if self.imageView.superview != nil {
+            return
+        }
+        
         //ImageView
-        self.imageView.frame = contentBounds
-        self.imageView.image = self.image
-        self.imageView.contentMode = .ScaleAspectFit
         self.addSubview(self.imageView)
-
+        
         //Overaly view
         let frame = CGRectMake(0, 0, CGRectGetWidth(self.frame)/3,CGRectGetHeight(self.frame)/3);
         self.overlayView.frame = frame
@@ -473,25 +500,10 @@ private let kEMCropViewPadding: CGFloat = 14.0
         
         //Listeners
         NSNotificationCenter.defaultCenter().addObserver(self,
-            selector: #selector(EMCropView.deviceDidChangeOrientation(_:)),
-            name: UIDeviceOrientationDidChangeNotification,
-            object: nil)
-    }
-    
-    override init(frame: CGRect) {
-        fatalError("Please, use 'init(image: UIImage)' initializer for this class")
-    }
-    
-    convenience init() {
-        fatalError("Please, use 'init(image: UIImage)' initializer for this class")
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("This class does not support NSCoding")
-    }
-    
-    deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self);
+                                                         selector: #selector(EMCropView.deviceDidChangeOrientation(_:)),
+                                                         name: UIDeviceOrientationDidChangeNotification,
+                                                         object: nil)
+
     }
     
     override func didMoveToSuperview() {
