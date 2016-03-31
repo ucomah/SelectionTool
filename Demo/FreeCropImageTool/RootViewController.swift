@@ -15,6 +15,13 @@ class RootViewController: UIViewController {
     
     private var barConstraint: NSLayoutConstraint?
     
+    override var navigationItem: UINavigationItem {
+        if let item = self.titleItem {
+            return item
+        }
+        return (self.navigationController?.navigationItem)!
+    }
+    
     override var title: String? {
         get {
             if let item = self.titleItem {

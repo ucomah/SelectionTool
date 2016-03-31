@@ -14,7 +14,7 @@ import UIKit
     optional func tablePopOver(popOver: UIViewController, didSelectItemAtIndex index: Int)
 }
 
-class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocumentPickerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocumentPickerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, SelectionTypeViewControllerDelegate {
 
     @IBOutlet weak var helperLabel : UILabel?
     @IBOutlet weak var imageHolder: EMZoomImageView?
@@ -41,6 +41,21 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
         if let data = NSData.init(contentsOfFile: self.tempImagePath) {
             let img = UIImage.init(data: data)
             self.setImage(img)
+            
+            return
+            //WARNING: TEST
+            if self.imageHolder?.tag != 0 {
+                return
+            }
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
+                while self.imageHolder?.image == nil {
+                    NSThread.sleepForTimeInterval(0.3)
+                }
+                dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                    self.navigateToROIScreenWithSelectionType(EMSelectionType.Lasso)
+                    self.imageHolder?.tag = 1
+                }
+            }
         }
     }
 
@@ -94,13 +109,6 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
         self.presentViewController(picker, animated: true, completion: nil)
     }
     
-    internal func doShowSelectCropScreen() {
-        self.performSegueWithIdentifier("showSelectCropTypeScreen", sender: self)
-//        if let cropSelectScreen = self.storyboard?.instantiateViewControllerWithIdentifier("SelectionTypeViewController_identifier") {
-//            self.presentViewController(cropSelectScreen, animated: true, completion: nil)
-//        }
-    }
-    
     internal func doDeleteImage() {
         self.setImage(nil)
     }
@@ -146,7 +154,7 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
             btnCrop = UIBarButtonItem.init(title: NSLocalizedString("Crop", comment: "ToolBar Crop selection button title"),
                                            style: UIBarButtonItemStyle.Plain,
                                            target: self,
-                                           action: #selector(ViewController.doShowSelectCropScreen))
+                                           action: #selector(ViewController.navigateToSelectCropScreen))
             btnDelete = UIBarButtonItem.init(barButtonSystemItem: .Trash, target: self, action: #selector(ViewController.doDeleteImage))
             
             self.titleItem?.leftBarButtonItems?.append(btnCrop!)
@@ -198,7 +206,42 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
     //MARK: Navigation
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        print(#function)
+        if segue.destinationViewController is SelectionTypeViewController {
+            let controller = segue.destinationViewController as! SelectionTypeViewController
+            controller.delegate = self
+        }
+//        else if segue.destinationViewController is ROIScreen {
+//            let controller = segue.destinationViewController as! ROIScreen
+//            
+//            controller.setImage((self.imageHolder?.image)!, animated: true)
+//            controller.selectionType = EMSelectionType(rawValue: (sender?.integerValue)!)!
+//        }
+    }
+    
+    internal func navigateToSelectCropScreen() {
+        self.performSegueWithIdentifier("showSelectCropTypeScreen", sender: self)
+//        if let cropSelectScreen = self.storyboard?.instantiateViewControllerWithIdentifier("SelectionTypeViewController_identifier") {
+//            self.presentViewController(cropSelectScreen, animated: true, completion: nil)
+//        }
+    }
+    
+    internal func navigateToROIScreenWithSelectionType(selectionType: EMSelectionType) {
+//        self.performSegueWithIdentifier("showROIScreen", sender: selectionType.rawValue)
+        
+        if let controller = self.storyboard?.instantiateViewControllerWithIdentifier("ROIScreen_identifier") as? ROIScreen {
+            self.presentViewController(controller, animated: true, completion: {
+                controller.setImage((self.imageHolder?.image)!, animated: true)
+                controller.selectionType = selectionType
+            })
+        }
+    }
+    
+    //MARK: SelectionTypeViewControllerDelegate
+    
+    func selectionTypeViewController(controller: SelectionTypeViewController, didChoseSelectionType type: EMSelectionType) {
+        controller.dismissViewControllerAnimated(true) { 
+            self.navigateToROIScreenWithSelectionType(type)
+        }
     }
 }
 
@@ -211,7 +254,7 @@ protocol SelectionTypeViewControllerDelegate {
 
 let cellReuseIdentifier = "SelectionTypeViewControllerCell_identifier"
 
-@objc class SelectionTypeViewController: RootViewController, UICollectionViewDataSource {
+@objc class SelectionTypeViewController: RootViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
     @IBOutlet weak var collectionHolder: UICollectionView?
     var delegate: SelectionTypeViewControllerDelegate?
@@ -243,9 +286,16 @@ let cellReuseIdentifier = "SelectionTypeViewControllerCell_identifier"
         //CollectionView setup
         let layout = PALayout.init()
         layout.isVertical = true
-        layout.itemSize = CGSizeMake(128, 160)
-        layout.horizontalItemsSpacing = 100
-        layout.verticalItemsSpacing = 60
+        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
+            layout.itemSize = CGSizeMake(128, 160)
+            layout.horizontalItemsSpacing = 100
+            layout.verticalItemsSpacing = 60
+        }
+        else {
+            layout.itemSize = CGSizeMake(64, 100)
+            layout.horizontalItemsSpacing = 55
+            layout.verticalItemsSpacing = 90
+        }
         
         collectionHolder?.frame = self.view.bounds
         
@@ -295,6 +345,12 @@ let cellReuseIdentifier = "SelectionTypeViewControllerCell_identifier"
         cell.titleLabel?.text = type.stringValue
         
         return cell
+    }
+    
+    ////MARK: UICollectionViewDelegate
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        delegate?.selectionTypeViewController(self, didChoseSelectionType: EMSelectionType(rawValue: indexPath.row)!)
     }
 }
 
