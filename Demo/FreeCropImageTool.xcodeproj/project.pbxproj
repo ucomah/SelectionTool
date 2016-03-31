@@ -149,6 +149,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A00CE2651CA00CED003E3510 /* Build configuration list for PBXNativeTarget "FreeCropImageTool" */;
 			buildPhases = (
+				A0EC35BB1CADB91D00E37BB5 /* Highlight warnings and errors */,
 				A00CE2441CA00CED003E3510 /* Sources */,
 				A00CE2451CA00CED003E3510 /* Frameworks */,
 				A00CE2461CA00CED003E3510 /* Resources */,
@@ -243,6 +244,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A0EC35BB1CADB91D00E37BB5 /* Highlight warnings and errors */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Highlight warnings and errors";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "TAGS=\"WARNING:|ERROR:\"\necho \"searching ${SRCROOT} for ${TAGS}\"\nfind \"${SRCROOT}\" \\( -name \"*.swift\" \\) -print0 | xargs -0 egrep --with-filename --line-number --only-matching \"($TAGS).*\\$\" | perl -p -e \"s/($TAGS)/ warning: \\$1/\"";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A00CE2441CA00CED003E3510 /* Sources */ = {
