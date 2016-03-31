@@ -310,6 +310,7 @@ let EM_SELECTION_SHAPE_POINT_COLOR = UIColor.init(red: 0.3, green: 0.4, blue: 0.
     
     deinit {
         self.removeObserver(self, forKeyPath: _localObserver)
+        self.removeObserver(self, forKeyPath: "shapeLayer.path")
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
@@ -465,8 +466,6 @@ let EM_SELECTION_SHAPE_POINT_COLOR = UIColor.init(red: 0.3, green: 0.4, blue: 0.
             return
         }
         //Adjust BezierPath frame to view frame
-        //WARNING: Stopped HERE
-        print("self.bounds = \(self.bounds)  shapeLayer.frame = \(shapeLayer.frame)")
         let widthDelta = CGRectGetWidth(self.bounds) / CGRectGetWidth(shapeLayer.frame)
         let heightDelta = CGRectGetHeight(self.bounds) / CGRectGetHeight(shapeLayer.frame)
         //let scale = min(widthDelta, heightDelta)
