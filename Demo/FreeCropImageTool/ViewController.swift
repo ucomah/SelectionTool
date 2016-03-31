@@ -8,6 +8,7 @@
 
 import UIKit
 
+//MARK: - ViewController
 
 @objc protocol SelectionToolPopOverDelegate {
     optional func tablePopOver(popOver: UIViewController, didSelectItemAtIndex index: Int)
@@ -30,18 +31,24 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
         helperLabel?.text = NSLocalizedString("Press '+' button to start", comment: "Main screen helper label text")
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
         //Navigation bar setup
         self.toggleNavigationBarButtons()
+        
+        //Load last used image
+        if let data = NSData.init(contentsOfFile: self.tempImagePath) {
+            let img = UIImage.init(data: data)
+            self.setImage(img)
+        }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-    //MARK: - Actions
+    //MARK: Actions
 
     internal func doAddItemAction() {
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
@@ -88,18 +95,41 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
     }
     
     internal func doShowSelectCropScreen() {
-        if let cropSelectScreen = self.storyboard?.instantiateViewControllerWithIdentifier("SelectionTypeViewController_identifier") {
-            self.presentViewController(cropSelectScreen, animated: true, completion: nil)
-        }
+        self.performSegueWithIdentifier("showSelectCropTypeScreen", sender: self)
+//        if let cropSelectScreen = self.storyboard?.instantiateViewControllerWithIdentifier("SelectionTypeViewController_identifier") {
+//            self.presentViewController(cropSelectScreen, animated: true, completion: nil)
+//        }
     }
     
     internal func doDeleteImage() {
         self.setImage(nil)
     }
     
-    //MARK: - Setup
+    private var tempImagePath: String {
+        var path = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true).last!
+        path += "/last_used_image.jpeg"
+        return path
+    }
+    
+    //MARK: Setup
     
     func setImage(image: UIImage?) {
+        //Cache image in background
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
+            if let img = image {
+                if let data = UIImageJPEGRepresentation(img, 1.0) {
+                    data.writeToFile(self.tempImagePath, atomically: true)
+                }
+            }
+            else { //Remove cached image if some
+                do {
+                    try NSFileManager.defaultManager().removeItemAtPath(self.tempImagePath)
+                }
+                catch {
+                }
+            }
+        }
+        //Set image
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
             self.imageHolder?.image = image
             self.toggleNavigationBarButtons()
@@ -127,7 +157,7 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
         }
     }
     
-    //MARK: - UIPopoverPresentationControllerDelegate
+    //MARK: UIPopoverPresentationControllerDelegate
     
     func tablePopOver(popOver: UIViewController, didSelectItemAtIndex index: Int) {
         inImageSource?.dismissViewControllerAnimated(true, completion: { 
@@ -142,7 +172,7 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
         })
     }
     
-    //MARK: - UIDocumentPickerDelegate
+    //MARK: UIDocumentPickerDelegate
     
     func documentPicker(controller: UIDocumentPickerViewController, didPickDocumentAtURL url: NSURL) {
         NSLog("UIDocumentPicker picked doc with URL: %@", url);
@@ -158,16 +188,22 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
         controller.dismissViewControllerAnimated(true, completion:nil)
     }
     
-    //MARK: - UIImagePickerControllerDelegate
+    //MARK: UIImagePickerControllerDelegate
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
         self.setImage(image)
         picker.dismissViewControllerAnimated(true, completion:nil)
     }
+    
+    //MARK: Navigation
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        print(#function)
+    }
 }
 
 
-//MARK: -
+//MARK: - SelectionTypeViewController
 
 protocol SelectionTypeViewControllerDelegate {
     func selectionTypeViewController(controller: SelectionTypeViewController,  didChoseSelectionType type: EMSelectionType)
@@ -175,7 +211,7 @@ protocol SelectionTypeViewControllerDelegate {
 
 let cellReuseIdentifier = "SelectionTypeViewControllerCell_identifier"
 
-class SelectionTypeViewController: RootViewController, UICollectionViewDataSource {
+@objc class SelectionTypeViewController: RootViewController, UICollectionViewDataSource {
     
     @IBOutlet weak var collectionHolder: UICollectionView?
     var delegate: SelectionTypeViewControllerDelegate?
@@ -201,19 +237,15 @@ class SelectionTypeViewController: RootViewController, UICollectionViewDataSourc
                                          action: #selector(SelectionTypeViewController.goCancel(_:)))
         self.titleItem?.leftBarButtonItem = btnCancel!
         
-        
+        self.view.backgroundColor = UIColor.whiteColor()
+        self.collectionHolder?.backgroundColor = UIColor.clearColor()
         
         //CollectionView setup
         let layout = PALayout.init()
         layout.isVertical = true
         layout.itemSize = CGSizeMake(128, 160)
-        layout.horizontalItemsSpacing = 120
-        layout.verticalItemsSpacing = 40
-        
-//        if self.collectionHolder == nil {
-//            self.collectionHolder = UICollectionView.init(frame: self.view.bounds, collectionViewLayout: layout)
-//            self.view.addSubview(self.collectionHolder!)
-//        }
+        layout.horizontalItemsSpacing = 100
+        layout.verticalItemsSpacing = 60
         
         collectionHolder?.frame = self.view.bounds
         
@@ -221,23 +253,22 @@ class SelectionTypeViewController: RootViewController, UICollectionViewDataSourc
         collectionHolder?.collectionViewLayout = layout
         collectionHolder?.clipsToBounds = true
         collectionHolder?.dataSource = self
-        
-        collectionHolder?.registerClass(SelectionTypeViewControllerCell.classForCoder(), forCellWithReuseIdentifier: cellReuseIdentifier)
-    }
-    
-    internal
-    func goCancel(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = NSLocalizedString("Tap to choose a selection tool", comment:"Selection type choise title")
+        self.title = NSLocalizedString("Choose a selection tool", comment:"Selection type choise title")
         self.titleItem?.rightBarButtonItem = btnCancel
     }
     
-    //MARK: - UICollectionView dataSource
+    //MARK: Actions
+    
+    func goCancel(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    //MARK: UICollectionView dataSource
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
@@ -255,7 +286,7 @@ class SelectionTypeViewController: RootViewController, UICollectionViewDataSourc
         case .Rectangle:
             cell.imageHolder?.image = UIImage.init(named: "Rectangle_black")
         case .Circle:
-            cell.imageHolder?.image = UIImage.init(named: "Circle_black")
+            cell.imageHolder?.image = UIImage.init(named: "Oval_black")
         case .Polygon:
             cell.imageHolder?.image = UIImage.init(named: "Polygon_black")
         case .Lasso:
@@ -267,6 +298,7 @@ class SelectionTypeViewController: RootViewController, UICollectionViewDataSourc
     }
 }
 
+//MARK: - SelectionTypeViewControllerCell
 
 class SelectionTypeViewControllerCell: UICollectionViewCell {
     

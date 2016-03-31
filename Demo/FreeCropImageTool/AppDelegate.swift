@@ -15,7 +15,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        //Output an app home dir if running on simulator
+        #if (arch(i386) || arch(x86_64)) && (os(iOS) || os(watchOS) || os(tvOS))
+            //Log App home folder
+            let directory: NSString = NSSearchPathForDirectoriesInDomains(.ApplicationDirectory, NSSearchPathDomainMask.UserDomainMask, true).last!
+            if var dir: NSString = directory {
+                if dir.lastPathComponent == "Applications" {
+                    dir = dir.stringByDeletingLastPathComponent
+                }
+                print("App Home dir:", dir);
+            }
+        #endif
+        
         return true
     }
 

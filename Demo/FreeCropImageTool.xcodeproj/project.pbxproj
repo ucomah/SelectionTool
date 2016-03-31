@@ -59,9 +59,9 @@
 		A00CE26F1CA045BC003E3510 /* EMSelectionShapeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EMSelectionShapeView.swift; sourceTree = "<group>"; };
 		A00CE2781CA04EF8003E3510 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		A00CE27B1CA05CBB003E3510 /* ImageSourceScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSourceScreen.swift; sourceTree = "<group>"; };
-		A00CE27E1CA05FB0003E3510 /* FreeCropImageTool.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = FreeCropImageTool.entitlements; sourceTree = "<group>"; };
 		A00CE27F1CA088F9003E3510 /* EMZoomImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EMZoomImageView.swift; sourceTree = "<group>"; };
 		A02EB03D1CA2BE7B003431BE /* EMCollectionLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EMCollectionLayout.swift; sourceTree = "<group>"; };
+		A05F08B11CAD2D7F00B26EFA /* FreeCropImageTool.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = FreeCropImageTool.entitlements; sourceTree = "<group>"; };
 		A09AF4F61CA31B2D0047E3B4 /* ROIScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ROIScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -105,10 +105,10 @@
 		A00CE24A1CA00CED003E3510 /* FreeCropImageTool */ = {
 			isa = PBXGroup;
 			children = (
+				A05F08B11CAD2D7F00B26EFA /* FreeCropImageTool.entitlements */,
 				A09AF4F61CA31B2D0047E3B4 /* ROIScreen.swift */,
 				A02EB03D1CA2BE7B003431BE /* EMCollectionLayout.swift */,
 				A00CE27F1CA088F9003E3510 /* EMZoomImageView.swift */,
-				A00CE27E1CA05FB0003E3510 /* FreeCropImageTool.entitlements */,
 				A00CE27B1CA05CBB003E3510 /* ImageSourceScreen.swift */,
 				A00CE2781CA04EF8003E3510 /* RootViewController.swift */,
 				A00CE24B1CA00CED003E3510 /* AppDelegate.swift */,

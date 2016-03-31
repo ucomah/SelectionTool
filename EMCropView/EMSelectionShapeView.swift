@@ -15,13 +15,13 @@ import UIKit
     var stringValue: String {
         switch self {
         case .Rectangle:
-            return "Rectangle_black"
+            return "Rectangle"
         case .Circle:
-            return "Circle_black"
+            return "Circle"
         case .Polygon:
-            return "Polygon_black"
+            return "Polygon"
         case .Lasso:
-            return "Lasso_black"
+            return "Lasso"
         }
     }
 }

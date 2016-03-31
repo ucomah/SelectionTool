@@ -23,7 +23,7 @@ class ROIScreen: RootViewController {
     var btnApply: UIBarButtonItem?
     var btnDeselect: UIBarButtonItem?
     var btnUndo: UIBarButtonItem?
-    @IBOutlet weak var cropView: EMCropView?
+    var cropView: EMCropView?
     
     //MARK: - LifeCycle
     
@@ -40,6 +40,24 @@ class ROIScreen: RootViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        self.title = NSLocalizedString(selectionType.stringva, comment: <#T##String#>)
+        self.title = NSLocalizedString(selectionType.stringValue, comment: "")
+    }
+    
+    //MARK: - Setup
+    
+    func setImage(image: UIImage, animated: Bool) {
+        cropView?.image = image
+    }
+    
+    func showCropViewWithSelectionType(selectionType: EMSelectionType, animated: Bool, completion: (Bool) -> Void) {
+        
+    }
+    
+    func hideCropViewAnimated(aniamted: Bool, completion: (Bool) -> Void) {
+        
+    }
+    
+    func toggleBarButtons() {
+        
     }
 }

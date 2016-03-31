@@ -47,18 +47,21 @@ class RootViewController: UIViewController {
             NSFontAttributeName: UIFont.boldSystemFontOfSize(18.0)
         ]
         navBar?.titleTextAttributes = attrs
-        
-        //Fix navigationBar height
-        view.addConstraint(NSLayoutConstraint.init(item: navBar!,
-            attribute: NSLayoutAttribute.Height,
-            relatedBy: NSLayoutRelation.Equal,
-            toItem: nil,
-            attribute: NSLayoutAttribute.Height,
-            multiplier: 1,
-            constant: 64.0))
     }
     
     override func viewWillAppear(animated: Bool) {
+        
+        //Fix navigationBar height
+        if self.modalPresentationStyle != UIModalPresentationStyle.FormSheet {
+            view.addConstraint(NSLayoutConstraint.init(item: navBar!,
+                attribute: NSLayoutAttribute.Height,
+                relatedBy: NSLayoutRelation.Equal,
+                toItem: nil,
+                attribute: NSLayoutAttribute.Height,
+                multiplier: 1,
+                constant: 64.0))
+        }
+        
         if (self.navBar != nil) {
             self.navBar?.items = [self.titleItem!]
         }
