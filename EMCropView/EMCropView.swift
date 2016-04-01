@@ -47,8 +47,8 @@ private let kEMCropViewPadding: CGFloat = 14.0
             self.imageView.frame = contentBounds
             self.imageView.contentMode = .ScaleAspectFit
             self.imageView.image = newValue
-            self.layoutInitialImage()
             self.layoutSubviews()
+            self.layoutInitialImage()
         }
     }
     /// A grid view overlaid on top of the foreground image view's container.
@@ -217,6 +217,9 @@ private let kEMCropViewPadding: CGFloat = 14.0
             contentRect.origin.y = kEMCropViewPadding + self.cropRegionInsets.top
             contentRect.size.width = CGRectGetWidth(self.bounds) - ((kEMCropViewPadding * 2) + self.cropRegionInsets.left + self.cropRegionInsets.right)
             contentRect.size.height = CGRectGetHeight(self.bounds) - ((kEMCropViewPadding * 2) + self.cropRegionInsets.top + self.cropRegionInsets.bottom)
+//            #if DEBUG
+//                print(#file, #function, contentRect)
+//            #endif
             return contentRect
         }
     }
@@ -310,6 +313,9 @@ private let kEMCropViewPadding: CGFloat = 14.0
                     self.initialCropRect = CGRectZero
                     self.isInitialRectDrawing = true
                     //self.cropBoxFrame = CGRectZero;
+                }
+                else {
+                    self.isInitialRectDrawing = false
                 }
             }
             
@@ -639,7 +645,7 @@ private let kEMCropViewPadding: CGFloat = 14.0
     
     //MARK: - View Layout
     
-    private func layoutInitialImage() {
+    func layoutInitialImage() {
         UIView.beginAnimations(nil, context: nil)
         UIView.setAnimationBeginsFromCurrentState(true)
         UIView.setAnimationDuration(0.2)
@@ -653,14 +659,23 @@ private let kEMCropViewPadding: CGFloat = 14.0
         
         //Set imageView frame
         self.imageView.frame = self.contentBounds
+        self.imageView.backgroundColor = UIColor.blueColor()
         
         //Relayout the image in the scroll view
+        func adjustFrameOrigin( frame: CGRect) -> CGRect {
+            return CGRectMake(bounds.origin.x + floor((CGRectGetWidth(bounds) - frame.size.width) * 0.5),
+                              bounds.origin.y + floor((CGRectGetHeight(bounds) - frame.size.height) * 0.5),
+                              frame.size.width,
+                              frame.size.height)
+        }
         var frame = CGRectZero
         if (CGRectEqualToRect(frame, self.cropBoxFrame)) {
             frame.size = scaledSize
+            frame = adjustFrameOrigin(frame)
             frame = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width/2, frame.size.height/2)
             if (self.usePreDefinedSelectionFrame) {
                 self.cropBoxFrame = frame
+                self.isInitialRectDrawing = false
             }
             else {
                 self.isInitialRectDrawing = true
@@ -669,9 +684,7 @@ private let kEMCropViewPadding: CGFloat = 14.0
         }
         else {
             frame = self.cropBoxFrame
-            frame.origin.x = bounds.origin.x + floor((CGRectGetWidth(bounds) - frame.size.width) * 0.5)
-            frame.origin.y = bounds.origin.y + floor((CGRectGetHeight(bounds) - frame.size.height) * 0.5)
-            
+            frame = adjustFrameOrigin(frame)
             self.cropBoxFrame = frame
         }
         

@@ -10,28 +10,28 @@ import UIKit
 
 @objc class EMCropOverlayView: UIView {
     
-    private(set) var selectionView: EMSelectionShapeView
+    private(set) var selectionView = EMSelectionShapeView.init(frame: CGRectZero)
     
     /// Default is whiteColor
-    var cropBoxColor: UIColor {
+    var cropBoxColor = UIColor.whiteColor() {
         didSet {
             self.borderLayer.strokeColor = cropBoxColor.CGColor
         }
     }
-    /// Default is 0.8f
-    var cropBoxLineWidth: CGFloat {
+    
+    var cropBoxLineWidth: CGFloat = 0.8 {
         didSet {
             self.borderLayer.lineWidth = cropBoxLineWidth
         }
     }
     /// Default is EM_SELECTION_SHAPE_POINT_COLOR
-    var resizingPointInnerColor: UIColor {
+    var resizingPointInnerColor = EM_SELECTION_SHAPE_POINT_COLOR {
         didSet {
             layoutSubviews()
         }
     }
     /// Default is whiteColor
-    var resizingPointOuterColor: UIColor {
+    var resizingPointOuterColor = UIColor.whiteColor() {
         didSet {
             layoutSubviews()
         }
@@ -66,7 +66,7 @@ import UIKit
     var bottomLeftCirclePoint: CAShapeLayer?
     var bottomCenterCirclePoint: CAShapeLayer?
     
-    var borderLayer: CAShapeLayer
+    var borderLayer = CAShapeLayer()
     
     //MARK: - Overrides
     
@@ -74,8 +74,15 @@ import UIKit
     
     override var frame: CGRect {
         didSet {
+            
             CATransaction.begin()
             CATransaction.setValue(true, forKey: kCATransactionDisableActions)
+        
+            self.alpha = CGRectEqualToRect(CGRectZero, frame) ? 0.0 : 1.0
+            
+            if CGRectEqualToRect(CGRectZero, selectionView.frame) {
+                selectionView.frame = CGRectMake(0, 0, frame.size.width, frame.size.height)
+            }
             
             borderLayer.frame = CGRectMake(0, 0, frame.size.width, frame.size.height)
             borderLayer.position = CGPointMake(frame.size.width/2, frame.size.height/2)
@@ -108,15 +115,6 @@ import UIKit
     }
     
     override init(frame: CGRect) {
-        
-        cropBoxColor = UIColor.whiteColor()
-        cropBoxLineWidth = 0.5
-        
-        resizingPointInnerColor = EM_SELECTION_SHAPE_POINT_COLOR
-        resizingPointOuterColor = UIColor.whiteColor()
-        
-        selectionView = EMSelectionShapeView.init(frame: CGRectMake(0, 0, frame.size.width, frame.size.height))
-        self.borderLayer = CAShapeLayer()
         
         super.init(frame: frame)
         
@@ -152,7 +150,7 @@ import UIKit
     }
 
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
     }
     
     //MARK: - Utils
