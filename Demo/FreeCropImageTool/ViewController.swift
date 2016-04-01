@@ -14,7 +14,7 @@ import UIKit
     optional func tablePopOver(popOver: UIViewController, didSelectItemAtIndex index: Int)
 }
 
-class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocumentPickerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, SelectionTypeViewControllerDelegate {
+class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocumentPickerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, SelectionTypeViewControllerDelegate, ROIScreenDelegate {
 
     @IBOutlet weak var helperLabel : UILabel?
     @IBOutlet weak var imageHolder: EMZoomImageView?
@@ -24,11 +24,39 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
     private var btnDelete: UIBarButtonItem?
     private var inImageSource: ImageSourceViewController?
     
+    var image: UIImage? {
+        didSet {
+            //Cache image in background
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
+                if let img = self.image {
+                    if let data = UIImageJPEGRepresentation(img, 1.0) {
+                        data.writeToFile(self.tempImagePath, atomically: true)
+                    }
+                }
+                else { //Remove cached image if some
+                    do {
+                        try NSFileManager.defaultManager().removeItemAtPath(self.tempImagePath)
+                    }
+                    catch {
+                    }
+                }
+            }
+            //Set image
+            dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                self.imageHolder?.image = self.image
+                self.toggleNavigationBarButtons()
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.title = NSLocalizedString("Selection Tool", comment: "Main screen title")
         helperLabel?.text = NSLocalizedString("Press '+' button to start", comment: "Main screen helper label text")
+        
+        self.imageHolder?.scrollView.showsVerticalScrollIndicator = true
+        self.imageHolder?.scrollView.showsHorizontalScrollIndicator = true
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -40,22 +68,7 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
         //Load last used image
         if let data = NSData.init(contentsOfFile: self.tempImagePath) {
             let img = UIImage.init(data: data)
-            self.setImage(img)
-            
-            return
-            //WARNING: TEST
-            if self.imageHolder?.tag != 0 {
-                return
-            }
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
-                while self.imageHolder?.image == nil {
-                    NSThread.sleepForTimeInterval(0.3)
-                }
-                dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                    self.navigateToROIScreenWithSelectionType(EMSelectionType.Lasso)
-                    self.imageHolder?.tag = 1
-                }
-            }
+            self.image = img
         }
     }
 
@@ -110,7 +123,7 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
     }
     
     internal func doDeleteImage() {
-        self.setImage(nil)
+        self.image = nil
     }
     
     private var tempImagePath: String {
@@ -120,29 +133,6 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
     }
     
     //MARK: Setup
-    
-    func setImage(image: UIImage?) {
-        //Cache image in background
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
-            if let img = image {
-                if let data = UIImageJPEGRepresentation(img, 1.0) {
-                    data.writeToFile(self.tempImagePath, atomically: true)
-                }
-            }
-            else { //Remove cached image if some
-                do {
-                    try NSFileManager.defaultManager().removeItemAtPath(self.tempImagePath)
-                }
-                catch {
-                }
-            }
-        }
-        //Set image
-        dispatch_async(dispatch_get_main_queue()) { () -> Void in
-            self.imageHolder?.image = image
-            self.toggleNavigationBarButtons()
-        }
-    }
     
     func toggleNavigationBarButtons() {
         btnAdd = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.Add,
@@ -192,14 +182,14 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
             return
         }
         let image = UIImage.init(data: data!)
-        self.setImage(image)
+        self.image = image
         controller.dismissViewControllerAnimated(true, completion:nil)
     }
     
     //MARK: UIImagePickerControllerDelegate
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
-        self.setImage(image)
+        self.image = image
         picker.dismissViewControllerAnimated(true, completion:nil)
     }
     
@@ -229,9 +219,9 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
 //        self.performSegueWithIdentifier("showROIScreen", sender: selectionType.rawValue)
         
         if let controller = self.storyboard?.instantiateViewControllerWithIdentifier("ROIScreen_identifier") as? ROIScreen {
+            controller.delegate = self
+            self.imageHolder?.tag = selectionType.rawValue
             self.presentViewController(controller, animated: true, completion: {
-                controller.setImage((self.imageHolder?.image)!, animated: true)
-                controller.selectionType = selectionType
             })
         }
     }
@@ -242,6 +232,20 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
         controller.dismissViewControllerAnimated(true) { 
             self.navigateToROIScreenWithSelectionType(type)
         }
+    }
+    
+    ////MARK: ROIScreenDelegate
+    
+    func selectionTypeForROIScreen(screen: ROIScreen) -> EMSelectionType {
+        return EMSelectionType(rawValue: (self.imageHolder?.tag)!)!
+    }
+    
+    func imageForROIScreen(screen: ROIScreen) -> UIImage {
+        return self.image!
+    }
+    
+    func roiScreen(screen: ROIScreen, didFinishSelectionWithImage resultImage: UIImage) {
+        print(#function)
     }
 }
 

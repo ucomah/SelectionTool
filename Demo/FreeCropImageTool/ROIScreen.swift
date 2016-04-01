@@ -10,17 +10,12 @@ import UIKit
 
 protocol ROIScreenDelegate {
     func imageForROIScreen(screen: ROIScreen) -> UIImage
+    func selectionTypeForROIScreen(screen: ROIScreen) -> EMSelectionType
     func roiScreen(screen: ROIScreen, didFinishSelectionWithImage resultImage: UIImage)
 }
 
 class ROIScreen: RootViewController {
     
-    var selectionType: EMSelectionType {
-        didSet {
-            self.cropView?.selectionType = selectionType
-            self.title = NSLocalizedString(selectionType.stringValue, comment: "")
-        }
-    }
     var delegate: ROIScreenDelegate?
     
     private
@@ -28,17 +23,20 @@ class ROIScreen: RootViewController {
     var btnApply: UIBarButtonItem?
     var btnDeselect: UIBarButtonItem?
     var btnUndo: UIBarButtonItem?
+    var image: UIImage? {
+        didSet {
+            cropView?.image = self.image!
+        }
+    }
     @IBOutlet weak var cropView: EMCropView?
     
     //MARK: - LifeCycle
     
-    init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?, selectionType: EMSelectionType) {
-        self.selectionType = selectionType
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
     required init?(coder aDecoder: NSCoder) {
-        self.selectionType = EMSelectionType(rawValue: Int(aDecoder.decodeIntForKey("selectionType") ?? 0))!
         super.init(coder: aDecoder)
     }
     
@@ -48,23 +46,41 @@ class ROIScreen: RootViewController {
         self.view.backgroundColor = UIColor.blackColor()
         self.cropView?.backgroundColor = UIColor.lightGrayColor()
         
+        self.toggleBarButtons()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.title = NSLocalizedString(self.delegate?.selectionTypeForROIScreen(self).stringValue ?? "", comment: "")
+        
+
+        
+        self.cropView?.alpha = 0.0
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.cropView?.image = (delegate?.imageForROIScreen(self))!
+        self.cropView?.selectionType = (self.delegate?.selectionTypeForROIScreen(self)) ?? EMSelectionType.Rectangle
+        self.cropView?.layoutSubviews()
+        self.cropView?.layoutInitialImage()
+        
+        UIView.animateWithDuration(0.5) { 
+            self.cropView?.alpha = 1.0
+        }
+    }
+    
+    //MARK: - Setup
+    
+    func toggleBarButtons() {
         btnCancel = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: #selector(doCancel))
         
         self.navigationItem.leftBarButtonItems = [btnCancel!]
     }
     
-    //MARK: - Setup
-    
-    func setImage(image: UIImage, animated: Bool) {
-        cropView?.image = image
-    }
-    
-    
-    func toggleBarButtons() {
-        
-    }
-    
-    ////MARK: - Actions
+    //MARK: - Actions
     
     func doCancel() {
         self.dismissViewControllerAnimated(true, completion: nil)
