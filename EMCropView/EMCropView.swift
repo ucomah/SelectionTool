@@ -449,6 +449,15 @@ private let kEMInitialImageAnimationDuration = 0.2
         }
     }
     
+    func croppedImage() -> UIImage {
+        if (!self.canDoCrop() || self.cropPath.isZeroPath) {
+            return self.image
+        }
+        let maskedImage = self.image.maskToPath(self.cropPath)
+        let image = maskedImage.imageByTrimmingTransparentPixelsRequiringFullOpacity(false)
+        return image
+    }
+    
     //MARK: - LifeCycle
     
     init(image: UIImage) {

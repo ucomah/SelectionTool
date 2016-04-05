@@ -30,6 +30,7 @@
 		A02EB03E1CA2BE7B003431BE /* EMCollectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02EB03D1CA2BE7B003431BE /* EMCollectionLayout.swift */; };
 		A02EB03F1CA2BE7B003431BE /* EMCollectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02EB03D1CA2BE7B003431BE /* EMCollectionLayout.swift */; };
 		A03B68551CB3A861006C6CB8 /* SelectionTypeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03B68541CB3A861006C6CB8 /* SelectionTypeScreen.swift */; };
+		A03B68591CB3C145006C6CB8 /* EMImageUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03B68581CB3C145006C6CB8 /* EMImageUtils.swift */; };
 		A09AF4F71CA31B2D0047E3B4 /* ROIScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09AF4F61CA31B2D0047E3B4 /* ROIScreen.swift */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +64,7 @@
 		A00CE27F1CA088F9003E3510 /* EMZoomImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EMZoomImageView.swift; sourceTree = "<group>"; };
 		A02EB03D1CA2BE7B003431BE /* EMCollectionLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EMCollectionLayout.swift; sourceTree = "<group>"; };
 		A03B68541CB3A861006C6CB8 /* SelectionTypeScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionTypeScreen.swift; sourceTree = "<group>"; };
+		A03B68581CB3C145006C6CB8 /* EMImageUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EMImageUtils.swift; sourceTree = "<group>"; };
 		A05F08B11CAD2D7F00B26EFA /* FreeCropImageTool.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = FreeCropImageTool.entitlements; sourceTree = "<group>"; };
 		A09AF4F61CA31B2D0047E3B4 /* ROIScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ROIScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -136,6 +138,7 @@
 		A00CE26B1CA045BC003E3510 /* EMCropView */ = {
 			isa = PBXGroup;
 			children = (
+				A03B68581CB3C145006C6CB8 /* EMImageUtils.swift */,
 				A00CE26C1CA045BC003E3510 /* EMBezierPathUtils.swift */,
 				A00CE26D1CA045BC003E3510 /* EMCropOverlayView.swift */,
 				A00CE26E1CA045BC003E3510 /* EMCropView.swift */,
@@ -280,6 +283,7 @@
 				A02EB03E1CA2BE7B003431BE /* EMCollectionLayout.swift in Sources */,
 				A00CE24C1CA00CED003E3510 /* AppDelegate.swift in Sources */,
 				A00CE27C1CA05CBB003E3510 /* ImageSourceScreen.swift in Sources */,
+				A03B68591CB3C145006C6CB8 /* EMImageUtils.swift in Sources */,
 				A00CE2801CA088F9003E3510 /* EMZoomImageView.swift in Sources */,
 				A00CE2761CA045BC003E3510 /* EMSelectionShapeView.swift in Sources */,
 			);
