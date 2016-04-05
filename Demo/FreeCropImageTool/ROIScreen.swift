@@ -64,12 +64,21 @@ class ROIScreen: RootViewController {
         
         self.cropView?.image = (delegate?.imageForROIScreen(self))!
         self.cropView?.selectionType = (self.delegate?.selectionTypeForROIScreen(self)) ?? EMSelectionType.Rectangle
+        self.cropView?.usePreDefinedSelectionFrame = false
         self.cropView?.layoutSubviews()
         self.cropView?.layoutInitialImage()
         
         UIView.animateWithDuration(0.5) { 
             self.cropView?.alpha = 1.0
         }
+    }
+    
+    override func willRotateToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
+        self.cropView?.onOrientationWillChange()
+    }
+    
+    override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
+        self.cropView?.onOrientationDidChange()
     }
     
     //MARK: - Setup
