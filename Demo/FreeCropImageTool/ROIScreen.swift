@@ -43,8 +43,8 @@ class ROIScreen: RootViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor.blackColor()
-        self.cropView?.backgroundColor = UIColor.lightGrayColor()
+        self.view.backgroundColor = super.view.backgroundColor
+        self.cropView?.backgroundColor = UIColor.clearColor()
         
         self.toggleBarButtons()
     }
@@ -53,8 +53,6 @@ class ROIScreen: RootViewController {
         super.viewWillAppear(animated)
         
         self.title = NSLocalizedString(self.delegate?.selectionTypeForROIScreen(self).stringValue ?? "", comment: "")
-        
-
         
         self.cropView?.alpha = 0.0
     }
@@ -84,14 +82,49 @@ class ROIScreen: RootViewController {
     //MARK: - Setup
     
     func toggleBarButtons() {
-        btnCancel = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: #selector(doCancel))
         
-        self.navigationItem.leftBarButtonItems = [btnCancel!]
+        btnCancel = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.Cancel,
+                                         target: self,
+                                         action: #selector(doCancel))
+        btnDeselect = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.Refresh,
+                                           target: self,
+                                           action: #selector(doDeselect))
+        btnApply = UIBarButtonItem.init(title: NSLocalizedString("Apply", comment: "'Apply crop' bar button item title"),
+                                        style: UIBarButtonItemStyle.Plain,
+                                        target: self,
+                                        action: #selector(doApply))
+        btnUndo = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.Undo,
+                                       target: self,
+                                       action: #selector(doUndo))
+        
+        self.navigationItem.leftBarButtonItems = [btnCancel!, btnDeselect!]
+        self.navigationItem.rightBarButtonItems = [btnApply!]
     }
     
     //MARK: - Actions
     
     func doCancel() {
         self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func doDeselect() {
+        self.cropView?.deselect()
+    }
+    
+    func doUndo() {
+        self.cropView?.undo()
+    }
+    
+    func doApply() {
+        if (self.cropView?.canDoCrop() != true || self.cropView?.cropPath.isZeroPath == true) {
+            delegate?.roiScreen(self, didFinishSelectionWithImage: self.image!)
+            return
+        }
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
+            let img = self.cropView?.croppedImage()
+            dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                self.delegate?.roiScreen(self, didFinishSelectionWithImage: img!)
+            }
+        }
     }
 }

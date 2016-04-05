@@ -41,7 +41,7 @@ let cellReuseIdentifier = "SelectionTypeViewControllerCell_identifier"
                                          target: self,
                                          action: #selector(SelectionTypeViewController.goCancel(_:)))
         
-        self.view.backgroundColor = UIColor.whiteColor()
+        self.view.backgroundColor = super.view.backgroundColor
         self.collectionHolder?.backgroundColor = UIColor.clearColor()
         self.collectionHolder?.scrollEnabled = false
         

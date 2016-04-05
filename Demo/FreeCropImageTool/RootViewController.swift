@@ -43,6 +43,8 @@ class RootViewController: UIViewController {
             titleItem = UINavigationItem.init()
         }
         
+        self.view.backgroundColor = UIColor.init(white: 0.9, alpha: 1.0)
+        
         //NavigationBar costumization
         navBar?.translucent = true
         

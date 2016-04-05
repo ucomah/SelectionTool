@@ -3,12 +3,13 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="FreeCropImageTool" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="FreeCropImageTool" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -20,8 +21,36 @@
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M1w-PF-JIL">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                 <items>
-                                    <navigationItem title="Title" id="6YF-Mw-esU"/>
+                                    <navigationItem title="Title" id="6YF-Mw-esU">
+                                        <leftBarButtonItems>
+                                            <barButtonItem systemItem="add" id="Ofw-Rq-r6w">
+                                                <connections>
+                                                    <action selector="doAddItemAction:" destination="BYZ-38-t0r" id="iER-Kg-bf7"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem systemItem="edit" id="e6k-HK-nYk">
+                                                <connections>
+                                                    <action selector="navigateToSelectCropScreen:" destination="BYZ-38-t0r" id="GhC-0p-a2f"/>
+                                                </connections>
+                                            </barButtonItem>
+                                        </leftBarButtonItems>
+                                        <rightBarButtonItems>
+                                            <barButtonItem systemItem="trash" id="rR2-nO-RKY">
+                                                <connections>
+                                                    <action selector="doDeleteImage:" destination="BYZ-38-t0r" id="6bV-RO-Dxi"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem systemItem="action" id="IFO-hP-W0G">
+                                                <connections>
+                                                    <action selector="doShareImage:" destination="BYZ-38-t0r" id="zsV-vh-njV"/>
+                                                </connections>
+                                            </barButtonItem>
+                                        </rightBarButtonItems>
+                                    </navigationItem>
                                 </items>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="wfc-0Z-Ddz"/>
+                                </connections>
                             </navigationBar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I1j-pA-AXu">
                                 <rect key="frame" x="281" y="291" width="38" height="18"/>
@@ -48,6 +77,10 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btnAdd" destination="Ofw-Rq-r6w" id="KMr-tr-jYI"/>
+                        <outlet property="btnCrop" destination="e6k-HK-nYk" id="E9Y-wm-yOa"/>
+                        <outlet property="btnDelete" destination="rR2-nO-RKY" id="CrW-c0-F3f"/>
+                        <outlet property="btnShare" destination="IFO-hP-W0G" id="X94-zL-W7c"/>
                         <outlet property="helperLabel" destination="I1j-pA-AXu" id="1sK-vH-QUF"/>
                         <outlet property="imageHolder" destination="Dce-ge-fDq" id="8bK-TT-Zx4"/>
                         <outlet property="navBar" destination="M1w-PF-JIL" id="4gx-3l-lZV"/>

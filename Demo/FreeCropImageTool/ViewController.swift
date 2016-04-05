@@ -19,31 +19,39 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
     @IBOutlet weak var helperLabel : UILabel?
     @IBOutlet weak var imageHolder: EMZoomImageView?
     
-    private var btnAdd: UIBarButtonItem?
-    private var btnCrop: UIBarButtonItem?
-    private var btnDelete: UIBarButtonItem?
-    private var inImageSource: ImageSourceViewController?
+    @IBOutlet var btnAdd: UIBarButtonItem?
+    @IBOutlet var btnCrop: UIBarButtonItem?
+    @IBOutlet var btnDelete: UIBarButtonItem?
+    @IBOutlet var btnShare: UIBarButtonItem?
+    var inImageSource: ImageSourceViewController?
+    
+    private var shouldLoadImageOnStart = true
+    private var shouldCacheImageOnSet = true
     
     var image: UIImage? {
         didSet {
             //Cache image in background
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
-                if let img = self.image {
-                    if let data = UIImageJPEGRepresentation(img, 1.0) {
-                        data.writeToFile(self.tempImagePath, atomically: true)
+                if self.shouldCacheImageOnSet {
+                    if let img = self.image {
+                        if let data = UIImageJPEGRepresentation(img, 1.0) {
+                            data.writeToFile(self.tempImagePath, atomically: true)
+                        }
+                    }
+                    else { //Remove cached image if some
+                        do {
+                            try NSFileManager.defaultManager().removeItemAtPath(self.tempImagePath)
+                        }
+                        catch {
+                        }
                     }
                 }
-                else { //Remove cached image if some
-                    do {
-                        try NSFileManager.defaultManager().removeItemAtPath(self.tempImagePath)
-                    }
-                    catch {
-                    }
-                }
+                self.shouldCacheImageOnSet = true
             }
             //Set image
             dispatch_async(dispatch_get_main_queue()) { () -> Void in
                 self.imageHolder?.image = self.image
+                self.helperLabel?.hidden = self.image != nil ? true : false
                 self.toggleNavigationBarButtons()
             }
         }
@@ -66,10 +74,15 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
         self.toggleNavigationBarButtons()
         
         //Load last used image
-        if let data = NSData.init(contentsOfFile: self.tempImagePath) {
-            let img = UIImage.init(data: data)
-            self.image = img
+        if shouldLoadImageOnStart {
+            if let data = NSData.init(contentsOfFile: self.tempImagePath) {
+                let img = UIImage.init(data: data)
+                if (img?.isEqual(self.image))! == false {
+                    self.image = img
+                }
+            }
         }
+        shouldLoadImageOnStart = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -78,7 +91,7 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
     
     //MARK: Actions
 
-    internal func doAddItemAction() {
+    @IBAction internal func doAddItemAction(sender: AnyObject) {
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
             if inImageSource == nil {
                 inImageSource = ImageSourceViewController.init(style: UITableViewStyle.Plain)
@@ -122,7 +135,11 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
         self.presentViewController(picker, animated: true, completion: nil)
     }
     
-    internal func doDeleteImage() {
+    @IBAction internal func doShareImage(sender: AnyObject) {
+        
+    }
+    
+    @IBAction internal func doDeleteImage(sender: AnyObject) {
         self.image = nil
     }
     
@@ -137,18 +154,18 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
     func toggleNavigationBarButtons() {
         btnAdd = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.Add,
                                       target: self,
-                                      action: #selector(ViewController.doAddItemAction))
-        self.titleItem?.leftBarButtonItems = [btnAdd!]
+                                      action: #selector(doAddItemAction(_:)))
+        self.navigationItem.leftBarButtonItems = [btnAdd!]
         
         if self.imageHolder?.image != nil {
-            btnCrop = UIBarButtonItem.init(title: NSLocalizedString("Crop", comment: "ToolBar Crop selection button title"),
-                                           style: UIBarButtonItemStyle.Plain,
+            btnCrop = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.Edit,
                                            target: self,
-                                           action: #selector(ViewController.navigateToSelectCropScreen))
-            btnDelete = UIBarButtonItem.init(barButtonSystemItem: .Trash, target: self, action: #selector(ViewController.doDeleteImage))
+                                           action: #selector(ViewController.navigateToSelectCropScreen(_:)))
+            btnShare = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: #selector(doShareImage(_:)))
+            btnDelete = UIBarButtonItem.init(barButtonSystemItem: .Trash, target: self, action: #selector(ViewController.doDeleteImage(_:)))
             
             self.titleItem?.leftBarButtonItems?.append(btnCrop!)
-            self.titleItem?.rightBarButtonItems = [btnDelete!]
+            self.titleItem?.rightBarButtonItems = [btnDelete!, btnShare!]
         }
         else {
             self.titleItem?.rightBarButtonItems = []
@@ -208,7 +225,7 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
 //        }
     }
     
-    internal func navigateToSelectCropScreen() {
+    @IBAction internal func navigateToSelectCropScreen(sender: AnyObject) {
         self.performSegueWithIdentifier("showSelectCropTypeScreen", sender: self)
 //        if let cropSelectScreen = self.storyboard?.instantiateViewControllerWithIdentifier("SelectionTypeViewController_identifier") {
 //            self.presentViewController(cropSelectScreen, animated: true, completion: nil)
@@ -245,7 +262,18 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
     }
     
     func roiScreen(screen: ROIScreen, didFinishSelectionWithImage resultImage: UIImage) {
-        print(#function)
+        shouldLoadImageOnStart = false
+        shouldCacheImageOnSet = false
+        self.image = resultImage
+        
+        
+        if let data = UIImageJPEGRepresentation(resultImage, 1.0) {
+            var path = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true).last!
+            path += "/cropped.jpeg"
+            data.writeToFile(path, atomically: true)
+        }
+        
+        screen.dismissViewControllerAnimated(true, completion: nil)
     }
 }
 
