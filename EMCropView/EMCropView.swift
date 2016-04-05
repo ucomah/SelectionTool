@@ -10,6 +10,7 @@ import UIKit
 
 private let kEMCropViewMinimumBoxSize: CGFloat = 42.0
 private let kEMCropViewPadding: CGFloat = 14.0
+private let kEMInitialImageAnimationDuration = 0.2
 
 /** When the user taps down to resize the box, this state is used
  to determine where they tapped and how to manipulate the box */
@@ -217,9 +218,6 @@ private let kEMCropViewPadding: CGFloat = 14.0
             contentRect.origin.y = kEMCropViewPadding + self.cropRegionInsets.top
             contentRect.size.width = CGRectGetWidth(self.bounds) - ((kEMCropViewPadding * 2) + self.cropRegionInsets.left + self.cropRegionInsets.right)
             contentRect.size.height = CGRectGetHeight(self.bounds) - ((kEMCropViewPadding * 2) + self.cropRegionInsets.top + self.cropRegionInsets.bottom)
-//            #if DEBUG
-//                print(#file, #function, contentRect)
-//            #endif
             return contentRect
         }
     }
@@ -240,27 +238,27 @@ private let kEMCropViewPadding: CGFloat = 14.0
             var frame = CGRectZero
             /*
             //Old value
-            frame.origin.x = floorf((contentOffset.x + edgeInsets.left) * (imageSize.width / contentSize.width));
+            frame.origin.x = floor((contentOffset.x + edgeInsets.left) * (imageSize.width / contentSize.width))
             */
-            //frame.origin.x = floorf((cropBoxFrame.origin.x) * widthDelta);
+            //frame.origin.x = floor((cropBoxFrame.origin.x) * widthDelta)
             frame.origin.x = floor((contentOffset.x - edgeInsets.left ) * widthDelta)
             frame.origin.x = max(0, frame.origin.x);
             
             /*
             //Old value
-            frame.origin.y = floorf((contentOffset.y + edgeInsets.top) * (imageSize.height / contentSize.height));
+            frame.origin.y = floor((contentOffset.y + edgeInsets.top) * (imageSize.height / contentSize.height))
             */
             
             //Origin will be a little different for small and big images because of a scale
             /*
-            CGFloat yPos = 0;
+            CGFloat yPos = 0
             if (heightDelta <= 1) {
-                yPos = floorf((contentOffset.y - (edgeInsets.top * heightDelta)) * heightDelta);
+                yPos = floor((contentOffset.y - (edgeInsets.top * heightDelta)) * heightDelta)
             }
             else {
-                yPos = floorf((contentOffset.y - (edgeInsets.top / heightDelta)) * heightDelta);
+                yPos = floor((contentOffset.y - (edgeInsets.top / heightDelta)) * heightDelta)
             }
-            frame.origin.y = yPos;
+            frame.origin.y = yPos
             */
             frame.origin.y = floor((contentOffset.y - edgeInsets.top) * heightDelta)
             frame.origin.y = max(0, frame.origin.y)
@@ -312,7 +310,7 @@ private let kEMCropViewPadding: CGFloat = 14.0
                 if (!self.usePreDefinedSelectionFrame) {
                     self.initialCropRect = CGRectZero
                     self.isInitialRectDrawing = true
-                    //self.cropBoxFrame = CGRectZero;
+                    //self.cropBoxFrame = CGRectZero
                 }
                 else {
                     self.isInitialRectDrawing = false
@@ -366,7 +364,7 @@ private let kEMCropViewPadding: CGFloat = 14.0
         self.overlayView.userInteractionEnabled = true
         
         //Resize cropView to fit bounds
-        UIView.animateWithDuration(0.2, animations: { () -> Void in
+        UIView.animateWithDuration(kEMInitialImageAnimationDuration, animations: { () -> Void in
             self.cropBoxFrame = self.contentBounds
             self.overlayView.setBoundsIndicatorsLayersHidden(true)
             }) { (Bool) -> Void in
@@ -504,12 +502,11 @@ private let kEMCropViewPadding: CGFloat = 14.0
         gridPanGestureRecognizer.delegate = self
         self.addGestureRecognizer(self.gridPanGestureRecognizer)
         
-        //Listeners
-        NSNotificationCenter.defaultCenter().addObserver(self,
-                                                         selector: #selector(EMCropView.deviceDidChangeOrientation(_:)),
-                                                         name: UIDeviceOrientationDidChangeNotification,
-                                                         object: nil)
-
+//        //Listeners
+//        NSNotificationCenter.defaultCenter().addObserver(self,
+//                                                         selector: #selector(EMCropView.deviceDidChangeOrientation(_:)),
+//                                                         name: UIDeviceOrientationDidChangeNotification,
+//                                                         object: nil)
     }
     
     override func didMoveToSuperview() {
@@ -618,27 +615,60 @@ private let kEMCropViewPadding: CGFloat = 14.0
     
     //MARK: - Orientation change handling
     
-    internal func deviceDidChangeOrientation(note: NSNotification) -> Void {
-        let path = self.overlayView.cropPath
-        let selectionAdjustmentNeeded = self.overlayView.selectionView.selectionIsPaused || self.overlayView.selectionView.type == .Polygon
-        if (selectionAdjustmentNeeded) {
-            self.overlayView.selectionView.selectionHidden = true
+    var pathBackup: UIBezierPath?
+    
+    func onOrientationWillChange() {
+        
+        //Backup Current "Selection Path" value
+        if self.overlayView.selectionView.selectionIsPaused || self.overlayView.selectionView.type == .Polygon {
+            pathBackup = self.overlayView.cropPath.copy() as? UIBezierPath
         }
+        else {
+            pathBackup = nil
+        }
+        
+        //Hide overlay view and it's layers
+        self.overlayView.selectionHidden = true
+        
+        UIView.animateWithDuration(kEMInitialImageAnimationDuration, animations: {
+            self.imageView.alpha = 0.0
+            self.overlayView.alpha = 0.0
+        })
+    }
+    
+    func onOrientationDidChange() {
+        
         self.layoutInitialImage()
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
+            //Wait for rotation to be finished
             NSThread.sleepForTimeInterval(0.3)
-            if TARGET_IPHONE_SIMULATOR == 1 {
+            dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                
+//                if TARGET_IPHONE_SIMULATOR == 1 {
+                    self.layoutInitialImage()
+//                }
                 self.layoutInitialImage()
+
             }
-            self.layoutInitialImage()
-            
-            //Adjust free selection mode if still in process of selection
-            if (selectionAdjustmentNeeded) {
-                self.beginFreeSelectionIfNeeded()
-                self.overlayView.selectionView.selectionPath = path
-                self.overlayView.selectionView.adjustInitialPointPosition()
-                self.overlayView.selectionView.selectionHidden = false
+            //Wait for layout animations to be completed
+            NSThread.sleepForTimeInterval(kEMInitialImageAnimationDuration)
+            dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                
+                //Restore selection path and overlay view layers
+                if let path = self.pathBackup {
+                    self.beginFreeSelectionIfNeeded()
+                    self.overlayView.selectionView.selectionPath = path
+                    self.overlayView.selectionView.adjustInitialPointPosition()
+                    
+                }
+                self.overlayView.selectionHidden = false
+                self.pathBackup = nil
+                
+                UIView.animateWithDuration(kEMInitialImageAnimationDuration, animations: {
+                    self.imageView.alpha = 1.0
+                    self.overlayView.alpha = 1.0
+                })
             }
         }
     }
@@ -648,7 +678,7 @@ private let kEMCropViewPadding: CGFloat = 14.0
     func layoutInitialImage() {
         UIView.beginAnimations(nil, context: nil)
         UIView.setAnimationBeginsFromCurrentState(true)
-        UIView.setAnimationDuration(0.2)
+        UIView.setAnimationDuration(kEMInitialImageAnimationDuration)
         
         let imageSize = self.imageSize
         let bounds = self.contentBounds //NOTE: Uses cropRegionInsets
@@ -659,7 +689,6 @@ private let kEMCropViewPadding: CGFloat = 14.0
         
         //Set imageView frame
         self.imageView.frame = self.contentBounds
-        self.imageView.backgroundColor = UIColor.blueColor()
         
         //Relayout the image in the scroll view
         func adjustFrameOrigin( frame: CGRect) -> CGRect {
@@ -969,7 +998,7 @@ private let kEMCropViewPadding: CGFloat = 14.0
                 self.overlayView.frame = frame
                 self.cropBoxFrame = frame
                 
-                UIView.animateWithDuration(0.2, animations: { () -> Void in
+                UIView.animateWithDuration(kEMInitialImageAnimationDuration, animations: { () -> Void in
                     self.overlayView.setBoundsIndicatorsLayersHidden(false)
                     }, completion: { (Bool) -> Void in
                         self.overlayView.selectionView.autoAdjustBezierPathOnResize = true

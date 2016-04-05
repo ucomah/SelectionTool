@@ -12,7 +12,6 @@ import UIKit
     
     private(set) var selectionView = EMSelectionShapeView.init(frame: CGRectZero)
     
-    /// Default is whiteColor
     var cropBoxColor = UIColor.whiteColor() {
         didSet {
             self.borderLayer.strokeColor = cropBoxColor.CGColor
@@ -24,13 +23,13 @@ import UIKit
             self.borderLayer.lineWidth = cropBoxLineWidth
         }
     }
-    /// Default is EM_SELECTION_SHAPE_POINT_COLOR
+    
     var resizingPointInnerColor = EM_SELECTION_SHAPE_POINT_COLOR {
         didSet {
             layoutSubviews()
         }
     }
-    /// Default is whiteColor
+    
     var resizingPointOuterColor = UIColor.whiteColor() {
         didSet {
             layoutSubviews()
@@ -83,10 +82,12 @@ import UIKit
             if CGRectEqualToRect(CGRectZero, selectionView.frame) {
                 selectionView.frame = CGRectMake(0, 0, frame.size.width, frame.size.height)
             }
-            
+
             borderLayer.frame = CGRectMake(0, 0, frame.size.width, frame.size.height)
             borderLayer.position = CGPointMake(frame.size.width/2, frame.size.height/2)
             borderLayer.path = UIBezierPath.init(rect: borderLayer.frame).CGPath
+            borderLayer.lineWidth = self.cropBoxLineWidth
+            borderLayer.strokeColor = self.cropBoxColor.CGColor
             
             topRightCirclePoint?.position = CGPointMake(frame.size.width, 0)
             topLeftCirclePoint?.position = CGPointMake(0, 0)
@@ -118,15 +119,16 @@ import UIKit
         
         super.init(frame: frame)
         
+        self.frame = frame
+        
         self.backgroundColor = UIColor.clearColor()
         
-        self.borderLayer.fillColor = UIColor.clearColor().CGColor;
+        self.borderLayer.fillColor = UIColor.clearColor().CGColor
         self.layer.addSublayer(borderLayer)
         
         self.userInteractionEnabled = true
         
         selectionView.backgroundColor = UIColor.clearColor()
-        selectionView.lineWidth = 1.0
         self.addSubview(selectionView)
         
         topRightCirclePoint = self.newCircleShapeLayer()
@@ -172,5 +174,18 @@ import UIKit
         sublayer.path = UIBezierPath.init(ovalInRect: sublayer.frame).CGPath
         layer.addSublayer(sublayer)
         return layer
+    }
+    
+    var selectionHidden: Bool {
+        set {
+            self.borderLayer.hidden = newValue
+            self.selectionView.selectionHidden = newValue
+            for layer in self.layer.sublayers! {
+                layer.hidden = newValue
+            }
+        }
+        get {
+            return self.borderLayer.hidden && self.selectionView.selectionHidden
+        }
     }
 }

@@ -57,7 +57,7 @@ let EM_SELECTION_SHAPE_POINT_COLOR = UIColor.init(red: 0.3, green: 0.4, blue: 0.
     /// BezierPath line color.
     var lineColor = UIColor.whiteColor()
     /// BezierPath line width.
-    var lineWidth: CGFloat = 3.0
+    var lineWidth: CGFloat = 2.0
     /// Color of initial selection point. If not specified, EM_SELECTION_SHAPE_POINT_COLOR will be used
     var shapePointColor: UIColor?
     /// Circle layer with initialPoint of BazierPath used to close path.
@@ -222,19 +222,19 @@ let EM_SELECTION_SHAPE_POINT_COLOR = UIColor.init(red: 0.3, green: 0.4, blue: 0.
     }
 
     private func placeInitialShapeAtPoint(point: CGPoint) {
-        let aShapeLayer = firstPointShape ?? CAShapeLayer()
+        let pointBufLayer = firstPointShape ?? CAShapeLayer()
         firstPointFrame = CGRectMake(point.x, point.y, 30, 30)
         firstPointFrame.origin.x = point.x - firstPointFrame.size.width / 2;
         firstPointFrame.origin.y = point.y - firstPointFrame.size.height / 2;
-        aShapeLayer.frame = firstPointFrame
+        pointBufLayer.frame = firstPointFrame
         //layer.position = point
 
-        if aShapeLayer.superlayer == nil {
-            self.layer.addSublayer(aShapeLayer)
+        if pointBufLayer.superlayer == nil {
+            self.layer.addSublayer(pointBufLayer)
         }
         
         //Blue point in the center
-        if (aShapeLayer.sublayers?.count == 0 || aShapeLayer.sublayers == nil) {
+        if (pointBufLayer.sublayers?.count == 0 || pointBufLayer.sublayers == nil) {
             let fillColor = self.lineColor
             let strokeColor = UIColor.whiteColor()
             
@@ -242,23 +242,23 @@ let EM_SELECTION_SHAPE_POINT_COLOR = UIColor.init(red: 0.3, green: 0.4, blue: 0.
             backShape.fillColor = fillColor.CGColor
             backShape.strokeColor = strokeColor.CGColor
             backShape.lineWidth = self.lineWidth
-            backShape.frame = CGRectMake(0, 0, CGRectGetWidth(aShapeLayer.frame), CGRectGetHeight(aShapeLayer.frame))
+            backShape.frame = CGRectMake(0, 0, CGRectGetWidth(pointBufLayer.frame), CGRectGetHeight(pointBufLayer.frame))
             backShape.path = UIBezierPath.init(ovalInRect: backShape.frame).CGPath
-            aShapeLayer.addSublayer(backShape)
+            pointBufLayer.addSublayer(backShape)
             
             let sublayer = CAShapeLayer()
-            let frame = CGRectMake(CGRectGetWidth(aShapeLayer.frame) / 8, CGRectGetHeight(aShapeLayer.frame) / 8,
-                CGRectGetWidth(aShapeLayer.frame) / 2,
-                CGRectGetHeight(aShapeLayer.frame) / 2)
+            let frame = CGRectMake(CGRectGetWidth(pointBufLayer.frame) / 8, CGRectGetHeight(pointBufLayer.frame) / 8,
+                CGRectGetWidth(pointBufLayer.frame) / 2,
+                CGRectGetHeight(pointBufLayer.frame) / 2)
             sublayer.frame = frame
             sublayer.fillColor = self.shapePointColor?.CGColor ?? EM_SELECTION_SHAPE_POINT_COLOR.CGColor
             sublayer.path = UIBezierPath.init(ovalInRect: sublayer.frame).CGPath
-            aShapeLayer.addSublayer(sublayer)
+            pointBufLayer.addSublayer(sublayer)
         }
         //Show
-        aShapeLayer.hidden = false
+        pointBufLayer.hidden = false
         
-        firstPointShape = aShapeLayer
+        firstPointShape = pointBufLayer
     }
 
     
@@ -302,10 +302,17 @@ let EM_SELECTION_SHAPE_POINT_COLOR = UIColor.init(red: 0.3, green: 0.4, blue: 0.
         //Observer for PanGesture
         self.addObserver(self, forKeyPath: _localObserver, options: .New, context: nil)
         self.addObserver(self, forKeyPath: "shapeLayer.path", options: .New, context: nil)
+        
+        NSNotificationCenter.defaultCenter().addObserverForName(UIApplicationDidBecomeActiveNotification,
+                                                                object: nil,
+                                                                queue: NSOperationQueue.mainQueue())
+        { (note: NSNotification) in
+            self.startAnimation()
+        }
     }
 
     required init?(coder aDecoder: NSCoder) {
-        fatalError("This class does not support NSCoding")
+        super.init(coder: aDecoder)
     }
     
     deinit {
@@ -433,9 +440,7 @@ let EM_SELECTION_SHAPE_POINT_COLOR = UIColor.init(red: 0.3, green: 0.4, blue: 0.
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
         self.applyShapeLayerPath()
-        
         self.startAnimation()
     }
     
@@ -466,8 +471,8 @@ let EM_SELECTION_SHAPE_POINT_COLOR = UIColor.init(red: 0.3, green: 0.4, blue: 0.
             return
         }
         //Adjust BezierPath frame to view frame
-        let widthDelta = CGRectGetWidth(self.bounds) / CGRectGetWidth(shapeLayer.frame)
-        let heightDelta = CGRectGetHeight(self.bounds) / CGRectGetHeight(shapeLayer.frame)
+        let widthDelta = CGRectGetWidth(self.bounds) / CGRectGetWidth(aPath.bounds)
+        let heightDelta = CGRectGetHeight(self.bounds) / CGRectGetHeight(aPath.bounds)
         //let scale = min(widthDelta, heightDelta)
         
         if (!isnan(widthDelta) && !isnan(heightDelta) && !isinf(widthDelta) && !isinf(heightDelta)) {
@@ -500,7 +505,6 @@ let EM_SELECTION_SHAPE_POINT_COLOR = UIColor.init(red: 0.3, green: 0.4, blue: 0.
         }
         
         shapeLayer.path = aPath.CGPath
-        shapeLayer.frame = self.bounds
     }
     
     //MARK: - Undo
@@ -539,7 +543,7 @@ let EM_SELECTION_SHAPE_POINT_COLOR = UIColor.init(red: 0.3, green: 0.4, blue: 0.
         }
         //User holds his finger almost on the same place?
         if (CGPointEqualToPoint(lastPointInPath , point)) {
-            //NSLog(@"Point ignored: %@", NSStringFromCGPoint(point));
+            //NSLog("Point ignored: ", NSStringFromCGPoint(point))
             return
         }
         //Touch is out if the 'firstPointFrame' box?
@@ -548,7 +552,6 @@ let EM_SELECTION_SHAPE_POINT_COLOR = UIColor.init(red: 0.3, green: 0.4, blue: 0.
             && !CGSizeEqualToSize(firstPointFrame.size, CGSizeZero)
             && allPoints.count > 3) {
             self.shapeCanBeLocked = true
-            //NSLog(@"Unlocking Shape with distance %f", [self distanceBetween:firstPointInPath and:point]);
         }
         //User locked a path?
         if ((CGPointEqualToPoint(point, firstPointInPath) ||
