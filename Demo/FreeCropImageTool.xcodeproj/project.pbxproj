@@ -27,6 +27,24 @@
 		A00CE27D1CA05CBB003E3510 /* ImageSourceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00CE27B1CA05CBB003E3510 /* ImageSourceScreen.swift */; };
 		A00CE2801CA088F9003E3510 /* EMZoomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00CE27F1CA088F9003E3510 /* EMZoomImageView.swift */; };
 		A00CE2811CA088F9003E3510 /* EMZoomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00CE27F1CA088F9003E3510 /* EMZoomImageView.swift */; };
+		A02665751CB549D300AF0926 /* FrameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02665621CB549D300AF0926 /* FrameView.swift */; };
+		A02665761CB549D300AF0926 /* HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02665631CB549D300AF0926 /* HUD.swift */; };
+		A02665771CB549D300AF0926 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A02665641CB549D300AF0926 /* Images.xcassets */; };
+		A02665781CB549D300AF0926 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A02665651CB549D300AF0926 /* Info.plist */; };
+		A02665791CB549D300AF0926 /* PKHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02665671CB549D300AF0926 /* PKHUD.swift */; };
+		A026657A1CB549D300AF0926 /* PKHUDAnimating.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02665681CB549D300AF0926 /* PKHUDAnimating.swift */; };
+		A026657B1CB549D300AF0926 /* PKHUDAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02665691CB549D300AF0926 /* PKHUDAnimation.swift */; };
+		A026657C1CB549D300AF0926 /* PKHUDAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = A026656A1CB549D300AF0926 /* PKHUDAssets.swift */; };
+		A026657D1CB549D300AF0926 /* PKHUDErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A026656B1CB549D300AF0926 /* PKHUDErrorView.swift */; };
+		A026657E1CB549D300AF0926 /* PKHUDProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A026656C1CB549D300AF0926 /* PKHUDProgressView.swift */; };
+		A026657F1CB549D300AF0926 /* PKHUDRotatingImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A026656D1CB549D300AF0926 /* PKHUDRotatingImageView.swift */; };
+		A02665801CB549D300AF0926 /* PKHUDSquareBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A026656E1CB549D300AF0926 /* PKHUDSquareBaseView.swift */; };
+		A02665811CB549D300AF0926 /* PKHUDSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A026656F1CB549D300AF0926 /* PKHUDSuccessView.swift */; };
+		A02665821CB549D300AF0926 /* PKHUDSystemActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02665701CB549D300AF0926 /* PKHUDSystemActivityIndicatorView.swift */; };
+		A02665831CB549D300AF0926 /* PKHUDTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02665711CB549D300AF0926 /* PKHUDTextView.swift */; };
+		A02665841CB549D300AF0926 /* PKHUDWideBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02665721CB549D300AF0926 /* PKHUDWideBaseView.swift */; };
+		A02665851CB549D300AF0926 /* Window.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02665731CB549D300AF0926 /* Window.swift */; };
+		A02665861CB549D300AF0926 /* WindowRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02665741CB549D300AF0926 /* WindowRootViewController.swift */; };
 		A02EB03E1CA2BE7B003431BE /* EMCollectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02EB03D1CA2BE7B003431BE /* EMCollectionLayout.swift */; };
 		A02EB03F1CA2BE7B003431BE /* EMCollectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02EB03D1CA2BE7B003431BE /* EMCollectionLayout.swift */; };
 		A03B68551CB3A861006C6CB8 /* SelectionTypeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03B68541CB3A861006C6CB8 /* SelectionTypeScreen.swift */; };
@@ -62,6 +80,25 @@
 		A00CE2781CA04EF8003E3510 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		A00CE27B1CA05CBB003E3510 /* ImageSourceScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSourceScreen.swift; sourceTree = "<group>"; };
 		A00CE27F1CA088F9003E3510 /* EMZoomImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EMZoomImageView.swift; sourceTree = "<group>"; };
+		A02665621CB549D300AF0926 /* FrameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrameView.swift; sourceTree = "<group>"; };
+		A02665631CB549D300AF0926 /* HUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HUD.swift; sourceTree = "<group>"; };
+		A02665641CB549D300AF0926 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		A02665651CB549D300AF0926 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A02665661CB549D300AF0926 /* PKHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKHUD.h; sourceTree = "<group>"; };
+		A02665671CB549D300AF0926 /* PKHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKHUD.swift; sourceTree = "<group>"; };
+		A02665681CB549D300AF0926 /* PKHUDAnimating.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKHUDAnimating.swift; sourceTree = "<group>"; };
+		A02665691CB549D300AF0926 /* PKHUDAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKHUDAnimation.swift; sourceTree = "<group>"; };
+		A026656A1CB549D300AF0926 /* PKHUDAssets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKHUDAssets.swift; sourceTree = "<group>"; };
+		A026656B1CB549D300AF0926 /* PKHUDErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKHUDErrorView.swift; sourceTree = "<group>"; };
+		A026656C1CB549D300AF0926 /* PKHUDProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKHUDProgressView.swift; sourceTree = "<group>"; };
+		A026656D1CB549D300AF0926 /* PKHUDRotatingImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKHUDRotatingImageView.swift; sourceTree = "<group>"; };
+		A026656E1CB549D300AF0926 /* PKHUDSquareBaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKHUDSquareBaseView.swift; sourceTree = "<group>"; };
+		A026656F1CB549D300AF0926 /* PKHUDSuccessView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKHUDSuccessView.swift; sourceTree = "<group>"; };
+		A02665701CB549D300AF0926 /* PKHUDSystemActivityIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKHUDSystemActivityIndicatorView.swift; sourceTree = "<group>"; };
+		A02665711CB549D300AF0926 /* PKHUDTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKHUDTextView.swift; sourceTree = "<group>"; };
+		A02665721CB549D300AF0926 /* PKHUDWideBaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKHUDWideBaseView.swift; sourceTree = "<group>"; };
+		A02665731CB549D300AF0926 /* Window.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Window.swift; sourceTree = "<group>"; };
+		A02665741CB549D300AF0926 /* WindowRootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowRootViewController.swift; sourceTree = "<group>"; };
 		A02EB03D1CA2BE7B003431BE /* EMCollectionLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EMCollectionLayout.swift; sourceTree = "<group>"; };
 		A03B68541CB3A861006C6CB8 /* SelectionTypeScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionTypeScreen.swift; sourceTree = "<group>"; };
 		A03B68581CB3C145006C6CB8 /* EMImageUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EMImageUtils.swift; sourceTree = "<group>"; };
@@ -109,6 +146,7 @@
 		A00CE24A1CA00CED003E3510 /* FreeCropImageTool */ = {
 			isa = PBXGroup;
 			children = (
+				A02665601CB549D300AF0926 /* Libs */,
 				A03B68541CB3A861006C6CB8 /* SelectionTypeScreen.swift */,
 				A05F08B11CAD2D7F00B26EFA /* FreeCropImageTool.entitlements */,
 				A09AF4F61CA31B2D0047E3B4 /* ROIScreen.swift */,
@@ -146,6 +184,40 @@
 			);
 			name = EMCropView;
 			path = ../EMCropView;
+			sourceTree = "<group>";
+		};
+		A02665601CB549D300AF0926 /* Libs */ = {
+			isa = PBXGroup;
+			children = (
+				A02665611CB549D300AF0926 /* PKHUD */,
+			);
+			path = Libs;
+			sourceTree = "<group>";
+		};
+		A02665611CB549D300AF0926 /* PKHUD */ = {
+			isa = PBXGroup;
+			children = (
+				A02665621CB549D300AF0926 /* FrameView.swift */,
+				A02665631CB549D300AF0926 /* HUD.swift */,
+				A02665641CB549D300AF0926 /* Images.xcassets */,
+				A02665651CB549D300AF0926 /* Info.plist */,
+				A02665661CB549D300AF0926 /* PKHUD.h */,
+				A02665671CB549D300AF0926 /* PKHUD.swift */,
+				A02665681CB549D300AF0926 /* PKHUDAnimating.swift */,
+				A02665691CB549D300AF0926 /* PKHUDAnimation.swift */,
+				A026656A1CB549D300AF0926 /* PKHUDAssets.swift */,
+				A026656B1CB549D300AF0926 /* PKHUDErrorView.swift */,
+				A026656C1CB549D300AF0926 /* PKHUDProgressView.swift */,
+				A026656D1CB549D300AF0926 /* PKHUDRotatingImageView.swift */,
+				A026656E1CB549D300AF0926 /* PKHUDSquareBaseView.swift */,
+				A026656F1CB549D300AF0926 /* PKHUDSuccessView.swift */,
+				A02665701CB549D300AF0926 /* PKHUDSystemActivityIndicatorView.swift */,
+				A02665711CB549D300AF0926 /* PKHUDTextView.swift */,
+				A02665721CB549D300AF0926 /* PKHUDWideBaseView.swift */,
+				A02665731CB549D300AF0926 /* Window.swift */,
+				A02665741CB549D300AF0926 /* WindowRootViewController.swift */,
+			);
+			path = PKHUD;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -237,7 +309,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				A00CE2561CA00CED003E3510 /* LaunchScreen.storyboard in Resources */,
+				A02665771CB549D300AF0926 /* Images.xcassets in Resources */,
 				A00CE2531CA00CED003E3510 /* Assets.xcassets in Resources */,
+				A02665781CB549D300AF0926 /* Info.plist in Resources */,
 				A00CE2511CA00CED003E3510 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -274,17 +348,33 @@
 			buildActionMask = 2147483647;
 			files = (
 				A09AF4F71CA31B2D0047E3B4 /* ROIScreen.swift in Sources */,
+				A026657B1CB549D300AF0926 /* PKHUDAnimation.swift in Sources */,
+				A026657A1CB549D300AF0926 /* PKHUDAnimating.swift in Sources */,
 				A00CE2701CA045BC003E3510 /* EMBezierPathUtils.swift in Sources */,
+				A026657D1CB549D300AF0926 /* PKHUDErrorView.swift in Sources */,
+				A026657F1CB549D300AF0926 /* PKHUDRotatingImageView.swift in Sources */,
+				A026657E1CB549D300AF0926 /* PKHUDProgressView.swift in Sources */,
+				A026657C1CB549D300AF0926 /* PKHUDAssets.swift in Sources */,
+				A02665801CB549D300AF0926 /* PKHUDSquareBaseView.swift in Sources */,
+				A02665811CB549D300AF0926 /* PKHUDSuccessView.swift in Sources */,
+				A02665791CB549D300AF0926 /* PKHUD.swift in Sources */,
+				A02665861CB549D300AF0926 /* WindowRootViewController.swift in Sources */,
 				A00CE2721CA045BC003E3510 /* EMCropOverlayView.swift in Sources */,
 				A00CE2741CA045BC003E3510 /* EMCropView.swift in Sources */,
 				A03B68551CB3A861006C6CB8 /* SelectionTypeScreen.swift in Sources */,
 				A00CE2791CA04EF8003E3510 /* RootViewController.swift in Sources */,
+				A02665841CB549D300AF0926 /* PKHUDWideBaseView.swift in Sources */,
+				A02665761CB549D300AF0926 /* HUD.swift in Sources */,
+				A02665831CB549D300AF0926 /* PKHUDTextView.swift in Sources */,
 				A00CE24E1CA00CED003E3510 /* ViewController.swift in Sources */,
 				A02EB03E1CA2BE7B003431BE /* EMCollectionLayout.swift in Sources */,
 				A00CE24C1CA00CED003E3510 /* AppDelegate.swift in Sources */,
 				A00CE27C1CA05CBB003E3510 /* ImageSourceScreen.swift in Sources */,
 				A03B68591CB3C145006C6CB8 /* EMImageUtils.swift in Sources */,
+				A02665851CB549D300AF0926 /* Window.swift in Sources */,
 				A00CE2801CA088F9003E3510 /* EMZoomImageView.swift in Sources */,
+				A02665821CB549D300AF0926 /* PKHUDSystemActivityIndicatorView.swift in Sources */,
+				A02665751CB549D300AF0926 /* FrameView.swift in Sources */,
 				A00CE2761CA045BC003E3510 /* EMSelectionShapeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
