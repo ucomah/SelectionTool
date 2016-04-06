@@ -184,10 +184,153 @@ extension UIImage {
         return img
     }
     
-    /*
-     * Original method signature; behavior should be identical.
-     */
+    
+    
+    
     func imageByTrimmingTransparentPixels() -> UIImage {
-        return self.imageByTrimmingTransparentPixelsRequiringFullOpacity(false)
+        
+        let inputCGImage = self.CGImage
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        let width = CGImageGetWidth(inputCGImage)
+        let height = CGImageGetHeight(inputCGImage)
+        let bytesPerPixel = 4
+        let bitsPerComponent = 8
+        let bytesPerRow = bytesPerPixel * width
+        let bitmapInfo = CGImageAlphaInfo.PremultipliedFirst.rawValue | CGBitmapInfo.ByteOrder32Little.rawValue
+        
+        let context = CGBitmapContextCreate(nil, width, height, bitsPerComponent, bytesPerRow, colorSpace, bitmapInfo)!
+        CGContextDrawImage(context, CGRectMake(0, 0, CGFloat(width), CGFloat(height)), inputCGImage)
+        
+        
+        
+        let rowSum = UnsafeMutablePointer<UInt32>(calloc(height, sizeof(UInt16)))
+        let colSum = UnsafeMutablePointer<UInt32>(calloc(width, sizeof(UInt16)))
+        
+        let pixelBuffer = UnsafeMutablePointer<UInt32>(CGBitmapContextGetData(context))
+        
+        // Enumerate through all pixels
+        var idx = 0
+        for row in 0..<height {
+            for col in 0..<width {
+                
+//                var pixel = pixelBuffer.memory
+                
+                var pixel = pixelBuffer[idx]
+                
+                if alpha(pixel) == 0 {
+                    pixel = rgba(red: 255, green: 0, blue: 0, alpha: 255)
+//                    pixelBuffer.memory = pixel
+                    pixelBuffer[idx] = pixel
+                    
+//                    rowSum[row] += 1
+//                    colSum[col] += 1
+                }
+//                pixelBuffer += 1
+                idx += 1
+            }
+        }
+        
+        
+        // Initialize crop insets and enumerate cols/rows arrays until we find non-empty columns or row
+        var cropInsets = UIEdgeInsetsZero
+        
+        // Top
+        for i in 0..<height {
+            if rowSum[i] > 0 {
+                cropInsets.top = CGFloat(i)
+                break
+            }
+        }
+        // Bottom
+        for i in (0..<height).reverse() {
+            if rowSum[i] > 0 {
+                cropInsets.bottom = CGFloat( max(0, height - i - 1) )
+                break
+            }
+        }
+        // Left
+        for i in 0..<width {
+            if (colSum[i] > 0) {
+                cropInsets.left = CGFloat(i)
+                break
+            }
+            
+        }
+        // Right
+        for i in (0..<width).reverse() {
+            if colSum[i] > 0 {
+                cropInsets.right = CGFloat(max(0, width - i - 1))
+                break
+            }
+        }
+
+        print(">>>", cropInsets)
+        
+        let outputCGImage = CGBitmapContextCreateImage(context)
+        let outputImage = UIImage(CGImage: outputCGImage!, scale: self.scale, orientation: self.imageOrientation)
+        
+        return outputImage
+        
+    }
+    
+    
+    
+    ////MARK: - 
+    
+    //http://stackoverflow.com/questions/31661023/change-color-of-certain-pixels-in-a-uiimage
+    func processPixelsInImage(inputImage: UIImage) -> UIImage {
+        let inputCGImage     = inputImage.CGImage
+        let colorSpace       = CGColorSpaceCreateDeviceRGB()
+        let width            = CGImageGetWidth(inputCGImage)
+        let height           = CGImageGetHeight(inputCGImage)
+        let bytesPerPixel    = 4
+        let bitsPerComponent = 8
+        let bytesPerRow      = bytesPerPixel * width
+        let bitmapInfo       = CGImageAlphaInfo.PremultipliedFirst.rawValue | CGBitmapInfo.ByteOrder32Little.rawValue
+        
+        let context = CGBitmapContextCreate(nil, width, height, bitsPerComponent, bytesPerRow, colorSpace, bitmapInfo)!
+        CGContextDrawImage(context, CGRectMake(0, 0, CGFloat(width), CGFloat(height)), inputCGImage)
+        
+        let pixelBuffer = UnsafeMutablePointer<UInt32>(CGBitmapContextGetData(context))
+        
+        var currentPixel = pixelBuffer
+        
+        for var i = 0; i < Int(height); i++ {
+            for var j = 0; j < Int(width); j++ {
+                let pixel = currentPixel.memory
+                if red(pixel) == 0 && green(pixel) == 0 && blue(pixel) == 0 {
+                    currentPixel.memory = rgba(red: 255, green: 0, blue: 0, alpha: 255)
+                }
+                currentPixel++
+            }
+        }
+        
+        let outputCGImage = CGBitmapContextCreateImage(context)
+        let outputImage = UIImage(CGImage: outputCGImage!, scale: inputImage.scale, orientation: inputImage.imageOrientation)
+        
+        return outputImage
+    }
+    
+    
+    private
+    
+    func alpha(color: UInt32) -> UInt8 {
+        return UInt8((color >> 24) & 255)
+    }
+    
+    func red(color: UInt32) -> UInt8 {
+        return UInt8((color >> 16) & 255)
+    }
+    
+    func green(color: UInt32) -> UInt8 {
+        return UInt8((color >> 8) & 255)
+    }
+    
+    func blue(color: UInt32) -> UInt8 {
+        return UInt8((color >> 0) & 255)
+    }
+    
+    func rgba(red red: UInt8, green: UInt8, blue: UInt8, alpha: UInt8) -> UInt32 {
+        return (UInt32(alpha) << 24) | (UInt32(red) << 16) | (UInt32(green) << 8) | (UInt32(blue) << 0)
     }
 }
