@@ -449,12 +449,14 @@ private let kEMInitialImageAnimationDuration = 0.2
         }
     }
     
-    func croppedImage() -> UIImage {
+    func croppedImageWithTrnsparentPixelsTrimmed(trimTransparent: Bool) -> UIImage {
         if (!self.canDoCrop() || self.cropPath.isZeroPath) {
             return self.image
         }
         let maskedImage = self.image.maskToPath(self.cropPath)
-        let image = maskedImage.imageByTrimmingTransparentPixelsRequiringFullOpacity(false)
+//        let image = maskedImage.imageByTrimmingTransparentPixelsRequiringFullOpacity(false)
+//        let image = maskedImage.processPixelsInImage(maskedImage)
+        let image = maskedImage.imageByTrimmingTransparentPixels()
         return image
     }
     

@@ -23,11 +23,7 @@ class ROIScreen: RootViewController {
     var btnApply: UIBarButtonItem?
     var btnDeselect: UIBarButtonItem?
     var btnUndo: UIBarButtonItem?
-    var image: UIImage? {
-        didSet {
-            cropView?.image = self.image!
-        }
-    }
+
     @IBOutlet weak var cropView: EMCropView?
     
     //MARK: - LifeCycle
@@ -116,12 +112,12 @@ class ROIScreen: RootViewController {
     }
     
     func doApply() {
-        if (self.cropView?.canDoCrop() != true || self.cropView?.cropPath.isZeroPath == true) {
-            delegate?.roiScreen(self, didFinishSelectionWithImage: self.image!)
+        if (self.cropView?.canDoCrop() == false || self.cropView?.cropPath.isZeroPath == true ) {
+            delegate?.roiScreen(self, didFinishSelectionWithImage: (self.cropView?.image)!)
             return
         }
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
-            let img = self.cropView?.croppedImage()
+            let img = self.cropView?.croppedImageWithTrnsparentPixelsTrimmed(true)
             dispatch_async(dispatch_get_main_queue()) { () -> Void in
                 self.delegate?.roiScreen(self, didFinishSelectionWithImage: img!)
             }
