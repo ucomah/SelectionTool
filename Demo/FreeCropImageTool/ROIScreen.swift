@@ -116,9 +116,11 @@ class ROIScreen: RootViewController {
             delegate?.roiScreen(self, didFinishSelectionWithImage: (self.cropView?.image)!)
             return
         }
+        HUD.show(HUDContentType.Progress)
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
             let img = self.cropView?.croppedImageWithTrnsparentPixelsTrimmed(true)
             dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                HUD.hide(animated: true)
                 self.delegate?.roiScreen(self, didFinishSelectionWithImage: img!)
             }
         }

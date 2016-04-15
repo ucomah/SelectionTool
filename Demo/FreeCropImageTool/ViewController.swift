@@ -23,37 +23,39 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
     @IBOutlet var btnCrop: UIBarButtonItem?
     @IBOutlet var btnDelete: UIBarButtonItem?
     @IBOutlet var btnShare: UIBarButtonItem?
+    @IBOutlet var btnReload: UIBarButtonItem?
     var inImageSource: ImageSourceViewController?
     
-    private var shouldLoadImageOnStart = true
-    private var shouldCacheImageOnSet = true
-    
-    var image: UIImage? {
+    private(set) var image: UIImage? {
         didSet {
-            //Cache image in background
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
-                if self.shouldCacheImageOnSet {
-                    if let img = self.image {
-                        if let data = UIImageJPEGRepresentation(img, 1.0) {
-                            data.writeToFile(self.tempImagePath, atomically: true)
-                        }
-                    }
-                    else { //Remove cached image if some
-                        do {
-                            try NSFileManager.defaultManager().removeItemAtPath(self.tempImagePath)
-                        }
-                        catch {
-                        }
+            self.imageHolder?.image = self.image
+            self.helperLabel?.hidden = self.image != nil ? true : false
+            self.toggleNavigationBarButtons()
+        }
+        
+    }
+    
+    func setImage(image: UIImage?, useCache: Bool) {
+        //Cache image in background
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
+            if useCache {
+                if let img = image {
+                    if let data = UIImagePNGRepresentation(img) {
+                        data.writeToFile(self.tempImagePath, atomically: true)
                     }
                 }
-                self.shouldCacheImageOnSet = true
+                else { //Remove cached image if some
+                    do {
+                        try NSFileManager.defaultManager().removeItemAtPath(self.tempImagePath)
+                    }
+                    catch {
+                    }
+                }
             }
-            //Set image
-            dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                self.imageHolder?.image = self.image
-                self.helperLabel?.hidden = self.image != nil ? true : false
-                self.toggleNavigationBarButtons()
-            }
+        }
+        //Set image
+        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+            self.image = image
         }
     }
     
@@ -65,6 +67,9 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
         
         self.imageHolder?.scrollView.showsVerticalScrollIndicator = true
         self.imageHolder?.scrollView.showsHorizontalScrollIndicator = true
+        
+        //Load last used image
+        self.loadCachedImage(nil)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -73,16 +78,11 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
         //Navigation bar setup
         self.toggleNavigationBarButtons()
         
-        //Load last used image
-        if shouldLoadImageOnStart {
-            if let data = NSData.init(contentsOfFile: self.tempImagePath) {
-                let img = UIImage.init(data: data)
-                if (img?.isEqual(self.image))! == false {
-                    self.image = img
-                }
-            }
-        }
-        shouldLoadImageOnStart = true
+//        //Load last used image
+//        if shouldLoadCachedImageOnStart {
+//            
+//        }
+//        shouldLoadCachedImageOnStart = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -97,7 +97,12 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
                 inImageSource = ImageSourceViewController.init(style: UITableViewStyle.Plain)
                 inImageSource!.delegate = self
                 inImageSource!.modalPresentationStyle = UIModalPresentationStyle.Popover
-                inImageSource!.preferredContentSize = CGSizeMake(220, 100)
+                if (UIImagePickerController.availableMediaTypesForSourceType(UIImagePickerControllerSourceType.Camera) != nil) {
+                    inImageSource!.preferredContentSize = CGSizeMake(220, 150)
+                }
+                else {
+                    inImageSource!.preferredContentSize = CGSizeMake(220, 100)
+                }
             }
             presentViewController(inImageSource!, animated: true, completion: nil)
             let popoverPresentationController = inImageSource!.popoverPresentationController
@@ -116,6 +121,11 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
             alert.addAction(UIAlertAction.init(title: NSLocalizedString("Cancel", comment: ""), style: UIAlertActionStyle.Destructive, handler: { (action: UIAlertAction) -> Void in
                 alert.dismissViewControllerAnimated(true, completion: nil)
             }))
+            if (UIImagePickerController.availableMediaTypesForSourceType(UIImagePickerControllerSourceType.Camera) != nil) {
+                alert.addAction(UIAlertAction.init(title: NSLocalizedString("Take a Photo", comment: ""), style: UIAlertActionStyle.Default, handler: { (action: UIAlertAction) -> Void in
+                    self.do_ImagePickerImportWithSourceType(UIImagePickerControllerSourceType.Camera)
+                }))
+            }
             self.presentViewController(alert, animated: true, completion: nil)
         }
     }
@@ -136,17 +146,36 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
     }
     
     @IBAction internal func doShareImage(sender: AnyObject) {
-        
+
     }
     
     @IBAction internal func doDeleteImage(sender: AnyObject) {
-        self.image = nil
+        self.setImage(nil, useCache: true)
     }
+    
+    @IBAction internal func doReloadImage(sender: AnyObject) {
+        self.loadCachedImage { (finished) in
+            
+        }
+    }
+    
+    //MARK: - Cache
     
     private var tempImagePath: String {
         var path = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true).last!
-        path += "/last_used_image.jpeg"
+        path += "/last_used_image.png"
         return path
+    }
+    
+    private func loadCachedImage(completion: ((finished: Bool) -> Void)?) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
+            if let data = NSData.init(contentsOfFile: self.tempImagePath) {
+                let img = UIImage.init(data: data)
+                if (img?.isEqual(self.image))! == false {
+                    self.setImage(img, useCache: true)
+                }
+            }
+        }
     }
     
     //MARK: Setup
@@ -163,8 +192,10 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
                                            action: #selector(ViewController.navigateToSelectCropScreen(_:)))
             btnShare = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: #selector(doShareImage(_:)))
             btnDelete = UIBarButtonItem.init(barButtonSystemItem: .Trash, target: self, action: #selector(ViewController.doDeleteImage(_:)))
+            btnReload = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.Refresh, target: self, action: #selector(doReloadImage(_:)))
             
             self.titleItem?.leftBarButtonItems?.append(btnCrop!)
+            self.titleItem?.leftBarButtonItems?.append(btnReload!)
             self.titleItem?.rightBarButtonItems = [btnDelete!, btnShare!]
         }
         else {
@@ -181,6 +212,8 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
                 self.do_iCloudImport()
             case 1:
                 self.do_ImagePickerImportWithSourceType(UIImagePickerControllerSourceType.PhotoLibrary)
+            case 2:
+                self.do_ImagePickerImportWithSourceType(UIImagePickerControllerSourceType.Camera)
             default:
                 break
             }
@@ -199,14 +232,14 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
             return
         }
         let image = UIImage.init(data: data!)
-        self.image = image
+        self.setImage(image, useCache: true)
         controller.dismissViewControllerAnimated(true, completion:nil)
     }
     
     //MARK: UIImagePickerControllerDelegate
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
-        self.image = image
+        self.setImage(image, useCache: true)
         picker.dismissViewControllerAnimated(true, completion:nil)
     }
     
@@ -262,17 +295,7 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
     }
     
     func roiScreen(screen: ROIScreen, didFinishSelectionWithImage resultImage: UIImage) {
-        shouldLoadImageOnStart = false
-        shouldCacheImageOnSet = false
-        self.image = resultImage
-        
-        
-        if let data = UIImageJPEGRepresentation(resultImage, 1.0) {
-            var path = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true).last!
-            path += "/cropped.jpeg"
-            data.writeToFile(path, atomically: true)
-        }
-        
+        self.setImage(resultImage, useCache: false)
         screen.dismissViewControllerAnimated(true, completion: nil)
     }
 }

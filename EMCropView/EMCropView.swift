@@ -438,7 +438,7 @@ private let kEMInitialImageAnimationDuration = 0.2
         if (self.isFreeSelectionMode()) {
             self.overlayView.setBoundsIndicatorsLayersHidden(true)
             //Clear selection path
-            self.overlayView.selectionView .clear(true, completion: { (_: (Bool)) -> Void in
+            self.overlayView.selectionView.clear(true, completion: { (_: (Bool)) -> Void in
                 //Reload
                 self.beginFreeSelectionIfNeeded()
             })

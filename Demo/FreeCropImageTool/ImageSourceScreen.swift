@@ -38,7 +38,7 @@ class ImageSourceViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return (UIImagePickerController.availableMediaTypesForSourceType(UIImagePickerControllerSourceType.Camera) != nil) ? 3 : 2
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -48,6 +48,8 @@ class ImageSourceViewController: UITableViewController {
             cell?.textLabel?.text = NSLocalizedString("iCloud Drive", comment: "")
         case 1:
             cell?.textLabel?.text = NSLocalizedString("Camera Roll", comment: "")
+        case 2:
+            cell?.textLabel?.text = NSLocalizedString("Take a Photo", comment: "")
         default:
             break
         }
