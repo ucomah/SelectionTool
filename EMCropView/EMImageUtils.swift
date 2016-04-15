@@ -130,6 +130,10 @@ extension UIImage {
         
         // Convert back to UIImage
         let img = UIImage.init(CGImage: newImage!, scale: self.scale, orientation: self.imageOrientation)
+        
+        //Free memory
+        pixelBuffer.destroy()
+        
         return img
     }
     

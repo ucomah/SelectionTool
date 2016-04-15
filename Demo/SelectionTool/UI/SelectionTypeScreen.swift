@@ -54,7 +54,7 @@ let cellReuseIdentifier = "SelectionTypeViewControllerCell_identifier"
             layout.verticalItemsSpacing = 60
         }
         else {
-            layout.itemSize = CGSizeMake(64, 100)
+            layout.itemSize = CGSizeMake(80, 116)
             layout.horizontalItemsSpacing = 55
             layout.verticalItemsSpacing = 90
         }

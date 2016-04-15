@@ -12,10 +12,12 @@ Fully written in Swift.
 6. Brightness, contrast tuning
 7. Export to JPG, PNG, TIFF, PDF
 8. "Square crop" tool - the copy of iOS basic one
+9. Pretty color selection tool 
+10. Any pixel-by-pixel work is possible for Mac OS and iOS (thanks to existing library)
 
 
-**TODO:**
+**Known bugs and todos:**
 
-1. Make a Storyboard for iPhone
-2. Adjust a Free selection mode initial point size for iPhone
-3. ImageUtils: Trim tool - make it use a clousre for pixels enumeration
+1. Adjust a Free selection mode initial point size for iPhone
+2. ImageUtils: Trim tool - make it use a clousre for pixels enumeration
+3. Rotation bugs if image is smaller then crop box frame

@@ -25,6 +25,9 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
     @IBOutlet var btnShare: UIBarButtonItem?
     @IBOutlet var btnReload: UIBarButtonItem?
     @IBOutlet var btnCloudExport: UIBarButtonItem?
+    
+    @IBOutlet var bottomToolBar: UIToolbar?
+    
     var inImageSource: ImageSourceViewController?
     private var docInteracton: UIDocumentInteractionController?
     
@@ -69,6 +72,10 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
         
         //Navigation bar setup
         self.toggleNavigationBarButtons()
+        
+        if self.bottomToolBar != nil {
+            self.bottomToolBar!.barTintColor = self.navBar?.barTintColor
+        }
     }
     
     deinit {
@@ -271,6 +278,9 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
     //MARK: Setup
     
     func toggleNavigationBarButtons() {
+        
+        let isPhone = UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Phone
+        
         btnAdd = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.Add,
                                       target: self,
                                       action: #selector(doAddItemAction(_:)))
@@ -285,12 +295,26 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
             btnReload = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.Refresh, target: self, action: #selector(doReloadImage(_:)))
             btnCloudExport = UIBarButtonItem.init(image: UIImage.init(named: "iCloud_export"), style: UIBarButtonItemStyle.Plain, target: self, action: #selector(do_iCloudExport))
             
-            self.titleItem?.leftBarButtonItems?.append(btnCrop!)
-            self.titleItem?.leftBarButtonItems?.append(btnReload!)
-            self.titleItem?.rightBarButtonItems = [btnDelete!, btnShare!, btnCloudExport!]
+            if isPhone {
+                self.bottomToolBar?.hidden = false
+                self.titleItem?.rightBarButtonItems = [btnCrop!]
+                self.titleItem?.leftBarButtonItems?.append(btnReload!)
+                let flex = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
+                let space = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.FixedSpace, target: nil, action: nil)
+                space.width = 20
+                self.bottomToolBar?.items = [btnDelete!, flex, btnShare!, space, btnCloudExport!]
+            }
+            else {
+                self.titleItem?.leftBarButtonItems?.append(btnCrop!)
+                self.titleItem?.leftBarButtonItems?.append(btnReload!)
+                self.titleItem?.rightBarButtonItems = [btnDelete!, btnShare!, btnCloudExport!]
+            }
         }
         else {
             self.titleItem?.rightBarButtonItems = []
+            if isPhone {
+                self.bottomToolBar?.hidden = true
+            }
         }
     }
     
