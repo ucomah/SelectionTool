@@ -107,14 +107,14 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
             alert.addAction(UIAlertAction.init(title: NSLocalizedString("Camera Roll", comment: ""), style: UIAlertActionStyle.Default, handler: { (action: UIAlertAction) -> Void in
                 self.do_ImagePickerImportWithSourceType(UIImagePickerControllerSourceType.PhotoLibrary)
             }))
-            alert.addAction(UIAlertAction.init(title: NSLocalizedString("Cancel", comment: ""), style: UIAlertActionStyle.Destructive, handler: { (action: UIAlertAction) -> Void in
-                alert.dismissViewControllerAnimated(true, completion: nil)
-            }))
             if (UIImagePickerController.availableMediaTypesForSourceType(UIImagePickerControllerSourceType.Camera) != nil) {
                 alert.addAction(UIAlertAction.init(title: NSLocalizedString("Take a Photo", comment: ""), style: UIAlertActionStyle.Default, handler: { (action: UIAlertAction) -> Void in
                     self.do_ImagePickerImportWithSourceType(UIImagePickerControllerSourceType.Camera)
                 }))
             }
+            alert.addAction(UIAlertAction.init(title: NSLocalizedString("Cancel", comment: ""), style: UIAlertActionStyle.Destructive, handler: { (action: UIAlertAction) -> Void in
+                alert.dismissViewControllerAnimated(true, completion: nil)
+            }))
             self.presentViewController(alert, animated: true, completion: nil)
         }
     }
