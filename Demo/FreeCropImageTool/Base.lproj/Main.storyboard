@@ -9,7 +9,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="FreeCropImageTool" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="SelectionTool" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -58,7 +58,7 @@
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dce-ge-fDq" customClass="EMZoomImageView" customModule="FreeCropImageTool" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dce-ge-fDq" customClass="EMZoomImageView" customModule="SelectionTool" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="44" width="600" height="556"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
@@ -95,7 +95,7 @@
         <!--Selection Type View Controller-->
         <scene sceneID="Hqd-JO-GXn">
             <objects>
-                <viewController storyboardIdentifier="SelectionTypeViewController_identifier" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Gk7-Az-wSq" customClass="SelectionTypeViewController" customModule="FreeCropImageTool" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SelectionTypeViewController_identifier" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Gk7-Az-wSq" customClass="SelectionTypeViewController" customModule="SelectionTool" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bHo-53-J5a"/>
                         <viewControllerLayoutGuide type="bottom" id="iEv-FX-eq7"/>
@@ -114,7 +114,7 @@
                                 <rect key="frame" x="0.0" y="44" width="600" height="556"/>
                                 <collectionViewLayout key="collectionViewLayout" id="vb5-3G-gFj" customClass="PALayout" customModule="FreeCropImageTool"/>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SelectionTypeViewControllerCell_identifier" id="qmX-TQ-2Mi" customClass="SelectionTypeViewControllerCell" customModule="FreeCropImageTool" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SelectionTypeViewControllerCell_identifier" id="qmX-TQ-2Mi" customClass="SelectionTypeViewControllerCell" customModule="SelectionTool" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="128" height="160"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -170,7 +170,7 @@
         <!--Screen-->
         <scene sceneID="MZM-oG-6Uw">
             <objects>
-                <viewController storyboardIdentifier="ROIScreen_identifier" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Sbq-DV-IHv" customClass="ROIScreen" customModule="FreeCropImageTool" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ROIScreen_identifier" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Sbq-DV-IHv" customClass="ROIScreen" customModule="SelectionTool" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="09w-BU-heY"/>
                         <viewControllerLayoutGuide type="bottom" id="Ryj-Hb-epj"/>
@@ -185,7 +185,7 @@
                                     <navigationItem title="Title" id="gn9-PP-PMZ"/>
                                 </items>
                             </navigationBar>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FVU-1f-zAb" customClass="EMCropView" customModule="FreeCropImageTool" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FVU-1f-zAb" customClass="EMCropView" customModule="SelectionTool" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="44" width="600" height="556"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>

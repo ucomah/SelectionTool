@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:FreeCropImageTool.xcodeproj">
+      location = "self:/Users/mel/Projects/Code/FreeCropImageTool/Demo/SelectionTool.xcodeproj">
    </FileRef>
 </Workspace>
