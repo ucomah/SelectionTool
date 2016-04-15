@@ -7,114 +7,87 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A00CE24C1CA00CED003E3510 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00CE24B1CA00CED003E3510 /* AppDelegate.swift */; };
-		A00CE24E1CA00CED003E3510 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00CE24D1CA00CED003E3510 /* ViewController.swift */; };
-		A00CE2511CA00CED003E3510 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A00CE24F1CA00CED003E3510 /* Main.storyboard */; };
-		A00CE2531CA00CED003E3510 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A00CE2521CA00CED003E3510 /* Assets.xcassets */; };
-		A00CE2561CA00CED003E3510 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A00CE2541CA00CED003E3510 /* LaunchScreen.storyboard */; };
-		A00CE2611CA00CED003E3510 /* FreeCropImageToolUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00CE2601CA00CED003E3510 /* FreeCropImageToolUITests.swift */; };
 		A00CE2701CA045BC003E3510 /* EMBezierPathUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00CE26C1CA045BC003E3510 /* EMBezierPathUtils.swift */; };
-		A00CE2711CA045BC003E3510 /* EMBezierPathUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00CE26C1CA045BC003E3510 /* EMBezierPathUtils.swift */; };
 		A00CE2721CA045BC003E3510 /* EMCropOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00CE26D1CA045BC003E3510 /* EMCropOverlayView.swift */; };
-		A00CE2731CA045BC003E3510 /* EMCropOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00CE26D1CA045BC003E3510 /* EMCropOverlayView.swift */; };
 		A00CE2741CA045BC003E3510 /* EMCropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00CE26E1CA045BC003E3510 /* EMCropView.swift */; };
-		A00CE2751CA045BC003E3510 /* EMCropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00CE26E1CA045BC003E3510 /* EMCropView.swift */; };
 		A00CE2761CA045BC003E3510 /* EMSelectionShapeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00CE26F1CA045BC003E3510 /* EMSelectionShapeView.swift */; };
-		A00CE2771CA045BC003E3510 /* EMSelectionShapeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00CE26F1CA045BC003E3510 /* EMSelectionShapeView.swift */; };
-		A00CE2791CA04EF8003E3510 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00CE2781CA04EF8003E3510 /* RootViewController.swift */; };
-		A00CE27A1CA04EF8003E3510 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00CE2781CA04EF8003E3510 /* RootViewController.swift */; };
-		A00CE27C1CA05CBB003E3510 /* ImageSourceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00CE27B1CA05CBB003E3510 /* ImageSourceScreen.swift */; };
-		A00CE27D1CA05CBB003E3510 /* ImageSourceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00CE27B1CA05CBB003E3510 /* ImageSourceScreen.swift */; };
-		A00CE2801CA088F9003E3510 /* EMZoomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00CE27F1CA088F9003E3510 /* EMZoomImageView.swift */; };
-		A00CE2811CA088F9003E3510 /* EMZoomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00CE27F1CA088F9003E3510 /* EMZoomImageView.swift */; };
-		A02665751CB549D300AF0926 /* FrameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02665621CB549D300AF0926 /* FrameView.swift */; };
-		A02665761CB549D300AF0926 /* HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02665631CB549D300AF0926 /* HUD.swift */; };
-		A02665771CB549D300AF0926 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A02665641CB549D300AF0926 /* Images.xcassets */; };
-		A02665781CB549D300AF0926 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A02665651CB549D300AF0926 /* Info.plist */; };
-		A02665791CB549D300AF0926 /* PKHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02665671CB549D300AF0926 /* PKHUD.swift */; };
-		A026657A1CB549D300AF0926 /* PKHUDAnimating.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02665681CB549D300AF0926 /* PKHUDAnimating.swift */; };
-		A026657B1CB549D300AF0926 /* PKHUDAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02665691CB549D300AF0926 /* PKHUDAnimation.swift */; };
-		A026657C1CB549D300AF0926 /* PKHUDAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = A026656A1CB549D300AF0926 /* PKHUDAssets.swift */; };
-		A026657D1CB549D300AF0926 /* PKHUDErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A026656B1CB549D300AF0926 /* PKHUDErrorView.swift */; };
-		A026657E1CB549D300AF0926 /* PKHUDProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A026656C1CB549D300AF0926 /* PKHUDProgressView.swift */; };
-		A026657F1CB549D300AF0926 /* PKHUDRotatingImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A026656D1CB549D300AF0926 /* PKHUDRotatingImageView.swift */; };
-		A02665801CB549D300AF0926 /* PKHUDSquareBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A026656E1CB549D300AF0926 /* PKHUDSquareBaseView.swift */; };
-		A02665811CB549D300AF0926 /* PKHUDSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A026656F1CB549D300AF0926 /* PKHUDSuccessView.swift */; };
-		A02665821CB549D300AF0926 /* PKHUDSystemActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02665701CB549D300AF0926 /* PKHUDSystemActivityIndicatorView.swift */; };
-		A02665831CB549D300AF0926 /* PKHUDTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02665711CB549D300AF0926 /* PKHUDTextView.swift */; };
-		A02665841CB549D300AF0926 /* PKHUDWideBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02665721CB549D300AF0926 /* PKHUDWideBaseView.swift */; };
-		A02665851CB549D300AF0926 /* Window.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02665731CB549D300AF0926 /* Window.swift */; };
-		A02665861CB549D300AF0926 /* WindowRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02665741CB549D300AF0926 /* WindowRootViewController.swift */; };
-		A02EB03E1CA2BE7B003431BE /* EMCollectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02EB03D1CA2BE7B003431BE /* EMCollectionLayout.swift */; };
-		A02EB03F1CA2BE7B003431BE /* EMCollectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02EB03D1CA2BE7B003431BE /* EMCollectionLayout.swift */; };
-		A03B68551CB3A861006C6CB8 /* SelectionTypeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03B68541CB3A861006C6CB8 /* SelectionTypeScreen.swift */; };
 		A03B68591CB3C145006C6CB8 /* EMImageUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03B68581CB3C145006C6CB8 /* EMImageUtils.swift */; };
-		A09AF4F71CA31B2D0047E3B4 /* ROIScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09AF4F61CA31B2D0047E3B4 /* ROIScreen.swift */; };
+		A042CA8C1CC0FF0C00EBFA7F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A042CA671CC0FF0C00EBFA7F /* AppDelegate.swift */; };
+		A042CA8D1CC0FF0C00EBFA7F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A042CA681CC0FF0C00EBFA7F /* Assets.xcassets */; };
+		A042CA8E1CC0FF0C00EBFA7F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A042CA691CC0FF0C00EBFA7F /* LaunchScreen.storyboard */; };
+		A042CA8F1CC0FF0C00EBFA7F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A042CA6B1CC0FF0C00EBFA7F /* Main.storyboard */; };
+		A042CA901CC0FF0C00EBFA7F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A042CA6D1CC0FF0C00EBFA7F /* Info.plist */; };
+		A042CA911CC0FF0C00EBFA7F /* FrameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A042CA701CC0FF0C00EBFA7F /* FrameView.swift */; };
+		A042CA921CC0FF0C00EBFA7F /* HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = A042CA711CC0FF0C00EBFA7F /* HUD.swift */; };
+		A042CA931CC0FF0C00EBFA7F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A042CA721CC0FF0C00EBFA7F /* Images.xcassets */; };
+		A042CA941CC0FF0C00EBFA7F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A042CA731CC0FF0C00EBFA7F /* Info.plist */; };
+		A042CA951CC0FF0C00EBFA7F /* PKHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = A042CA751CC0FF0C00EBFA7F /* PKHUD.swift */; };
+		A042CA961CC0FF0C00EBFA7F /* PKHUDAnimating.swift in Sources */ = {isa = PBXBuildFile; fileRef = A042CA761CC0FF0C00EBFA7F /* PKHUDAnimating.swift */; };
+		A042CA971CC0FF0C00EBFA7F /* PKHUDAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A042CA771CC0FF0C00EBFA7F /* PKHUDAnimation.swift */; };
+		A042CA981CC0FF0C00EBFA7F /* PKHUDAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = A042CA781CC0FF0C00EBFA7F /* PKHUDAssets.swift */; };
+		A042CA991CC0FF0C00EBFA7F /* PKHUDErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A042CA791CC0FF0C00EBFA7F /* PKHUDErrorView.swift */; };
+		A042CA9A1CC0FF0C00EBFA7F /* PKHUDProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A042CA7A1CC0FF0C00EBFA7F /* PKHUDProgressView.swift */; };
+		A042CA9B1CC0FF0C00EBFA7F /* PKHUDRotatingImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A042CA7B1CC0FF0C00EBFA7F /* PKHUDRotatingImageView.swift */; };
+		A042CA9C1CC0FF0C00EBFA7F /* PKHUDSquareBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A042CA7C1CC0FF0C00EBFA7F /* PKHUDSquareBaseView.swift */; };
+		A042CA9D1CC0FF0C00EBFA7F /* PKHUDSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A042CA7D1CC0FF0C00EBFA7F /* PKHUDSuccessView.swift */; };
+		A042CA9E1CC0FF0C00EBFA7F /* PKHUDSystemActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A042CA7E1CC0FF0C00EBFA7F /* PKHUDSystemActivityIndicatorView.swift */; };
+		A042CA9F1CC0FF0C00EBFA7F /* PKHUDTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A042CA7F1CC0FF0C00EBFA7F /* PKHUDTextView.swift */; };
+		A042CAA01CC0FF0C00EBFA7F /* PKHUDWideBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A042CA801CC0FF0C00EBFA7F /* PKHUDWideBaseView.swift */; };
+		A042CAA11CC0FF0C00EBFA7F /* Window.swift in Sources */ = {isa = PBXBuildFile; fileRef = A042CA811CC0FF0C00EBFA7F /* Window.swift */; };
+		A042CAA21CC0FF0C00EBFA7F /* WindowRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A042CA821CC0FF0C00EBFA7F /* WindowRootViewController.swift */; };
+		A042CAA31CC0FF0C00EBFA7F /* SelectionTool.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = A042CA831CC0FF0C00EBFA7F /* SelectionTool.entitlements */; };
+		A042CAA41CC0FF0C00EBFA7F /* EMCollectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A042CA851CC0FF0C00EBFA7F /* EMCollectionLayout.swift */; };
+		A042CAA51CC0FF0C00EBFA7F /* EMZoomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A042CA861CC0FF0C00EBFA7F /* EMZoomImageView.swift */; };
+		A042CAA61CC0FF0C00EBFA7F /* ImageSourceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A042CA871CC0FF0C00EBFA7F /* ImageSourceScreen.swift */; };
+		A042CAA71CC0FF0C00EBFA7F /* ROIScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A042CA881CC0FF0C00EBFA7F /* ROIScreen.swift */; };
+		A042CAA81CC0FF0C00EBFA7F /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A042CA891CC0FF0C00EBFA7F /* RootViewController.swift */; };
+		A042CAA91CC0FF0C00EBFA7F /* SelectionTypeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A042CA8A1CC0FF0C00EBFA7F /* SelectionTypeScreen.swift */; };
+		A042CAAA1CC0FF0C00EBFA7F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A042CA8B1CC0FF0C00EBFA7F /* ViewController.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		A00CE25D1CA00CED003E3510 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A00CE2401CA00CED003E3510 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A00CE2471CA00CED003E3510;
-			remoteInfo = FreeCropImageTool;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		A00CE2481CA00CED003E3510 /* SelectionTool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SelectionTool.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A00CE24B1CA00CED003E3510 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A00CE24D1CA00CED003E3510 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		A00CE2501CA00CED003E3510 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		A00CE2521CA00CED003E3510 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		A00CE2551CA00CED003E3510 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		A00CE2571CA00CED003E3510 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A00CE25C1CA00CED003E3510 /* SelectionTool.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SelectionTool.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		A00CE2601CA00CED003E3510 /* FreeCropImageToolUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeCropImageToolUITests.swift; sourceTree = "<group>"; };
-		A00CE2621CA00CED003E3510 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A00CE26C1CA045BC003E3510 /* EMBezierPathUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EMBezierPathUtils.swift; sourceTree = "<group>"; };
 		A00CE26D1CA045BC003E3510 /* EMCropOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EMCropOverlayView.swift; sourceTree = "<group>"; };
 		A00CE26E1CA045BC003E3510 /* EMCropView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EMCropView.swift; sourceTree = "<group>"; };
 		A00CE26F1CA045BC003E3510 /* EMSelectionShapeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EMSelectionShapeView.swift; sourceTree = "<group>"; };
-		A00CE2781CA04EF8003E3510 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
-		A00CE27B1CA05CBB003E3510 /* ImageSourceScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSourceScreen.swift; sourceTree = "<group>"; };
-		A00CE27F1CA088F9003E3510 /* EMZoomImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EMZoomImageView.swift; sourceTree = "<group>"; };
-		A02665621CB549D300AF0926 /* FrameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrameView.swift; sourceTree = "<group>"; };
-		A02665631CB549D300AF0926 /* HUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HUD.swift; sourceTree = "<group>"; };
-		A02665641CB549D300AF0926 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		A02665651CB549D300AF0926 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A02665661CB549D300AF0926 /* PKHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKHUD.h; sourceTree = "<group>"; };
-		A02665671CB549D300AF0926 /* PKHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKHUD.swift; sourceTree = "<group>"; };
-		A02665681CB549D300AF0926 /* PKHUDAnimating.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKHUDAnimating.swift; sourceTree = "<group>"; };
-		A02665691CB549D300AF0926 /* PKHUDAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKHUDAnimation.swift; sourceTree = "<group>"; };
-		A026656A1CB549D300AF0926 /* PKHUDAssets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKHUDAssets.swift; sourceTree = "<group>"; };
-		A026656B1CB549D300AF0926 /* PKHUDErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKHUDErrorView.swift; sourceTree = "<group>"; };
-		A026656C1CB549D300AF0926 /* PKHUDProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKHUDProgressView.swift; sourceTree = "<group>"; };
-		A026656D1CB549D300AF0926 /* PKHUDRotatingImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKHUDRotatingImageView.swift; sourceTree = "<group>"; };
-		A026656E1CB549D300AF0926 /* PKHUDSquareBaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKHUDSquareBaseView.swift; sourceTree = "<group>"; };
-		A026656F1CB549D300AF0926 /* PKHUDSuccessView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKHUDSuccessView.swift; sourceTree = "<group>"; };
-		A02665701CB549D300AF0926 /* PKHUDSystemActivityIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKHUDSystemActivityIndicatorView.swift; sourceTree = "<group>"; };
-		A02665711CB549D300AF0926 /* PKHUDTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKHUDTextView.swift; sourceTree = "<group>"; };
-		A02665721CB549D300AF0926 /* PKHUDWideBaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKHUDWideBaseView.swift; sourceTree = "<group>"; };
-		A02665731CB549D300AF0926 /* Window.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Window.swift; sourceTree = "<group>"; };
-		A02665741CB549D300AF0926 /* WindowRootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowRootViewController.swift; sourceTree = "<group>"; };
-		A02EB03D1CA2BE7B003431BE /* EMCollectionLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EMCollectionLayout.swift; sourceTree = "<group>"; };
-		A03B68541CB3A861006C6CB8 /* SelectionTypeScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionTypeScreen.swift; sourceTree = "<group>"; };
 		A03B68581CB3C145006C6CB8 /* EMImageUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EMImageUtils.swift; sourceTree = "<group>"; };
-		A05F08B11CAD2D7F00B26EFA /* FreeCropImageTool.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = FreeCropImageTool.entitlements; sourceTree = "<group>"; };
-		A09AF4F61CA31B2D0047E3B4 /* ROIScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ROIScreen.swift; sourceTree = "<group>"; };
+		A042CA671CC0FF0C00EBFA7F /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A042CA681CC0FF0C00EBFA7F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A042CA6A1CC0FF0C00EBFA7F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A042CA6C1CC0FF0C00EBFA7F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A042CA6D1CC0FF0C00EBFA7F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A042CA701CC0FF0C00EBFA7F /* FrameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrameView.swift; sourceTree = "<group>"; };
+		A042CA711CC0FF0C00EBFA7F /* HUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HUD.swift; sourceTree = "<group>"; };
+		A042CA721CC0FF0C00EBFA7F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		A042CA731CC0FF0C00EBFA7F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A042CA741CC0FF0C00EBFA7F /* PKHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKHUD.h; sourceTree = "<group>"; };
+		A042CA751CC0FF0C00EBFA7F /* PKHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKHUD.swift; sourceTree = "<group>"; };
+		A042CA761CC0FF0C00EBFA7F /* PKHUDAnimating.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKHUDAnimating.swift; sourceTree = "<group>"; };
+		A042CA771CC0FF0C00EBFA7F /* PKHUDAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKHUDAnimation.swift; sourceTree = "<group>"; };
+		A042CA781CC0FF0C00EBFA7F /* PKHUDAssets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKHUDAssets.swift; sourceTree = "<group>"; };
+		A042CA791CC0FF0C00EBFA7F /* PKHUDErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKHUDErrorView.swift; sourceTree = "<group>"; };
+		A042CA7A1CC0FF0C00EBFA7F /* PKHUDProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKHUDProgressView.swift; sourceTree = "<group>"; };
+		A042CA7B1CC0FF0C00EBFA7F /* PKHUDRotatingImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKHUDRotatingImageView.swift; sourceTree = "<group>"; };
+		A042CA7C1CC0FF0C00EBFA7F /* PKHUDSquareBaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKHUDSquareBaseView.swift; sourceTree = "<group>"; };
+		A042CA7D1CC0FF0C00EBFA7F /* PKHUDSuccessView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKHUDSuccessView.swift; sourceTree = "<group>"; };
+		A042CA7E1CC0FF0C00EBFA7F /* PKHUDSystemActivityIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKHUDSystemActivityIndicatorView.swift; sourceTree = "<group>"; };
+		A042CA7F1CC0FF0C00EBFA7F /* PKHUDTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKHUDTextView.swift; sourceTree = "<group>"; };
+		A042CA801CC0FF0C00EBFA7F /* PKHUDWideBaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKHUDWideBaseView.swift; sourceTree = "<group>"; };
+		A042CA811CC0FF0C00EBFA7F /* Window.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Window.swift; sourceTree = "<group>"; };
+		A042CA821CC0FF0C00EBFA7F /* WindowRootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowRootViewController.swift; sourceTree = "<group>"; };
+		A042CA831CC0FF0C00EBFA7F /* SelectionTool.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SelectionTool.entitlements; sourceTree = "<group>"; };
+		A042CA851CC0FF0C00EBFA7F /* EMCollectionLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EMCollectionLayout.swift; sourceTree = "<group>"; };
+		A042CA861CC0FF0C00EBFA7F /* EMZoomImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EMZoomImageView.swift; sourceTree = "<group>"; };
+		A042CA871CC0FF0C00EBFA7F /* ImageSourceScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSourceScreen.swift; sourceTree = "<group>"; };
+		A042CA881CC0FF0C00EBFA7F /* ROIScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ROIScreen.swift; sourceTree = "<group>"; };
+		A042CA891CC0FF0C00EBFA7F /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		A042CA8A1CC0FF0C00EBFA7F /* SelectionTypeScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionTypeScreen.swift; sourceTree = "<group>"; };
+		A042CA8B1CC0FF0C00EBFA7F /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		A00CE2451CA00CED003E3510 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A00CE2591CA00CED003E3510 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -128,8 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				A00CE26B1CA045BC003E3510 /* EMCropView */,
-				A00CE24A1CA00CED003E3510 /* FreeCropImageTool */,
-				A00CE25F1CA00CED003E3510 /* FreeCropImageToolUITests */,
+				A042CA661CC0FF0C00EBFA7F /* SelectionTool */,
 				A00CE2491CA00CED003E3510 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -138,39 +110,8 @@
 			isa = PBXGroup;
 			children = (
 				A00CE2481CA00CED003E3510 /* SelectionTool.app */,
-				A00CE25C1CA00CED003E3510 /* SelectionTool.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		A00CE24A1CA00CED003E3510 /* FreeCropImageTool */ = {
-			isa = PBXGroup;
-			children = (
-				A02665601CB549D300AF0926 /* Libs */,
-				A03B68541CB3A861006C6CB8 /* SelectionTypeScreen.swift */,
-				A05F08B11CAD2D7F00B26EFA /* FreeCropImageTool.entitlements */,
-				A09AF4F61CA31B2D0047E3B4 /* ROIScreen.swift */,
-				A02EB03D1CA2BE7B003431BE /* EMCollectionLayout.swift */,
-				A00CE27F1CA088F9003E3510 /* EMZoomImageView.swift */,
-				A00CE27B1CA05CBB003E3510 /* ImageSourceScreen.swift */,
-				A00CE2781CA04EF8003E3510 /* RootViewController.swift */,
-				A00CE24B1CA00CED003E3510 /* AppDelegate.swift */,
-				A00CE24D1CA00CED003E3510 /* ViewController.swift */,
-				A00CE24F1CA00CED003E3510 /* Main.storyboard */,
-				A00CE2521CA00CED003E3510 /* Assets.xcassets */,
-				A00CE2541CA00CED003E3510 /* LaunchScreen.storyboard */,
-				A00CE2571CA00CED003E3510 /* Info.plist */,
-			);
-			path = FreeCropImageTool;
-			sourceTree = "<group>";
-		};
-		A00CE25F1CA00CED003E3510 /* FreeCropImageToolUITests */ = {
-			isa = PBXGroup;
-			children = (
-				A00CE2601CA00CED003E3510 /* FreeCropImageToolUITests.swift */,
-				A00CE2621CA00CED003E3510 /* Info.plist */,
-			);
-			path = FreeCropImageToolUITests;
 			sourceTree = "<group>";
 		};
 		A00CE26B1CA045BC003E3510 /* EMCropView */ = {
@@ -186,38 +127,67 @@
 			path = ../EMCropView;
 			sourceTree = "<group>";
 		};
-		A02665601CB549D300AF0926 /* Libs */ = {
+		A042CA661CC0FF0C00EBFA7F /* SelectionTool */ = {
 			isa = PBXGroup;
 			children = (
-				A02665611CB549D300AF0926 /* PKHUD */,
+				A042CA671CC0FF0C00EBFA7F /* AppDelegate.swift */,
+				A042CA681CC0FF0C00EBFA7F /* Assets.xcassets */,
+				A042CA691CC0FF0C00EBFA7F /* LaunchScreen.storyboard */,
+				A042CA6B1CC0FF0C00EBFA7F /* Main.storyboard */,
+				A042CA6D1CC0FF0C00EBFA7F /* Info.plist */,
+				A042CA6E1CC0FF0C00EBFA7F /* Libs */,
+				A042CA831CC0FF0C00EBFA7F /* SelectionTool.entitlements */,
+				A042CA841CC0FF0C00EBFA7F /* UI */,
+			);
+			path = SelectionTool;
+			sourceTree = "<group>";
+		};
+		A042CA6E1CC0FF0C00EBFA7F /* Libs */ = {
+			isa = PBXGroup;
+			children = (
+				A042CA6F1CC0FF0C00EBFA7F /* PKHUD */,
 			);
 			path = Libs;
 			sourceTree = "<group>";
 		};
-		A02665611CB549D300AF0926 /* PKHUD */ = {
+		A042CA6F1CC0FF0C00EBFA7F /* PKHUD */ = {
 			isa = PBXGroup;
 			children = (
-				A02665621CB549D300AF0926 /* FrameView.swift */,
-				A02665631CB549D300AF0926 /* HUD.swift */,
-				A02665641CB549D300AF0926 /* Images.xcassets */,
-				A02665651CB549D300AF0926 /* Info.plist */,
-				A02665661CB549D300AF0926 /* PKHUD.h */,
-				A02665671CB549D300AF0926 /* PKHUD.swift */,
-				A02665681CB549D300AF0926 /* PKHUDAnimating.swift */,
-				A02665691CB549D300AF0926 /* PKHUDAnimation.swift */,
-				A026656A1CB549D300AF0926 /* PKHUDAssets.swift */,
-				A026656B1CB549D300AF0926 /* PKHUDErrorView.swift */,
-				A026656C1CB549D300AF0926 /* PKHUDProgressView.swift */,
-				A026656D1CB549D300AF0926 /* PKHUDRotatingImageView.swift */,
-				A026656E1CB549D300AF0926 /* PKHUDSquareBaseView.swift */,
-				A026656F1CB549D300AF0926 /* PKHUDSuccessView.swift */,
-				A02665701CB549D300AF0926 /* PKHUDSystemActivityIndicatorView.swift */,
-				A02665711CB549D300AF0926 /* PKHUDTextView.swift */,
-				A02665721CB549D300AF0926 /* PKHUDWideBaseView.swift */,
-				A02665731CB549D300AF0926 /* Window.swift */,
-				A02665741CB549D300AF0926 /* WindowRootViewController.swift */,
+				A042CA701CC0FF0C00EBFA7F /* FrameView.swift */,
+				A042CA711CC0FF0C00EBFA7F /* HUD.swift */,
+				A042CA721CC0FF0C00EBFA7F /* Images.xcassets */,
+				A042CA731CC0FF0C00EBFA7F /* Info.plist */,
+				A042CA741CC0FF0C00EBFA7F /* PKHUD.h */,
+				A042CA751CC0FF0C00EBFA7F /* PKHUD.swift */,
+				A042CA761CC0FF0C00EBFA7F /* PKHUDAnimating.swift */,
+				A042CA771CC0FF0C00EBFA7F /* PKHUDAnimation.swift */,
+				A042CA781CC0FF0C00EBFA7F /* PKHUDAssets.swift */,
+				A042CA791CC0FF0C00EBFA7F /* PKHUDErrorView.swift */,
+				A042CA7A1CC0FF0C00EBFA7F /* PKHUDProgressView.swift */,
+				A042CA7B1CC0FF0C00EBFA7F /* PKHUDRotatingImageView.swift */,
+				A042CA7C1CC0FF0C00EBFA7F /* PKHUDSquareBaseView.swift */,
+				A042CA7D1CC0FF0C00EBFA7F /* PKHUDSuccessView.swift */,
+				A042CA7E1CC0FF0C00EBFA7F /* PKHUDSystemActivityIndicatorView.swift */,
+				A042CA7F1CC0FF0C00EBFA7F /* PKHUDTextView.swift */,
+				A042CA801CC0FF0C00EBFA7F /* PKHUDWideBaseView.swift */,
+				A042CA811CC0FF0C00EBFA7F /* Window.swift */,
+				A042CA821CC0FF0C00EBFA7F /* WindowRootViewController.swift */,
 			);
 			path = PKHUD;
+			sourceTree = "<group>";
+		};
+		A042CA841CC0FF0C00EBFA7F /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				A042CA851CC0FF0C00EBFA7F /* EMCollectionLayout.swift */,
+				A042CA861CC0FF0C00EBFA7F /* EMZoomImageView.swift */,
+				A042CA871CC0FF0C00EBFA7F /* ImageSourceScreen.swift */,
+				A042CA881CC0FF0C00EBFA7F /* ROIScreen.swift */,
+				A042CA891CC0FF0C00EBFA7F /* RootViewController.swift */,
+				A042CA8A1CC0FF0C00EBFA7F /* SelectionTypeScreen.swift */,
+				A042CA8B1CC0FF0C00EBFA7F /* ViewController.swift */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -241,24 +211,6 @@
 			productReference = A00CE2481CA00CED003E3510 /* SelectionTool.app */;
 			productType = "com.apple.product-type.application";
 		};
-		A00CE25B1CA00CED003E3510 /* SelectionToolUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = A00CE2681CA00CED003E3510 /* Build configuration list for PBXNativeTarget "SelectionToolUITests" */;
-			buildPhases = (
-				A00CE2581CA00CED003E3510 /* Sources */,
-				A00CE2591CA00CED003E3510 /* Frameworks */,
-				A00CE25A1CA00CED003E3510 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				A00CE25E1CA00CED003E3510 /* PBXTargetDependency */,
-			);
-			name = SelectionToolUITests;
-			productName = FreeCropImageToolUITests;
-			productReference = A00CE25C1CA00CED003E3510 /* SelectionTool.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -278,10 +230,6 @@
 							};
 						};
 					};
-					A00CE25B1CA00CED003E3510 = {
-						CreatedOnToolsVersion = 7.2.1;
-						TestTargetID = A00CE2471CA00CED003E3510;
-					};
 				};
 			};
 			buildConfigurationList = A00CE2431CA00CED003E3510 /* Build configuration list for PBXProject "SelectionTool" */;
@@ -298,7 +246,6 @@
 			projectRoot = "";
 			targets = (
 				A00CE2471CA00CED003E3510 /* SelectionTool */,
-				A00CE25B1CA00CED003E3510 /* SelectionToolUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -308,18 +255,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A00CE2561CA00CED003E3510 /* LaunchScreen.storyboard in Resources */,
-				A02665771CB549D300AF0926 /* Images.xcassets in Resources */,
-				A00CE2531CA00CED003E3510 /* Assets.xcassets in Resources */,
-				A02665781CB549D300AF0926 /* Info.plist in Resources */,
-				A00CE2511CA00CED003E3510 /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A00CE25A1CA00CED003E3510 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				A042CAA31CC0FF0C00EBFA7F /* SelectionTool.entitlements in Resources */,
+				A042CA901CC0FF0C00EBFA7F /* Info.plist in Resources */,
+				A042CA931CC0FF0C00EBFA7F /* Images.xcassets in Resources */,
+				A042CA941CC0FF0C00EBFA7F /* Info.plist in Resources */,
+				A042CA8F1CC0FF0C00EBFA7F /* Main.storyboard in Resources */,
+				A042CA8D1CC0FF0C00EBFA7F /* Assets.xcassets in Resources */,
+				A042CA8E1CC0FF0C00EBFA7F /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -347,79 +289,55 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A09AF4F71CA31B2D0047E3B4 /* ROIScreen.swift in Sources */,
-				A026657B1CB549D300AF0926 /* PKHUDAnimation.swift in Sources */,
-				A026657A1CB549D300AF0926 /* PKHUDAnimating.swift in Sources */,
+				A042CA8C1CC0FF0C00EBFA7F /* AppDelegate.swift in Sources */,
+				A042CA951CC0FF0C00EBFA7F /* PKHUD.swift in Sources */,
+				A042CAA11CC0FF0C00EBFA7F /* Window.swift in Sources */,
+				A042CA971CC0FF0C00EBFA7F /* PKHUDAnimation.swift in Sources */,
+				A042CAA71CC0FF0C00EBFA7F /* ROIScreen.swift in Sources */,
 				A00CE2701CA045BC003E3510 /* EMBezierPathUtils.swift in Sources */,
-				A026657D1CB549D300AF0926 /* PKHUDErrorView.swift in Sources */,
-				A026657F1CB549D300AF0926 /* PKHUDRotatingImageView.swift in Sources */,
-				A026657E1CB549D300AF0926 /* PKHUDProgressView.swift in Sources */,
-				A026657C1CB549D300AF0926 /* PKHUDAssets.swift in Sources */,
-				A02665801CB549D300AF0926 /* PKHUDSquareBaseView.swift in Sources */,
-				A02665811CB549D300AF0926 /* PKHUDSuccessView.swift in Sources */,
-				A02665791CB549D300AF0926 /* PKHUD.swift in Sources */,
-				A02665861CB549D300AF0926 /* WindowRootViewController.swift in Sources */,
 				A00CE2721CA045BC003E3510 /* EMCropOverlayView.swift in Sources */,
+				A042CAA01CC0FF0C00EBFA7F /* PKHUDWideBaseView.swift in Sources */,
+				A042CA9E1CC0FF0C00EBFA7F /* PKHUDSystemActivityIndicatorView.swift in Sources */,
 				A00CE2741CA045BC003E3510 /* EMCropView.swift in Sources */,
-				A03B68551CB3A861006C6CB8 /* SelectionTypeScreen.swift in Sources */,
-				A00CE2791CA04EF8003E3510 /* RootViewController.swift in Sources */,
-				A02665841CB549D300AF0926 /* PKHUDWideBaseView.swift in Sources */,
-				A02665761CB549D300AF0926 /* HUD.swift in Sources */,
-				A02665831CB549D300AF0926 /* PKHUDTextView.swift in Sources */,
-				A00CE24E1CA00CED003E3510 /* ViewController.swift in Sources */,
-				A02EB03E1CA2BE7B003431BE /* EMCollectionLayout.swift in Sources */,
-				A00CE24C1CA00CED003E3510 /* AppDelegate.swift in Sources */,
-				A00CE27C1CA05CBB003E3510 /* ImageSourceScreen.swift in Sources */,
 				A03B68591CB3C145006C6CB8 /* EMImageUtils.swift in Sources */,
-				A02665851CB549D300AF0926 /* Window.swift in Sources */,
-				A00CE2801CA088F9003E3510 /* EMZoomImageView.swift in Sources */,
-				A02665821CB549D300AF0926 /* PKHUDSystemActivityIndicatorView.swift in Sources */,
-				A02665751CB549D300AF0926 /* FrameView.swift in Sources */,
+				A042CA9C1CC0FF0C00EBFA7F /* PKHUDSquareBaseView.swift in Sources */,
+				A042CAA91CC0FF0C00EBFA7F /* SelectionTypeScreen.swift in Sources */,
+				A042CAA41CC0FF0C00EBFA7F /* EMCollectionLayout.swift in Sources */,
+				A042CA981CC0FF0C00EBFA7F /* PKHUDAssets.swift in Sources */,
+				A042CAA51CC0FF0C00EBFA7F /* EMZoomImageView.swift in Sources */,
+				A042CA9B1CC0FF0C00EBFA7F /* PKHUDRotatingImageView.swift in Sources */,
+				A042CA991CC0FF0C00EBFA7F /* PKHUDErrorView.swift in Sources */,
+				A042CA921CC0FF0C00EBFA7F /* HUD.swift in Sources */,
+				A042CA961CC0FF0C00EBFA7F /* PKHUDAnimating.swift in Sources */,
+				A042CAAA1CC0FF0C00EBFA7F /* ViewController.swift in Sources */,
+				A042CAA21CC0FF0C00EBFA7F /* WindowRootViewController.swift in Sources */,
+				A042CAA81CC0FF0C00EBFA7F /* RootViewController.swift in Sources */,
+				A042CA9D1CC0FF0C00EBFA7F /* PKHUDSuccessView.swift in Sources */,
+				A042CAA61CC0FF0C00EBFA7F /* ImageSourceScreen.swift in Sources */,
+				A042CA911CC0FF0C00EBFA7F /* FrameView.swift in Sources */,
+				A042CA9A1CC0FF0C00EBFA7F /* PKHUDProgressView.swift in Sources */,
 				A00CE2761CA045BC003E3510 /* EMSelectionShapeView.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A00CE2581CA00CED003E3510 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A00CE27D1CA05CBB003E3510 /* ImageSourceScreen.swift in Sources */,
-				A00CE2751CA045BC003E3510 /* EMCropView.swift in Sources */,
-				A00CE2611CA00CED003E3510 /* FreeCropImageToolUITests.swift in Sources */,
-				A00CE27A1CA04EF8003E3510 /* RootViewController.swift in Sources */,
-				A00CE2711CA045BC003E3510 /* EMBezierPathUtils.swift in Sources */,
-				A00CE2811CA088F9003E3510 /* EMZoomImageView.swift in Sources */,
-				A00CE2731CA045BC003E3510 /* EMCropOverlayView.swift in Sources */,
-				A00CE2771CA045BC003E3510 /* EMSelectionShapeView.swift in Sources */,
-				A02EB03F1CA2BE7B003431BE /* EMCollectionLayout.swift in Sources */,
+				A042CA9F1CC0FF0C00EBFA7F /* PKHUDTextView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		A00CE25E1CA00CED003E3510 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = A00CE2471CA00CED003E3510 /* SelectionTool */;
-			targetProxy = A00CE25D1CA00CED003E3510 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin PBXVariantGroup section */
-		A00CE24F1CA00CED003E3510 /* Main.storyboard */ = {
+		A042CA691CC0FF0C00EBFA7F /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				A00CE2501CA00CED003E3510 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		A00CE2541CA00CED003E3510 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A00CE2551CA00CED003E3510 /* Base */,
+				A042CA6A1CC0FF0C00EBFA7F /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		A042CA6B1CC0FF0C00EBFA7F /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A042CA6C1CC0FF0C00EBFA7F /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -464,6 +382,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "aa5576ca-115d-4391-a0e8-7a1aab204d7e";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -502,6 +421,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "aa5576ca-115d-4391-a0e8-7a1aab204d7e";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -512,15 +432,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = FreeCropImageTool/FreeCropImageTool.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_ENTITLEMENTS = $PROJECT_DIR/$PROJECT_NAME/SelectionTool.entitlements;
+				CODE_SIGN_IDENTITY = "$(inherited)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = FreeCropImageTool/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.melkov.FreeCropImageTool;
+				PRODUCT_BUNDLE_IDENTIFIER = com.melkov.SelectionTool;
 				PRODUCT_NAME = SelectionTool;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "$(inherited)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -529,40 +449,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = FreeCropImageTool/FreeCropImageTool.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_ENTITLEMENTS = $PROJECT_DIR/$PROJECT_NAME/SelectionTool.entitlements;
+				CODE_SIGN_IDENTITY = "$(inherited)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = FreeCropImageTool/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.melkov.FreeCropImageTool;
+				PRODUCT_BUNDLE_IDENTIFIER = com.melkov.SelectionTool;
 				PRODUCT_NAME = SelectionTool;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "$(inherited)";
 				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		A00CE2691CA00CED003E3510 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = FreeCropImageToolUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.melkov.FreeCropImageToolUITests;
-				PRODUCT_NAME = SelectionTool;
-				TEST_TARGET_NAME = FreeCropImageTool;
-				USES_XCTRUNNER = YES;
-			};
-			name = Debug;
-		};
-		A00CE26A1CA00CED003E3510 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = FreeCropImageToolUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.melkov.FreeCropImageToolUITests;
-				PRODUCT_NAME = SelectionTool;
-				TEST_TARGET_NAME = FreeCropImageTool;
-				USES_XCTRUNNER = YES;
 			};
 			name = Release;
 		};
@@ -583,15 +479,6 @@
 			buildConfigurations = (
 				A00CE2661CA00CED003E3510 /* Debug */,
 				A00CE2671CA00CED003E3510 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		A00CE2681CA00CED003E3510 /* Build configuration list for PBXNativeTarget "SelectionToolUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A00CE2691CA00CED003E3510 /* Debug */,
-				A00CE26A1CA00CED003E3510 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
