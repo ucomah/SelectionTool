@@ -16,11 +16,9 @@
 		A042CA8D1CC0FF0C00EBFA7F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A042CA681CC0FF0C00EBFA7F /* Assets.xcassets */; };
 		A042CA8E1CC0FF0C00EBFA7F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A042CA691CC0FF0C00EBFA7F /* LaunchScreen.storyboard */; };
 		A042CA8F1CC0FF0C00EBFA7F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A042CA6B1CC0FF0C00EBFA7F /* Main.storyboard */; };
-		A042CA901CC0FF0C00EBFA7F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A042CA6D1CC0FF0C00EBFA7F /* Info.plist */; };
 		A042CA911CC0FF0C00EBFA7F /* FrameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A042CA701CC0FF0C00EBFA7F /* FrameView.swift */; };
 		A042CA921CC0FF0C00EBFA7F /* HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = A042CA711CC0FF0C00EBFA7F /* HUD.swift */; };
 		A042CA931CC0FF0C00EBFA7F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A042CA721CC0FF0C00EBFA7F /* Images.xcassets */; };
-		A042CA941CC0FF0C00EBFA7F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A042CA731CC0FF0C00EBFA7F /* Info.plist */; };
 		A042CA951CC0FF0C00EBFA7F /* PKHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = A042CA751CC0FF0C00EBFA7F /* PKHUD.swift */; };
 		A042CA961CC0FF0C00EBFA7F /* PKHUDAnimating.swift in Sources */ = {isa = PBXBuildFile; fileRef = A042CA761CC0FF0C00EBFA7F /* PKHUDAnimating.swift */; };
 		A042CA971CC0FF0C00EBFA7F /* PKHUDAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A042CA771CC0FF0C00EBFA7F /* PKHUDAnimation.swift */; };
@@ -43,6 +41,8 @@
 		A042CAA81CC0FF0C00EBFA7F /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A042CA891CC0FF0C00EBFA7F /* RootViewController.swift */; };
 		A042CAA91CC0FF0C00EBFA7F /* SelectionTypeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A042CA8A1CC0FF0C00EBFA7F /* SelectionTypeScreen.swift */; };
 		A042CAAA1CC0FF0C00EBFA7F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A042CA8B1CC0FF0C00EBFA7F /* ViewController.swift */; };
+		A042CAB01CC100B000EBFA7F /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A042CAAF1CC100B000EBFA7F /* Fabric.framework */; };
+		A042CAB21CC1014500EBFA7F /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A042CAB11CC1014500EBFA7F /* Crashlytics.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,6 +84,8 @@
 		A042CA891CC0FF0C00EBFA7F /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		A042CA8A1CC0FF0C00EBFA7F /* SelectionTypeScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionTypeScreen.swift; sourceTree = "<group>"; };
 		A042CA8B1CC0FF0C00EBFA7F /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A042CAAF1CC100B000EBFA7F /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		A042CAB11CC1014500EBFA7F /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A042CAB21CC1014500EBFA7F /* Crashlytics.framework in Frameworks */,
+				A042CAB01CC100B000EBFA7F /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,6 +149,8 @@
 		A042CA6E1CC0FF0C00EBFA7F /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				A042CAB11CC1014500EBFA7F /* Crashlytics.framework */,
+				A042CAAF1CC100B000EBFA7F /* Fabric.framework */,
 				A042CA6F1CC0FF0C00EBFA7F /* PKHUD */,
 			);
 			path = Libs;
@@ -201,6 +207,7 @@
 				A00CE2441CA00CED003E3510 /* Sources */,
 				A00CE2451CA00CED003E3510 /* Frameworks */,
 				A00CE2461CA00CED003E3510 /* Resources */,
+				A042CAAB1CC1000100EBFA7F /* Crashlytics */,
 			);
 			buildRules = (
 			);
@@ -256,9 +263,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A042CAA31CC0FF0C00EBFA7F /* SelectionTool.entitlements in Resources */,
-				A042CA901CC0FF0C00EBFA7F /* Info.plist in Resources */,
 				A042CA931CC0FF0C00EBFA7F /* Images.xcassets in Resources */,
-				A042CA941CC0FF0C00EBFA7F /* Info.plist in Resources */,
 				A042CA8F1CC0FF0C00EBFA7F /* Main.storyboard in Resources */,
 				A042CA8D1CC0FF0C00EBFA7F /* Assets.xcassets in Resources */,
 				A042CA8E1CC0FF0C00EBFA7F /* LaunchScreen.storyboard in Resources */,
@@ -268,6 +273,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		A042CAAB1CC1000100EBFA7F /* Crashlytics */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Crashlytics;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "releaseConfig=\"Release\"\n\nif [ \"$releaseConfig\" = \"${CONFIGURATION}\" ]; then\necho \"Running Crashlytics\"\n./$PROJECT_NAME/Libs/Fabric.framework/run c978c95623bbbf1a6732666941ccef70c921e19e 7375f80d600c7702fda529986eb07a7054d71ca0393a5a893c729caea82b7034\nfi";
+		};
 		A0EC35BB1CADB91D00E37BB5 /* Highlight warnings and errors */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -435,7 +454,11 @@
 				CODE_SIGN_ENTITLEMENTS = $PROJECT_DIR/$PROJECT_NAME/SelectionTool.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = FreeCropImageTool/Info.plist;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SelectionTool/Libs",
+				);
+				INFOPLIST_FILE = SelectionTool/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.melkov.SelectionTool;
@@ -452,7 +475,11 @@
 				CODE_SIGN_ENTITLEMENTS = $PROJECT_DIR/$PROJECT_NAME/SelectionTool.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = FreeCropImageTool/Info.plist;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SelectionTool/Libs",
+				);
+				INFOPLIST_FILE = SelectionTool/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.melkov.SelectionTool;
