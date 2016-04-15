@@ -24,6 +24,7 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
     @IBOutlet var btnDelete: UIBarButtonItem?
     @IBOutlet var btnShare: UIBarButtonItem?
     @IBOutlet var btnReload: UIBarButtonItem?
+    @IBOutlet var btnCloudExport: UIBarButtonItem?
     var inImageSource: ImageSourceViewController?
     private var docInteracton: UIDocumentInteractionController?
     
@@ -134,10 +135,11 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
         self.presentViewController(picker, animated: true, completion: nil)
     }
     
-    private func do_iCloudExport() {
+    internal func do_iCloudExport() {
         self.prepareForSharingWithCompeltion { (ready) in
             //Perform export
             let documentPicker = UIDocumentPickerViewController.init(URL: self.tempFileURL, inMode: UIDocumentPickerMode.ExportToService)
+            documentPicker.delegate = self
             documentPicker.modalPresentationStyle = UIModalPresentationStyle.FormSheet
             self.presentViewController(documentPicker, animated: true, completion: nil)
         }
@@ -240,7 +242,9 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
             var success = false
             var isDirectory: ObjCBool = ObjCBool(true)
-            if NSFileManager.defaultManager().fileExistsAtPath(path, isDirectory: &isDirectory) {
+            var buf = NSString.init(string: path)
+            buf = buf.stringByReplacingOccurrencesOfString(buf.lastPathComponent, withString: "")
+            if NSFileManager.defaultManager().fileExistsAtPath(buf as String, isDirectory: &isDirectory) {
                 if let img = image {
                     if let data = UIImagePNGRepresentation(img) {
                         success = data.writeToFile(path, atomically: true)
@@ -279,10 +283,11 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
             btnShare = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: #selector(doShareImage(_:)))
             btnDelete = UIBarButtonItem.init(barButtonSystemItem: .Trash, target: self, action: #selector(ViewController.doDeleteImage(_:)))
             btnReload = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.Refresh, target: self, action: #selector(doReloadImage(_:)))
+            btnCloudExport = UIBarButtonItem.init(image: UIImage.init(named: "iCloud_export"), style: UIBarButtonItemStyle.Plain, target: self, action: #selector(do_iCloudExport))
             
             self.titleItem?.leftBarButtonItems?.append(btnCrop!)
             self.titleItem?.leftBarButtonItems?.append(btnReload!)
-            self.titleItem?.rightBarButtonItems = [btnDelete!, btnShare!]
+            self.titleItem?.rightBarButtonItems = [btnDelete!, btnShare!, btnCloudExport!]
         }
         else {
             self.titleItem?.rightBarButtonItems = []
@@ -320,6 +325,10 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
         let image = UIImage.init(data: data!)
         self.setImage(image, useCache: true)
         controller.dismissViewControllerAnimated(true, completion:nil)
+    }
+    
+    func documentPickerWasCancelled(controller: UIDocumentPickerViewController) {
+        self.cleanupTempFiles()
     }
     
     //MARK: UIImagePickerControllerDelegate
