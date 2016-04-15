@@ -14,7 +14,7 @@ import UIKit
     optional func tablePopOver(popOver: UIViewController, didSelectItemAtIndex index: Int)
 }
 
-class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocumentPickerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, SelectionTypeViewControllerDelegate, ROIScreenDelegate {
+class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocumentPickerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, SelectionTypeViewControllerDelegate, ROIScreenDelegate, UIDocumentInteractionControllerDelegate {
 
     @IBOutlet weak var helperLabel : UILabel?
     @IBOutlet weak var imageHolder: EMZoomImageView?
@@ -25,6 +25,7 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
     @IBOutlet var btnShare: UIBarButtonItem?
     @IBOutlet var btnReload: UIBarButtonItem?
     var inImageSource: ImageSourceViewController?
+    private var docInteracton: UIDocumentInteractionController?
     
     private(set) var image: UIImage? {
         didSet {
@@ -37,24 +38,14 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
     
     func setImage(image: UIImage?, useCache: Bool) {
         //Cache image in background
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
-            if useCache {
-                if let img = image {
-                    if let data = UIImagePNGRepresentation(img) {
-                        data.writeToFile(self.tempImagePath, atomically: true)
-                    }
-                }
-                else { //Remove cached image if some
-                    do {
-                        try NSFileManager.defaultManager().removeItemAtPath(self.tempImagePath)
-                    }
-                    catch {
-                    }
-                }
-            }
+        if useCache {
+            self.cacheImage(image, to: self.cacheImagePath, with: nil)
         }
         //Set image
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
+            if image == self.image {
+                return
+            }
             self.image = image
         }
     }
@@ -77,12 +68,10 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
         
         //Navigation bar setup
         self.toggleNavigationBarButtons()
-        
-//        //Load last used image
-//        if shouldLoadCachedImageOnStart {
-//            
-//        }
-//        shouldLoadCachedImageOnStart = true
+    }
+    
+    deinit {
+        self.cleanupTempFiles()
     }
 
     override func didReceiveMemoryWarning() {
@@ -145,8 +134,26 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
         self.presentViewController(picker, animated: true, completion: nil)
     }
     
+    private func do_iCloudExport() {
+        self.prepareForSharingWithCompeltion { (ready) in
+            //Perform export
+            let documentPicker = UIDocumentPickerViewController.init(URL: self.tempFileURL, inMode: UIDocumentPickerMode.ExportToService)
+            documentPicker.modalPresentationStyle = UIModalPresentationStyle.FormSheet
+            self.presentViewController(documentPicker, animated: true, completion: nil)
+        }
+    }
+    
     @IBAction internal func doShareImage(sender: AnyObject) {
-
+        
+        docInteracton = UIDocumentInteractionController.init(URL: self.tempFileURL)
+        docInteracton!.delegate = self
+        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
+            docInteracton?.presentOptionsMenuFromBarButtonItem(self.btnShare!, animated: true)
+        }
+        else {
+            docInteracton?.presentOptionsMenuFromRect(self.view.frame, inView: self.view, animated: true)
+        }
+        
     }
     
     @IBAction internal func doDeleteImage(sender: AnyObject) {
@@ -159,20 +166,99 @@ class ViewController: RootViewController, SelectionToolPopOverDelegate, UIDocume
         }
     }
     
+    //MARK: - UIDocumentInteractionControllerDelegate
+    
+    func documentInteractionControllerRectForPreview(controller: UIDocumentInteractionController) -> CGRect {
+        return self.view.frame
+    }
+    
+    func documentInteractionControllerViewForPreview(controller: UIDocumentInteractionController) -> UIView? {
+        return self.view
+    }
+    
+    func documentInteractionControllerDidDismissOptionsMenu(controller: UIDocumentInteractionController) {
+        self.cleanupTempFiles()
+    }
+    
+    func documentInteractionControllerDidDismissOpenInMenu(controller: UIDocumentInteractionController) {
+        self.cleanupTempFiles()
+    }
+    
     //MARK: - Cache
     
-    private var tempImagePath: String {
+    private func prepareForSharingWithCompeltion(completion: ((ready: Bool) -> Void)) {
+        //Store current image to temporary URL if needed
+        self.cacheImage(self.image, to: self.tempFileURL.path!) { (success) in
+            if !success {
+                UIAlertView.init(title: NSLocalizedString("Error", comment: ""),
+                                 message: NSLocalizedString("Failed to cache a file for exporting!", comment: ""),
+                                 delegate: nil,
+                                 cancelButtonTitle: "Ok").show()
+            }
+            completion(ready: success)
+        }
+    }
+    
+    private var cacheImagePath: String {
         var path = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true).last!
         path += "/last_used_image.png"
         return path
     }
     
+    private var tempFileURL: NSURL {
+        var path = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true).last!
+        path += "/temp.png"
+        let url = NSURL.init(fileURLWithPath: path)
+        return url
+    }
+    
     private func loadCachedImage(completion: ((finished: Bool) -> Void)?) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
-            if let data = NSData.init(contentsOfFile: self.tempImagePath) {
+            if let data = NSData.init(contentsOfFile: self.cacheImagePath) {
                 let img = UIImage.init(data: data)
                 if (img?.isEqual(self.image))! == false {
                     self.setImage(img, useCache: true)
+                }
+            }
+        }
+    }
+    
+    func cleanupTempFiles() {
+        do {
+            try NSFileManager.defaultManager().removeItemAtURL(self.tempFileURL)
+        }
+        catch {
+            
+        }
+    }
+    
+    /**
+     Cache image in background.
+     If @param image is nil, current cache will be cleaned
+     */
+    private func cacheImage(image: UIImage?, to path: String, with completion: ((success: Bool) -> Void)?) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
+            var success = false
+            var isDirectory: ObjCBool = ObjCBool(true)
+            if NSFileManager.defaultManager().fileExistsAtPath(path, isDirectory: &isDirectory) {
+                if let img = image {
+                    if let data = UIImagePNGRepresentation(img) {
+                        success = data.writeToFile(path, atomically: true)
+                    }
+                }
+                else { //Remove cached image if some
+                    do {
+                        try NSFileManager.defaultManager().removeItemAtPath(path)
+                        success = true
+                    }
+                    catch {
+                        success = false
+                    }
+                }
+            }
+            if let handler = completion {
+                dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                    handler(success: success)
                 }
             }
         }
