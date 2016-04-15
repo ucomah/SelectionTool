@@ -454,8 +454,9 @@ private let kEMInitialImageAnimationDuration = 0.2
             return self.image
         }
         let maskedImage = self.image.maskToPath(self.cropPath)
-//        let image = maskedImage.imageByTrimmingTransparentPixelsRequiringFullOpacity(false)
-//        let image = maskedImage.processPixelsInImage(maskedImage)
+        if !trimTransparent {
+            return maskedImage
+        }
         let image = maskedImage.imageByTrimmingTransparentPixels()
         return image
     }
