@@ -14,10 +14,12 @@ Fully written in Swift.
 8. "Square crop" tool - the copy of iOS basic one
 9. Pretty color selection tool 
 10. Any pixel-by-pixel work is possible for Mac OS and iOS (thanks to existing library)
+11. Image pretty resize using scale or pre-defined sizes (like in other apps)
 
 
-**Known bugs and todos:**
+**Known bugs:**
 
 1. Adjust a Free selection mode initial point size for iPhone
 2. ImageUtils: Trim tool - make it use a clousre for pixels enumeration
 3. Rotation bugs if image is smaller then crop box frame
+4. CameraRoll portrait images getting rotated to landscape on Main screen reload

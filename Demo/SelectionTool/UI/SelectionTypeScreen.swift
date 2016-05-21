@@ -109,7 +109,7 @@ let cellReuseIdentifier = "SelectionTypeViewControllerCell_identifier"
         return cell
     }
     
-    ////MARK: UICollectionViewDelegate
+    //MARK: UICollectionViewDelegate
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         delegate?.selectionTypeViewController(self, didChoseSelectionType: EMSelectionType(rawValue: indexPath.row)!)

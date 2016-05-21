@@ -209,6 +209,7 @@
 				A0EC35BB1CADB91D00E37BB5 /* Highlight warnings and errors */,
 				A00CE2441CA00CED003E3510 /* Sources */,
 				A00CE2451CA00CED003E3510 /* Frameworks */,
+				A0C305011CC1F6CB00831268 /* Increment build version */,
 				A00CE2461CA00CED003E3510 /* Resources */,
 				A042CAAB1CC1000100EBFA7F /* Crashlytics */,
 			);
@@ -290,6 +291,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "releaseConfig=\"Release\"\n\nif [ \"$releaseConfig\" = \"${CONFIGURATION}\" ]; then\necho \"Running Crashlytics\"\n./$PROJECT_NAME/Libs/Fabric.framework/run c978c95623bbbf1a6732666941ccef70c921e19e 7375f80d600c7702fda529986eb07a7054d71ca0393a5a893c729caea82b7034\nfi";
+		};
+		A0C305011CC1F6CB00831268 /* Increment build version */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Increment build version";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ \"Release\" != \"${CONFIGURATION}\" ]\nthen\nexit 0\nfi\n\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
 		};
 		A0EC35BB1CADB91D00E37BB5 /* Highlight warnings and errors */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -391,7 +406,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Evgeniy Melkov (TGN34LFD2P)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Evgeniy Melkov (TGN34LFD2P)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -413,7 +429,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "aa5576ca-115d-4391-a0e8-7a1aab204d7e";
+				PROVISIONING_PROFILE = "0218d863-018b-4d13-ab52-4ac8d80c42e0";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -437,7 +453,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Evgeniy Melkov (TGN34LFD2P)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Evgeniy Melkov (TGN34LFD2P)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -452,7 +469,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "fc6bc29b-9107-4066-a4f3-34211f39baa4";
+				PROVISIONING_PROFILE = "eda0d7e9-6151-499b-8d5f-9dc2767d79f8";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -464,8 +481,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = $PROJECT_DIR/$PROJECT_NAME/SelectionTool.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = $inherited;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = $inherited;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/SelectionTool/Libs",
@@ -475,7 +492,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.melkov.SelectionTool;
 				PRODUCT_NAME = SelectionTool;
-				PROVISIONING_PROFILE = "aa5576ca-115d-4391-a0e8-7a1aab204d7e";
+				PROVISIONING_PROFILE = $inherited;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -485,8 +502,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = $PROJECT_DIR/$PROJECT_NAME/SelectionTool.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = $inherited;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = $inherited;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/SelectionTool/Libs",
@@ -496,7 +513,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.melkov.SelectionTool;
 				PRODUCT_NAME = SelectionTool;
-				PROVISIONING_PROFILE = "fc6bc29b-9107-4066-a4f3-34211f39baa4";
+				PROVISIONING_PROFILE = $inherited;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
